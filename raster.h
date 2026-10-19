@@ -2,7 +2,7 @@
 #define RASTER_H
 
 /*----- Function: clear_screen -----
-v
+
  PURPOSE: Clears the entire screen.
 
  INPUT: Address(UINT32*): to the start of the screen
