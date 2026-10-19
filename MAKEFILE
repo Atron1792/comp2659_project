@@ -1,0 +1,8 @@
+prog.tos: c_example.o asm_example.o
+	cc68x -g c_example.o asm_example.o -o prog.tos
+
+c_example.o: c_example.c asm_example.h
+	cc68x -g -c c_example.c
+
+asm_example.o: asm_example.s
+	gen -D -L2 asm_example.s
