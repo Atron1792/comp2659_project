@@ -3,7 +3,7 @@
 
 #include "model.h"
 
-void initModel(GameMdl* mdl) {
+void initGameMdl(GameMdl* mdl) {
 	mdl -> score = 0L;
 	mdl -> gameStatus = (char)GAME_ON_FLG;
     initDino(mdl -> dino, 0.0, 0.0, 0,0,0,0);
@@ -46,5 +46,3 @@ CACTUS FUNCTIONS
 void initCactus(Cactus* cactus) {
     /* */
 }
-
-

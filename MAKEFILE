@@ -1,16 +1,25 @@
 all: tests #prog.tos tst_model
-tests: tst_model
+tests: tst_rend
+
+tst_rend: tst_rend.o model.o raster.o font.o bitmaps.o renderer.o
+	cc68x -g tst_rend.o model.o raster.o font.o bitmaps.o renderer.o -lm -o tst_rend.prg
+
+tst_rend.o: tst_rend.c renderer.h model.h raster.h bitmaps.h
+	cc68x -g -c tst_rend.c
+
+renderer.o: renderer.c renderer.h model.h raster.h bitmaps.h
+	cc68x -g -c renderer.c
+
+bitmaps.o: bitmaps.c bitmaps.h
+	cc68x -g -c bitmaps.c
 
 tst_rast: tst_rast.o raster.o font.o
 	cc68x -g tst_rast.o raster.o font.o -o tst_rast
 
-model.o: model.c model.h types.h
-	cc68x -g -c model.c
-
 tst_rast.o: tst_rast.c
 	cc68x -g -c tst_rast.c
 
-raster.o: raster.c raster.h
+raster.o: raster.c raster.h font.h
 	cc68x -g -c raster.c
 
 tst_model: tst_mdl.o model.o
@@ -18,6 +27,9 @@ tst_model: tst_mdl.o model.o
 
 tst_mdl.o: tst_mdl.c model.h types.h
 	cc68x -g -c tst_mdl.c
+
+model.o: model.c model.h types.h
+	cc68x -g -c model.c
 
 font.o: font.c font.h
 	cc68x -g -c font.c
