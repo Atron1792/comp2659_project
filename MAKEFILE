@@ -1,8 +1,11 @@
-prog.tos: c_example.o asm_example.o
-	cc68x -g c_example.o asm_example.o -o prog.tos
+tst_rast: tst_rast.o raster.o font.o
+	cc68x -g tst_rast.o raster.o font.o -o tst_rast
 
-c_example.o: c_example.c asm_example.h
-	cc68x -g -c c_example.c
+tst_rast.o: tst_rast.c
+	cc68x -g -c tst_rast.c
 
-asm_example.o: asm_example.s
-	gen -D -L2 asm_example.s
+raster.o: raster.c raster.h
+	cc68x -g -c raster.c
+
+font.o: font.c font.h
+	cc68x -g -c font.c
