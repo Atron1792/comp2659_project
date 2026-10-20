@@ -1,8 +1,23 @@
+all: tests #prog.tos tst_model
+tests: tst_model
+
+
 prog.tos: c_example.o asm_example.o
 	cc68x -g c_example.o asm_example.o -o prog.tos
+
+
+model.o: model.c model.h types.h
+	cc68x -g -c model.c
 
 c_example.o: c_example.c asm_example.h
 	cc68x -g -c c_example.c
 
 asm_example.o: asm_example.s
 	gen -D -L2 asm_example.s
+
+
+tst_model: tst_mdl.o model.o
+	cc68x -g tst_mdl.o model.o -o tst_mdl.tos
+
+tst_mdl.o: tst_mdl.c model.h types.h
+	cc68x -g -c tst_mdl.c
