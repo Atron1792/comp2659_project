@@ -1,19 +1,20 @@
-#include <stdio.h>
-#include <stdlib.h>
-
 #include "model.h"
 
-void initGameMdl(GameMdl* mdl) {
+void initModel(GameModel* mdl) {
 	mdl -> score = 0L;
-	mdl -> gameStatus = (char)GAME_ON_FLG;
-    initDino(mdl -> dino, 0.0, 0.0, 0,0,0,0);
-    initCactus(mdl -> cactus);
+	mdl -> gameStatus = (char)(GAME_ON_FLG);
+    
+    initDino(mdl -> dino, 0, 0, DINO_X_POS, DINO_Y_POS, 0,0);
+    initCactus(mdl -> cactus, 0,0,0,0);
+    
+    mdl -> base = (UINT16*)Physbase();
 }
 
 /*
 DINO FUNCTIONS
 */
-void initDino(Dino* dino, double xVel, double yVel, int x, int y, int dx, int dy) {
+void initDino(Dino* dino, int xVel, int yVel, int x, int y, int dx, int dy) {
+    /* This function is still being developed */
     dino -> x = x;
     dino -> dx = dx;
     dino -> xVel = xVel;
@@ -21,18 +22,17 @@ void initDino(Dino* dino, double xVel, double yVel, int x, int y, int dx, int dy
     dino -> y = y;
     dino -> dy = dy;
     dino -> yVel = yVel;
-    printf("g = %lf\ndt = %lf\n", GRAVITY, (1.0/70.0));
 }
 
 void moveDino(Dino* dino) {
-    double currY, newY;
-    double currVel, newVel;
+    int currY, newY;
+    int currVel, newVel;
     
     currVel = dino -> yVel;
-    newVel = currVel + ((double)GRAVITY / (1.0/70.0));
+    newVel = currVel + ((int)GRAVITY / (1.0/35.0));
 
     currY = dino -> y;
-    newY = newVel * (1.0/70.0) + 0.5;
+    newY = newVel * (1.0/35.0);
 
 
     dino -> yVel = newVel;
@@ -43,6 +43,16 @@ void moveDino(Dino* dino) {
 /*
 CACTUS FUNCTIONS
 */
-void initCactus(Cactus* cactus) {
-    /* */
+void initCactus(Cactus* cactus, int x, int y, int dx, int dy) {
+    cactus -> x = x;
+    cactus -> y = y;
+    cactus -> dx = dx;
+    cactus -> dy = dy;
 }
+
+void moveCactus(Cactus* cactus) {
+    cactus -> x += cactus -> dx;
+    cactus -> y += cactus -> dy;
+}
+
+

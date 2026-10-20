@@ -3,12 +3,17 @@
 
 #include "TYPES.H"
 
-/*dino bitmap*/ 
-extern const UINT16 dinoBitmap[16];
 
-extern const UINT16 dinoHeight[16];
+#define HEIGHT_DINO 16
+#define HEIGHT_CACTUS 16
+
+
+/*dino bitmap*/ 
+const UINT16 dinoBitmap[HEIGHT_DINO];
+
+const UINT16 dinoHeight[HEIGHT_DINO];
 
 /*cactus bitmap*/ 
-extern const UINT16 cactusBitmap[16];
+const UINT16 cactusBitmap[HEIGHT_CACTUS];
 
 #endif

@@ -2,6 +2,9 @@
 #define MODEL_H
 
 /* Includes */
+#include <osbind.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include "TYPES.H"
 
 
@@ -12,7 +15,10 @@
 /* Environment Constants */
 #define FLOOR_Y 200
 
-#define GRAVITY -10.0 /* m/s */
+#define DINO_X_POS 32
+#define DINO_Y_POS 168
+
+#define GRAVITY -10 /* m/s */
 
 
 /* Game status flags */
@@ -22,15 +28,15 @@
 #define QUIT_FLG 0x08
 #define E_FLG 0x10 /* Currently unused */
 #define F_FLG 0x20 /* Currently unused */
-#define F_FLG 0x40 /* Currently unused */
-#define G_FLG 0x80 /* Currently unused */
+#define G_FLG 0x40 /* Currently unused */
+#define H_FLG 0x80 /* Currently unused */
 
 
 
 /* Structs */
 typedef struct {
-    double xVel, yVel;
-    double x, y;
+    int xVel, yVel;
+    int x, y;
     int dx, dy;
 } Dino;
 
@@ -43,14 +49,19 @@ typedef struct {
 	unsigned long score;
     Dino* dino;
     Cactus* cactus;
+    UINT16* base;
 	char gameStatus;
-} GameMdl;
+} GameModel;
 
 
 
 /* Prototypes */
-void initGameMdl(GameMdl* model);
-void initDino(Dino* dino, double xVel, double yVel, int x, int y, int dx, int dy);
-void initCactus(Cactus* cactus);
+void initGameMdl(GameModel* model);
+
+void initDino(Dino* dino, int xVel, int yVel, int x, int y, int dx, int dy);
+void moveDino(Dino* dino);
+
+void initCactus(Cactus* cactus, int x, int y, int dx, int dy);
+void moveCactus(Cactus* cactus);
 
 #endif

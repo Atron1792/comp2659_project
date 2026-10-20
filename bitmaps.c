@@ -1,7 +1,7 @@
 #include "bitmaps.h"
 
 /* dino bitmap */
-const UINT16 dinoBitmap[16] = {
+const UINT16 dinoBitmap[HEIGHT_DINO] = {
     0x00FE,
     0x01BF,
     0x01FF,
@@ -19,7 +19,7 @@ const UINT16 dinoBitmap[16] = {
     0x0900,
     0x0D80};
 
-const UINT16 dinoHeight[16] = {
+const UINT16 dinoHeight[HEIGHT_DINO] = {
     0x00FE,
     0x01BF,
     0x01FF,
@@ -35,10 +35,12 @@ const UINT16 dinoHeight[16] = {
     0x1F80,
     0x0900,
     0x0D00,
-    0x0180};
+    0x0180
+};
+
 
 /* cactus bitmap */
-const UINT16 cactusBitmap[16] = {
+const UINT16 cactusBitmap[HEIGHT_CACTUS] = {
     0x03C0,
     0x07E0,
     0x07E0,
@@ -54,4 +56,5 @@ const UINT16 cactusBitmap[16] = {
     0x07E0,
     0x07E0,
     0x07E0,
-    0x07E0};
+    0x07E0
+};
