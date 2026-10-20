@@ -1,16 +1,17 @@
 all: tests #prog.tos tst_model
 tests: tst_model
 
-
 tst_rast: tst_rast.o raster.o font.o
 	cc68x -g tst_rast.o raster.o font.o -o tst_rast
 
-c_example.o: c_example.c asm_example.h
-	cc68x -g -c c_example.c
+model.o: model.c model.h types.h
+	cc68x -g -c model.c
+
+tst_rast.o: tst_rast.c
+	cc68x -g -c tst_rast.c
 
 raster.o: raster.c raster.h
 	cc68x -g -c raster.c
-
 
 tst_model: tst_mdl.o model.o
 	cc68x -g tst_mdl.o model.o -o tst_mdl.tos
