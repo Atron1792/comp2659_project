@@ -5,8 +5,14 @@
 #define FRAMEBUFFER_WORD_COUNT 8000
 #define SCREEN_WIDTH 640
 #define SCREEN_HEIGHT 400
-#define BYTES_PER_SCANLINE 80
+
 #define BITS_PER_BYTE 8
+#define WORD_BIT_COUNT 16
+#define LONG_BIT_COUNT 32
+
+#define BYTES_PER_SCANLINE 80
+#define WORDS_PER_SCANLINE 40
+#define LONGS_PER_SCANLINE 20
 
 void clear_screen(UINT32 *base)
 {
@@ -18,22 +24,19 @@ void clear_screen(UINT32 *base)
     }
 }
 
-void clear_region(UINT32 *base, int row, int col, UINT16 length, UINT16 width)
-{
+void clear_region(UINT32 *base, int row, int col, UINT16 length, UINT16 width) {
     int curr_row, curr_col;
-    UINT8 *byte_base;
+    UINT8 *byte_base = (UINT8 *)base;
+    UINT8* loc = byte_base + (row * BYTES_PER_SCANLINE) + (col >> 3);
     UINT8 mask;
-
-    byte_base = (UINT8 *)base;
 
     for (curr_row = row; curr_row < row + length; curr_row++)
     {
         for (curr_col = col; curr_col < col + width; curr_col++)
         {
-            if (curr_row >= 0 && curr_row < SCREEN_HEIGHT && curr_col >= 0 && curr_col < SCREEN_WIDTH)
-            {
+            if (curr_row >= 0 && curr_row < SCREEN_HEIGHT && curr_col >= 0 && curr_col < SCREEN_WIDTH) {
                 mask = 1 << (BITS_PER_BYTE - 1 - (curr_col & (BITS_PER_BYTE - 1)));
-                byte_base[curr_row * BYTES_PER_SCANLINE + (curr_col >> 3)] &= ~mask;
+                *loc &= ~mask;
             }
         }
     }
@@ -49,34 +52,31 @@ void plot_pixel(UINT8 *base, int row, int col)
 
 void plot_horizontal_line(UINT32 *base, int row, int col, UINT16 length)
 {
-    UINT8 *byte_base;
+    UINT8 *byte_base = (UINT8 *)base;
+    UINT8* loc = byte_base + (row * BYTES_PER_SCANLINE) + (col >> 3);
     UINT8 mask;
     int i;
-    int curr_col;
-
-    byte_base = (UINT8 *)base;
+    int curr_col = (col>>3);
 
     for (i = 0; i < length; i++)
     {
-        curr_col = col + i;
-
         if (row >= 0 && row < SCREEN_HEIGHT && curr_col >= 0 && curr_col < SCREEN_WIDTH)
         {
             mask = 1 << (BITS_PER_BYTE - 1 - (curr_col & (BITS_PER_BYTE - 1)));
-
-            byte_base[row * BYTES_PER_SCANLINE + (curr_col >> 3)] |= mask;
+            *loc |= mask;
+            loc++;
+            curr_col++;
         }
     }
 }
 
 void plot_vertical_line(UINT32 *base, int row, int col, UINT16 length)
 {
-    UINT8 *byte_base;
+    UINT8 *byte_base = (UINT8 *)base;
+    UINT8* = byte_base + (row * BYTES_PER_SCANLINE) + (col >> 3)
     UINT8 mask;
     int i;
-    int curr_row;
-
-    byte_base = (UINT8 *)base;
+    int curr_row = row;
 
     for (i = 0; i < length; i++)
     {
@@ -86,7 +86,9 @@ void plot_vertical_line(UINT32 *base, int row, int col, UINT16 length)
         {
             mask = 1 << (BITS_PER_BYTE - 1 - (col & (BITS_PER_BYTE - 1)));
 
-            byte_base[curr_row * BYTES_PER_SCANLINE + (col >> 3)] |= mask;
+            *loc |= mask;
+            loc += BYTES_PER_SCANLINE;
+            curr_row++;
         }
     }
 }
@@ -270,8 +272,46 @@ void plot_triangle(UINT32 *base, int row, int col, UINT16 triangle_base, UINT16 
     }
 }
 
-void plot_8bit_bitmap(UINT8 *base, int row, int col, const UINT8 *bitmap, UINT16 height)
-{
+void plot_8bit_bitmap(UINT8 *base, int row, int col, const UINT8 *bitmap, UINT16 height) {
+    UINT8 *loc = base + (row * BYTES_PER_SCANLINE) + (col >> 3);
+    UINT8 prevChar; /* Holds overflow bits */
+    int r, c;
+    int currRow;
+    int shift = col & 7; /* col % 8 */
+    int invShift = BITS_PER_BYTE - shift;
+
+    if ((col >> 3) < 0 || col > SCREEN_WIDTH) {
+        /* Out of bounds; return early */
+        break;
+    }
+
+    currRow = row;
+    while (currRow < 0) {
+        /* Move base pointer into screen */
+        loc += BYTES_PER_SCANLINE;
+        currRow++;
+    }
+
+    prevChar = 0;
+    for (r = 0; r < height; r++) {
+        if (currRow >= 0 && currRow < SCREEN_HEIGHT) {
+            *loc |= bitmap[r] >> shift;
+            *loc |= prevChar;
+            
+            prevChar = bitmap[r] << invShift;
+            loc += BYTES_PER_SCANLINE; /* Move base to next line */
+        } else if (currRow >= SCREEN_HEIGHT) {
+            /* Plotting below screen; end early */
+            break;
+        }
+        currRow++;
+    }
+
+    if (shift != 0 && currRow < SCREEN_HEIGHT) {
+        /* Apply leftover bits */
+        *loc |= prevChar;
+    }
+    /*
     UINT8 mask;
     int curr_row;
     int curr_col;
@@ -296,10 +336,50 @@ void plot_8bit_bitmap(UINT8 *base, int row, int col, const UINT8 *bitmap, UINT16
             }
         }
     }
+    */
 }
 
 void plot_16bit_bitmap(UINT16 *base, int row, int col, const UINT16 *bitmap, UINT16 height)
 {
+    UINT16 *loc = base + (row * WORDS_PER_SCANLINE) + (col >> 4);
+    UINT16 prevWord; /* Holds overflow bits */
+    int r, c;
+    int currRow;
+    int shift = col & 15; /* col % 16 */
+    int invShift = WORD_BIT_COUNT - shift;
+
+    if ((col >> 4) < 0 || col > SCREEN_WIDTH) {
+        /* Out of bounds; return early */
+        break;
+    }
+
+    currRow = row;
+    while (currRow < 0) {
+        /* Move base pointer into screen */
+        loc += WORDS_PER_SCANLINE;
+        currRow++;
+    }
+
+    prevWord = 0;
+    for (r = 0; r < height; r++) {
+        if (currRow >= 0 && currRow < SCREEN_HEIGHT) {
+            *loc |= bitmap[r] >> shift;
+            *loc |= prevWord;
+            
+            prevWord = bitmap[r] << invShift;
+            loc += LONGS_PER_SCANLINE; /* Move base to next line */
+        } else if (currRow >= SCREEN_HEIGHT) {
+            /* Plotting below screen; end early */
+            break;
+        }
+        currRow++;
+    }
+
+    if (shift != 0 && currRow < SCREEN_HEIGHT) {
+        /* Apply leftover bits */
+        *loc |= prevWord;
+    }
+    /*
     UINT16 mask;
     UINT8 *byte_base;
     int curr_row;
@@ -327,10 +407,50 @@ void plot_16bit_bitmap(UINT16 *base, int row, int col, const UINT16 *bitmap, UIN
             }
         }
     }
+    */
 }
 
 void plot_32bit_bitmap(UINT32 *base, int row, int col, const UINT32 *bitmap, UINT16 height)
 {
+    UINT32 *loc = base + (row * LONGS_PER_SCANLINE) + (col >> 5);
+    UINT32 prevLong; /* Holds overflow bits */
+    int r, c;
+    int currRow;
+    int shift = col & 31; /* col % 32 */
+    int invShift = LONG_BIT_COUNT - shift;
+
+    if ((col >> 5) < 0 || col > SCREEN_WIDTH) {
+        /* Out of bounds; return early */
+        break;
+    }
+
+    currRow = row;
+    while (currRow < 0) {
+        /* Move base pointer into screen */
+        loc += LONGS_PER_SCANLINE;
+        currRow++;
+    }
+
+    prevLong = 0;
+    for (r = 0; r < height; r++) {
+        if (currRow >= 0 && currRow < SCREEN_HEIGHT) {
+            *loc |= bitmap[r] >> shift;
+            *loc |= prevLong;
+            
+            prevLong = bitmap[r] << invShift;
+            loc += LONGS_PER_SCANLINE; /* Move base to next line */
+        } else if (currRow >= SCREEN_HEIGHT) {
+            /* Plotting below screen; end early */
+            break;
+        }
+        currRow++;
+    }
+
+    if (shift != 0 && currRow < SCREEN_HEIGHT) {
+        /* Apply leftover bits */
+        *loc |= prevLong;
+    }
+    /*
     UINT32 mask;
     UINT8 *byte_base;
     int curr_row;
@@ -358,6 +478,7 @@ void plot_32bit_bitmap(UINT32 *base, int row, int col, const UINT32 *bitmap, UIN
             }
         }
     }
+    */
 }
 
 void plot_character(UINT8 *base, int row, int col, char ch)
@@ -394,11 +515,8 @@ void plot_character(UINT8 *base, int row, int col, char ch)
 
 void plot_string(UINT8 *base, int row, int col, char *ch)
 {
-    int i;
-    int curr_col;
-
-    i = 0;
-    curr_col = col;
+    int i = 0;
+    int curr_col = col;
 
     while (ch[i] != '\0')
     {
