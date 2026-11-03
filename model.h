@@ -26,10 +26,10 @@
 #define WIN_FLG 0x02
 #define LOSS_FLG 0x04
 #define QUIT_FLG 0x08
-#define E_FLG 0x10 /* Currently unused */
-#define F_FLG 0x20 /* Currently unused */
-#define G_FLG 0x40 /* Currently unused */
-#define H_FLG 0x80 /* Currently unused */
+#define E_FLG 0x10 /* Unused flag */
+#define F_FLG 0x20 /* Unused flag */
+#define G_FLG 0x40 /* Unused flag */
+#define H_FLG 0x80 /* Unused flag */
 
 
 

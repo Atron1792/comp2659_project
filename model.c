@@ -2,7 +2,7 @@
 
 void initModel(GameModel* mdl) {
 	mdl -> score = 0L;
-	mdl -> gameStatus = (char)(GAME_ON_FLG);
+	mdl -> gameStatus = 0x00 | (char)(GAME_ON_FLG);
     
     initDino(mdl -> dino, 0, 0, DINO_X_POS, DINO_Y_POS, 0,0);
     initCactus(mdl -> cactus, 0,0,0,0);
