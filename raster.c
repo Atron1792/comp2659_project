@@ -73,7 +73,7 @@ void plot_horizontal_line(UINT32 *base, int row, int col, UINT16 length)
 void plot_vertical_line(UINT32 *base, int row, int col, UINT16 length)
 {
     UINT8 *byte_base = (UINT8 *)base;
-    UINT8* = byte_base + (row * BYTES_PER_SCANLINE) + (col >> 3)
+    UINT8* loc = byte_base + (row * BYTES_PER_SCANLINE) + (col >> 3);
     UINT8 mask;
     int i;
     int curr_row = row;
@@ -282,7 +282,7 @@ void plot_8bit_bitmap(UINT8 *base, int row, int col, const UINT8 *bitmap, UINT16
 
     if ((col >> 3) < 0 || col > SCREEN_WIDTH) {
         /* Out of bounds; return early */
-        break;
+        return;
     }
 
     currRow = row;
@@ -311,32 +311,6 @@ void plot_8bit_bitmap(UINT8 *base, int row, int col, const UINT8 *bitmap, UINT16
         /* Apply leftover bits */
         *loc |= prevChar;
     }
-    /*
-    UINT8 mask;
-    int curr_row;
-    int curr_col;
-    int screen_row;
-    int screen_col;
-
-    for (curr_row = 0; curr_row < height; curr_row++)
-    {
-        screen_row = row + curr_row;
-
-        for (curr_col = 0; curr_col < BITS_PER_BYTE; curr_col++)
-        {
-            screen_col = col + curr_col;
-            mask = 1 << (BITS_PER_BYTE - 1 - curr_col);
-
-            if (screen_row >= 0 && screen_row < SCREEN_HEIGHT && screen_col >= 0 && screen_col < SCREEN_WIDTH)
-            {
-                if (bitmap[curr_row] & mask)
-                {
-                    base[screen_row * BYTES_PER_SCANLINE + (screen_col >> 3)] |= 1 << (BITS_PER_BYTE - 1 - (screen_col & (BITS_PER_BYTE - 1)));
-                }
-            }
-        }
-    }
-    */
 }
 
 void plot_16bit_bitmap(UINT16 *base, int row, int col, const UINT16 *bitmap, UINT16 height)
@@ -350,7 +324,7 @@ void plot_16bit_bitmap(UINT16 *base, int row, int col, const UINT16 *bitmap, UIN
 
     if ((col >> 4) < 0 || col > SCREEN_WIDTH) {
         /* Out of bounds; return early */
-        break;
+        return;
     }
 
     currRow = row;
@@ -379,35 +353,6 @@ void plot_16bit_bitmap(UINT16 *base, int row, int col, const UINT16 *bitmap, UIN
         /* Apply leftover bits */
         *loc |= prevWord;
     }
-    /*
-    UINT16 mask;
-    UINT8 *byte_base;
-    int curr_row;
-    int curr_col;
-    int screen_row;
-    int screen_col;
-
-    byte_base = (UINT8 *)base;
-
-    for (curr_row = 0; curr_row < height; curr_row++)
-    {
-        screen_row = row + curr_row;
-
-        for (curr_col = 0; curr_col < 16; curr_col++)
-        {
-            screen_col = col + curr_col;
-            mask = 1 << (15 - curr_col);
-
-            if (screen_row >= 0 && screen_row < SCREEN_HEIGHT && screen_col >= 0 && screen_col < SCREEN_WIDTH)
-            {
-                if (bitmap[curr_row] & mask)
-                {
-                    byte_base[screen_row * BYTES_PER_SCANLINE + (screen_col >> 3)] |= 1 << (BITS_PER_BYTE - 1 - (screen_col & (BITS_PER_BYTE - 1)));
-                }
-            }
-        }
-    }
-    */
 }
 
 void plot_32bit_bitmap(UINT32 *base, int row, int col, const UINT32 *bitmap, UINT16 height)
@@ -421,7 +366,7 @@ void plot_32bit_bitmap(UINT32 *base, int row, int col, const UINT32 *bitmap, UIN
 
     if ((col >> 5) < 0 || col > SCREEN_WIDTH) {
         /* Out of bounds; return early */
-        break;
+        return;
     }
 
     currRow = row;
@@ -450,35 +395,6 @@ void plot_32bit_bitmap(UINT32 *base, int row, int col, const UINT32 *bitmap, UIN
         /* Apply leftover bits */
         *loc |= prevLong;
     }
-    /*
-    UINT32 mask;
-    UINT8 *byte_base;
-    int curr_row;
-    int curr_col;
-    int screen_row;
-    int screen_col;
-
-    byte_base = (UINT8 *)base;
-
-    for (curr_row = 0; curr_row < height; curr_row++)
-    {
-        screen_row = row + curr_row;
-
-        for (curr_col = 0; curr_col < 32; curr_col++)
-        {
-            screen_col = col + curr_col;
-            mask = 1UL << (31 - curr_col);
-
-            if (screen_row >= 0 && screen_row < SCREEN_HEIGHT && screen_col >= 0 && screen_col < SCREEN_WIDTH)
-            {
-                if (bitmap[curr_row] & mask)
-                {
-                    byte_base[screen_row * BYTES_PER_SCANLINE + (screen_col >> 3)] |= 1 << (BITS_PER_BYTE - 1 - (screen_col & (BITS_PER_BYTE - 1)));
-                }
-            }
-        }
-    }
-    */
 }
 
 void plot_character(UINT8 *base, int row, int col, char ch)
