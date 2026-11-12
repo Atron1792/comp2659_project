@@ -51,12 +51,12 @@ typedef struct {
     Cactus* cactus;
     UINT16* base;
 	char gameStatus;
-} GameModel;
+} GameMdl;
 
 
 
 /* Prototypes */
-void initGameMdl(GameModel* model);
+void initGameMdl(GameMdl* model);
 
 void initDino(Dino* dino, int xVel, int yVel, int x, int y, int dx, int dy);
 void moveDino(Dino* dino);

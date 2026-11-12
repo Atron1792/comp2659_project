@@ -1,12 +1,12 @@
 #include "game.h"
 
 
-void initScreen(GameModel* model) {
+void initScreen(GameMdl* model) {
     /* IMPLEMENT ME */
 }
 
 
-void gameLoop(GameModel* model) {
+void gameLoop(GameMdl* model) {
     while (model -> gameStatus & GAME_ON_FLG) {
         /**/
     }

@@ -11,8 +11,8 @@ void tstDinoMove();
 
 
 void testModel() {
-    GameModel mdl;
-    initModel(&mdl);
+    GameMdl mdl;
+    initGameMdl(&mdl);
 }
 
 /* DINO TESTS */

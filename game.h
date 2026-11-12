@@ -9,7 +9,7 @@
 #include "TYPES.H"
 #include "model.h"
 
-void gameLoop(GameModel* model);
-void initScreen(GameModel* model);
+void gameLoop(GameMdl* model);
+void initScreen(GameMdl* model);
 
 #endif

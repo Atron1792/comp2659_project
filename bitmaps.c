@@ -1,34 +1,54 @@
 #include "bitmaps.h"
 
 /* dino bitmap */
-const UINT16 dinoBitmap[HEIGHT_DINO] = {
+const UINT16 dinoBitmap0[HEIGHT_DINO] = {
     0x00FE,
-    0x01BF,
     0x01FF,
+    0x01BF,
     0x01FF,
     0x01F0,
     0x81FE,
     0x83E0,
     0xCFF8,
-    0xFFE0,
+    0xFFE8,
     0xFFE0,
     0x7FE0,
     0x3FC0,
     0x1F80,
     0x0900,
     0x0900,
-    0x0D80};
+    0x0D80
+};
 
-const UINT16 dinoHeight[HEIGHT_DINO] = {
+const UINT16 dinoBitmap1[HEIGHT_DINO] = {
     0x00FE,
-    0x01BF,
     0x01FF,
+    0x01BF,
     0x01FF,
     0x01F0,
     0x81FE,
     0x83E0,
     0xCFF8,
+    0xFFE8,
     0xFFE0,
+    0x7FE0,
+    0x3FC0,
+    0x1F80,
+    0x0900,
+    0x0980,
+    0x0C00
+};
+
+const UINT16 dinoBitmap2[HEIGHT_DINO] = {
+    0x00FE,
+    0x01FF,
+    0x01BF,
+    0x01FF,
+    0x01F0,
+    0x81FE,
+    0x83E0,
+    0xCFF8,
+    0xFFE8,
     0xFFE0,
     0x7FE0,
     0x3FC0,
@@ -38,6 +58,24 @@ const UINT16 dinoHeight[HEIGHT_DINO] = {
     0x0180
 };
 
+const UINT16 dinoBitmapDeath[HEIGHT_DINO] = {
+    0x00FE,
+    0x011F,
+    0x015F,
+    0x011F,
+    0x01F0,
+    0x81FE,
+    0x83E0,
+    0xCFF8,
+    0xFFE8,
+    0xFFE0,
+    0x7FE0,
+    0x3FC0,
+    0x1F80,
+    0x0900,
+    0x0900,
+    0x0D80
+};
 
 /* cactus bitmap */
 const UINT16 cactusBitmap[HEIGHT_CACTUS] = {

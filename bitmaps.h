@@ -9,9 +9,13 @@
 
 
 /*dino bitmap*/ 
-const UINT16 dinoBitmap[HEIGHT_DINO];
+const UINT16 dinoBitmap0[HEIGHT_DINO];
 
-const UINT16 dinoHeight[HEIGHT_DINO];
+const UINT16 dinoBitmap1[HEIGHT_DINO];
+
+const UINT16 dinoBitmap2[HEIGHT_DINO];
+
+const UINT16 dinoBitmapDeath[HEIGHT_DINO];
 
 /*cactus bitmap*/ 
 const UINT16 cactusBitmap[HEIGHT_CACTUS];

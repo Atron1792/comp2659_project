@@ -1,6 +1,6 @@
 #include "model.h"
 
-void initModel(GameModel* mdl) {
+void initGameMdl(GameMdl* mdl) {
 	mdl -> score = 0L;
 	mdl -> gameStatus = 0x00 | (char)(GAME_ON_FLG);
     
