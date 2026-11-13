@@ -1,10 +1,10 @@
 #include "model.h"
 
-void initModel(GameModel* mdl) {
+void initGameMdl(GameMdl* mdl) {
 	mdl -> score = 0L;
 	mdl -> gameStatus = 0x00 | (char)(GAME_ON_FLG);
     
-    initDino(mdl -> dino, 0, 0, DINO_X_POS, DINO_Y_POS, 0,0);
+    initDino(mdl -> dino, 0, 0, DINO_X_POS, DINO_Y_POS, 0, 0, 0);
     initCactus(mdl -> cactus, 0,0,0,0);
     
     mdl -> base = (UINT16*)Physbase();
@@ -53,22 +53,21 @@ void initCactus(Cactus* cactus, int x, int y, int dx, int dy) {
 
 void moveCactus(Cactus* cactus) {
     cactus -> x += cactus -> dx; 
-    cactus -> y += cactus -> dy; //we can remove this catus not changing y
+    cactus -> y += cactus -> dy; /*we can remove this catus not changing y*/
 }
 
 
-int Checkintersect(Dino* dino, Cactus* cactus) {
-    int dbrxp, cx; //dino bottem right x-axius pixel
+int checkIntersect(Dino* dino, Cactus* cactus) {
+    int dbrxp, cx, dy; /*dino bottem right x-axius pixel*/
     dbrxp = DINO_X_POS;
     dbrxp += 15;
     cx = cactus -> x;
-    if (dbrxp > cx) { //if catus could possibly have its x interspt in dinos
-        int dy;
+    if (dbrxp > cx) { /*if catus could possibly have its x interspt in dinos*/
         dy = dino -> y;
-        dy -= 15; //we do this to find lowest pixel of dinos y
-        if (cactus -> y > dy) { //dinos and catus y axus intersects.
+        dy -= 15; /*we do this to find lowest pixel of dinos y*/
+        if (cactus -> y > dy) { /*dinos and catus y axus intersects.*/
             cx += 15;
-            if (cx > DINO_X_POS) { // if upper right most pixel isn't farther than dino 
+            if (cx > DINO_X_POS) { /*if upper right most pixel isn't farther than dino */
                 return 1;
             } else {
                 return 0;
@@ -81,14 +80,14 @@ int Checkintersect(Dino* dino, Cactus* cactus) {
     }
 }
 
-void Dinojump(Dino* dino) {
-    if (dino -> y == DINO_Y_POS) { //sets up start of dino jump(dino on ground)
+void dinoJump(Dino* dino) {
+    if (dino -> y == DINO_Y_POS) { /* sets up start of dino jump(dino on ground) */
         dino -> yVel = 2;
         dino -> counter = 0;
     }
     dino -> y += dino -> yVel;
     dino -> counter += 1;
-    if (dino -> counter == 16) { //for changeing yvel accounting for acceleration. 
+    if (dino -> counter == 16) { /*for changeing yvel accounting for acceleration.*/
         dino -> yVel += dino -> a;
         dino -> counter = 0;
         

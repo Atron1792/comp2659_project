@@ -2,7 +2,7 @@
 #define RENDERER_H
 
 #include "model.h"
-#include "types.h"
+#include "TYPES.H"
 
 void render(const GameMdl *model, UINT32 *base);
 

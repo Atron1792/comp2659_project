@@ -7,7 +7,7 @@
 
 void render(const GameMdl *model, UINT32 *base)
 {
-    clear_screen(base);
+    clearScreen(base);
     renderDino(model->dino, (UINT16 *)base);
 
     renderCactus(model->cactus, (UINT16 *)base);
@@ -25,10 +25,10 @@ void renderDino(const Dino *dino, UINT16 *base)
         bitmap = dinoBitmap0;
     }
 
-    plot_16bit_bitmap(base, dino->y, dino->x, bitmap, HEIGHT_DINO);
+    plot16bitBitmap(base, dino->y, dino->x, bitmap, HEIGHT_DINO);
 }
 
 void renderCactus(const Cactus *cactus, UINT16 *base)
 {
-    plot_16bit_bitmap(base, cactus->y, cactus->x, cactusBitmap, HEIGHT_CACTUS);
+    plot16bitBitmap(base, cactus->y, cactus->x, cactusBitmap, HEIGHT_CACTUS);
 }

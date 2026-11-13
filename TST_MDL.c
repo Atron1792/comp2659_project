@@ -30,7 +30,7 @@ void tstDinoMove() {
     int dy = 0;
     double yVel = 5.0;
     
-    initDino(&chuck, xVel, yVel, x, y, dx, dy);
+    initDino(&chuck, xVel, yVel, x, y, dx, dy, 0);
     moveDino(&chuck);
     moveDino(&chuck);
     printf("x = %d\ny = %d\n\nxVel = %lf\nyVel = %lf\n", chuck.x, chuck.y, chuck.xVel, chuck.yVel);

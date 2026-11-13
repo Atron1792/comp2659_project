@@ -14,7 +14,7 @@
 #define WORDS_PER_SCANLINE 40
 #define LONGS_PER_SCANLINE 20
 
-void clear_screen(UINT32 *base)
+void clearScreen(UINT32 *base)
 {
     int i;
 
@@ -24,7 +24,7 @@ void clear_screen(UINT32 *base)
     }
 }
 
-void clear_region(UINT32 *base, int row, int col, UINT16 length, UINT16 width) {
+void clearRegion(UINT32 *base, int row, int col, UINT16 length, UINT16 width) {
     int curr_row, curr_col;
     UINT8 *byte_base = (UINT8 *)base;
     UINT8* loc = byte_base + (row * BYTES_PER_SCANLINE) + (col >> 3);
@@ -42,7 +42,7 @@ void clear_region(UINT32 *base, int row, int col, UINT16 length, UINT16 width) {
     }
 }
 
-void plot_pixel(UINT8 *base, int row, int col)
+void plotPixel(UINT8 *base, int row, int col)
 {
     if (col >= 0 && col < SCREEN_WIDTH && row >= 0 && row < SCREEN_HEIGHT)
     {
@@ -50,7 +50,7 @@ void plot_pixel(UINT8 *base, int row, int col)
     }
 }
 
-void plot_horizontal_line(UINT32 *base, int row, int col, UINT16 length)
+void plotHorizontalLine(UINT32 *base, int row, int col, UINT16 length)
 {
     UINT8 *byte_base = (UINT8 *)base;
     UINT8* loc = byte_base + (row * BYTES_PER_SCANLINE) + (col >> 3);
@@ -70,7 +70,7 @@ void plot_horizontal_line(UINT32 *base, int row, int col, UINT16 length)
     }
 }
 
-void plot_vertical_line(UINT32 *base, int row, int col, UINT16 length)
+void plotVerticalLine(UINT32 *base, int row, int col, UINT16 length)
 {
     UINT8 *byte_base = (UINT8 *)base;
     UINT8* loc = byte_base + (row * BYTES_PER_SCANLINE) + (col >> 3);
@@ -93,7 +93,7 @@ void plot_vertical_line(UINT32 *base, int row, int col, UINT16 length)
     }
 }
 
-void plot_line(UINT32 *base, int start_row, int start_col, int end_row, int end_col)
+void plotLine(UINT32 *base, int start_row, int start_col, int end_row, int end_col)
 {
     UINT8 *byte_base;
     UINT8 mask;
@@ -165,7 +165,7 @@ void plot_line(UINT32 *base, int start_row, int start_col, int end_row, int end_
     }
 }
 
-void plot_rectangle(UINT32 *base, int row, int col, UINT16 length, UINT16 width)
+void plotRectangle(UINT32 *base, int row, int col, UINT16 length, UINT16 width)
 {
     UINT8 *byte_base;
     UINT8 mask;
@@ -188,7 +188,7 @@ void plot_rectangle(UINT32 *base, int row, int col, UINT16 length, UINT16 width)
     }
 }
 
-void plot_square(UINT32 *base, int row, int col, UINT16 side)
+void plotSquare(UINT32 *base, int row, int col, UINT16 side)
 {
     UINT8 *byte_base;
     UINT8 mask;
@@ -211,7 +211,7 @@ void plot_square(UINT32 *base, int row, int col, UINT16 side)
     }
 }
 
-void plot_triangle(UINT32 *base, int row, int col, UINT16 triangle_base, UINT16 height, UINT8 direction)
+void plotTriangle(UINT32 *base, int row, int col, UINT16 triangle_base, UINT16 height, UINT8 direction)
 {
     UINT8 *byte_base;
     UINT8 mask;
@@ -272,7 +272,7 @@ void plot_triangle(UINT32 *base, int row, int col, UINT16 triangle_base, UINT16 
     }
 }
 
-void plot_8bit_bitmap(UINT8 *base, int row, int col, const UINT8 *bitmap, UINT16 height) {
+void plot8bitBitmap(UINT8 *base, int row, int col, const UINT8 *bitmap, UINT16 height) {
     UINT8 *loc = base + (row * BYTES_PER_SCANLINE) + (col >> 3);
     UINT8 prevChar; /* Holds overflow bits */
     int r, c;
@@ -313,7 +313,7 @@ void plot_8bit_bitmap(UINT8 *base, int row, int col, const UINT8 *bitmap, UINT16
     }
 }
 
-void plot_16bit_bitmap(UINT16 *base, int row, int col, const UINT16 *bitmap, UINT16 height)
+void plot16bitBitmap(UINT16 *base, int row, int col, const UINT16 *bitmap, UINT16 height)
 {
     UINT16 *loc = base + (row * WORDS_PER_SCANLINE) + (col >> 4);
     UINT16 prevWord; /* Holds overflow bits */
@@ -355,7 +355,7 @@ void plot_16bit_bitmap(UINT16 *base, int row, int col, const UINT16 *bitmap, UIN
     }
 }
 
-void plot_32bit_bitmap(UINT32 *base, int row, int col, const UINT32 *bitmap, UINT16 height)
+void plot32bitBitmap(UINT32 *base, int row, int col, const UINT32 *bitmap, UINT16 height)
 {
     UINT32 *loc = base + (row * LONGS_PER_SCANLINE) + (col >> 5);
     UINT32 prevLong; /* Holds overflow bits */
@@ -397,7 +397,7 @@ void plot_32bit_bitmap(UINT32 *base, int row, int col, const UINT32 *bitmap, UIN
     }
 }
 
-void plot_character(UINT8 *base, int row, int col, char ch)
+void plotCharacter(UINT8 *base, int row, int col, char ch)
 {
     const UINT8 *glyph;
     UINT8 mask;
@@ -429,7 +429,7 @@ void plot_character(UINT8 *base, int row, int col, char ch)
     }
 }
 
-void plot_string(UINT8 *base, int row, int col, char *ch)
+void plotString(UINT8 *base, int row, int col, char *ch)
 {
     int i = 0;
     int curr_col = col;
@@ -447,7 +447,7 @@ void plot_string(UINT8 *base, int row, int col, char *ch)
         }
         else if (IS_PRINTABLE(ch[i]))
         {
-            plot_character(base, row, curr_col, ch[i]);
+            plotCharacter(base, row, curr_col, ch[i]);
             curr_col += BITS_PER_BYTE;
         }
 

@@ -3,7 +3,7 @@
 
 #include "model.h"
 
-void on_jump_request(GameMdl *model);
-void on_quit_request(GameMdl *model);
+void onJumpRequest(GameMdl *model);
+void onQuitRequest(GameMdl *model);
 
 #endif

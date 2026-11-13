@@ -32,9 +32,6 @@
 #define H_FLG 0x80 /* Unused flag */
 
 
-
-
-
 /* Structs */
 typedef struct {
     int xVel, yVel;
@@ -55,20 +52,20 @@ typedef struct {
     Cactus* cactus;
     UINT16* base;
 	char gameStatus;
-} GameModel;
+} GameMdl;
 
 
 
 /* Prototypes */
-void initGameMdl(GameModel* model);
+void initGameMdl(GameMdl* model);
 
-void initDino(Dino* dino, int xVel, int yVel, int x, int y, int dx, int dy, int a;);
+void initDino(Dino* dino, int xVel, int yVel, int x, int y, int dx, int dy, int a);
 void moveDino(Dino* dino);
 
 void initCactus(Cactus* cactus, int x, int y, int dx, int dy);
 void moveCactus(Cactus* cactus);
 
 
-int Checkintersect(Dino* dino, Cactus* cactus);
-void Dinojump(Dino* dino);
+int checkIntersect(Dino* dino, Cactus* cactus);
+void dinoJump(Dino* dino);
 #endif

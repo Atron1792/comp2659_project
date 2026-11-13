@@ -1,6 +1,6 @@
 #include "asynch.h"
 
-void on_jump_request(GameMdl *model)
+void onJumpRequest(GameMdl *model)
 {
     if (model->dino) {
         if (model->dino->y == DINO_Y_POS) {
@@ -9,7 +9,7 @@ void on_jump_request(GameMdl *model)
     }
 }
 
-void on_quit_request(GameMdl *model)
+void onQuitRequest(GameMdl *model)
 {
     model->gameStatus |= QUIT_FLG;
 }

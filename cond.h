@@ -3,7 +3,7 @@
 
 #include "model.h"
 
-signed int check_collision(const GameMdl *model);
-void on_collision(GameMdl *model);
+signed int checkCollision(const GameMdl *model);
+void onCollision(GameMdl *model);
 
 #endif
