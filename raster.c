@@ -341,7 +341,7 @@ void plot16bitBitmap(UINT16 *base, int row, int col, const UINT16 *bitmap, UINT1
             *loc |= prevWord;
             
             prevWord = bitmap[r] << invShift;
-            loc += LONGS_PER_SCANLINE; /* Move base to next line */
+            loc += WORDS_PER_SCANLINE; /* Move base to next line */
         } else if (currRow >= SCREEN_HEIGHT) {
             /* Plotting below screen; end early */
             break;
