@@ -2,7 +2,7 @@
 
 #include "raster.h"
 #include "bitmaps.h"
-#include "types.h"
+#include "TYPES.H"
 #include "model.h"
 
 void render(const GameMdl *model, UINT32 *base)
@@ -15,10 +15,20 @@ void render(const GameMdl *model, UINT32 *base)
 
 void renderDino(const Dino *dino, UINT16 *base)
 {
-    plot_16bit_bitmap(base, dino->x, dino->y, dinoBitmap, 16);
+    const UINT16 *bitmap;
+
+    if (dino->yVel < 0) {
+        bitmap = dinoBitmap2;
+    } else if (dino->yVel > 0) {
+        bitmap = dinoBitmap1;
+    } else {
+        bitmap = dinoBitmap0;
+    }
+
+    plot_16bit_bitmap(base, dino->y, dino->x, bitmap, HEIGHT_DINO);
 }
 
 void renderCactus(const Cactus *cactus, UINT16 *base)
 {
-    plot_16bit_bitmap(base, cactus->x, cactus->y, cactusBitmap, 16);
+    plot_16bit_bitmap(base, cactus->y, cactus->x, cactusBitmap, HEIGHT_CACTUS);
 }
