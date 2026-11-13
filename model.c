@@ -1,6 +1,6 @@
 #include "model.h"
 
-void initGameMdl(GameMdl* mdl) {
+void initModel(GameModel* mdl) {
 	mdl -> score = 0L;
 	mdl -> gameStatus = 0x00 | (char)(GAME_ON_FLG);
     
@@ -13,7 +13,7 @@ void initGameMdl(GameMdl* mdl) {
 /*
 DINO FUNCTIONS
 */
-void initDino(Dino* dino, int xVel, int yVel, int x, int y, int dx, int dy) {
+void initDino(Dino* dino, int xVel, int yVel, int x, int y, int dx, int dy, int a) {
     /* This function is still being developed */
     dino -> x = x;
     dino -> dx = dx;
@@ -22,6 +22,7 @@ void initDino(Dino* dino, int xVel, int yVel, int x, int y, int dx, int dy) {
     dino -> y = y;
     dino -> dy = dy;
     dino -> yVel = yVel;
+    dino -> a = a;
 }
 
 void moveDino(Dino* dino) {
@@ -51,8 +52,50 @@ void initCactus(Cactus* cactus, int x, int y, int dx, int dy) {
 }
 
 void moveCactus(Cactus* cactus) {
-    cactus -> x += cactus -> dx;
-    cactus -> y += cactus -> dy;
+    cactus -> x += cactus -> dx; 
+    cactus -> y += cactus -> dy; //we can remove this catus not changing y
 }
 
 
+int Checkintersect(Dino* dino, Cactus* cactus) {
+    int dbrxp, cx; //dino bottem right x-axius pixel
+    dbrxp = DINO_X_POS;
+    dbrxp += 15;
+    cx = cactus -> x;
+    if (dbrxp > cx) { //if catus could possibly have its x interspt in dinos
+        int dy;
+        dy = dino -> y;
+        dy -= 15; //we do this to find lowest pixel of dinos y
+        if (cactus -> y > dy) { //dinos and catus y axus intersects.
+            cx += 15;
+            if (cx > DINO_X_POS) { // if upper right most pixel isn't farther than dino 
+                return 1;
+            } else {
+                return 0;
+            }
+        } else {
+            return 0;
+        }
+    } else {
+        return 0;
+    }
+}
+
+void Dinojump(Dino* dino) {
+    if (dino -> y == DINO_Y_POS) { //sets up start of dino jump(dino on ground)
+        dino -> yVel = 2;
+        dino -> counter = 0;
+    }
+    dino -> y += dino -> yVel;
+    dino -> counter += 1;
+    if (dino -> counter == 16) { //for changeing yvel accounting for acceleration. 
+        dino -> yVel += dino -> a;
+        dino -> counter = 0;
+        
+        /*
+        if (dino -> yVel == 0) {
+            dino -> counter = 10;
+        }
+        */
+    }
+}

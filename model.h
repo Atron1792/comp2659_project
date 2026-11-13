@@ -33,11 +33,15 @@
 
 
 
+
+
 /* Structs */
 typedef struct {
     int xVel, yVel;
     int x, y;
     int dx, dy;
+    int a;
+    int counter;
 } Dino;
 
 typedef struct {
@@ -51,17 +55,20 @@ typedef struct {
     Cactus* cactus;
     UINT16* base;
 	char gameStatus;
-} GameMdl;
+} GameModel;
 
 
 
 /* Prototypes */
-void initGameMdl(GameMdl* model);
+void initGameMdl(GameModel* model);
 
-void initDino(Dino* dino, int xVel, int yVel, int x, int y, int dx, int dy);
+void initDino(Dino* dino, int xVel, int yVel, int x, int y, int dx, int dy, int a;);
 void moveDino(Dino* dino);
 
 void initCactus(Cactus* cactus, int x, int y, int dx, int dy);
 void moveCactus(Cactus* cactus);
 
+
+int Checkintersect(Dino* dino, Cactus* cactus);
+void Dinojump(Dino* dino);
 #endif
