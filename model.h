@@ -9,7 +9,7 @@
 
 
 /* Dino constants */
-#define JUMP_Y_VELOCITY 5 /* m/s */
+#define JUMP_Y_VELOCITY 10 /* m/s */
 
 
 /* Cactus constants */
@@ -18,10 +18,13 @@
 #define CACTUS_MOVE_RATE 2 /* frames */
 
 /* Environment Constants */
-#define FLOOR_Y 200
+#define SCRN_W 640
+#define SCRN_H 400
+
+#define FLOOR_Y (SCRN_H - 32) 
 
 #define DINO_X_POS 32
-#define DINO_Y_POS 168
+#define DINO_Y_POS (FLOOR_Y - 32)
 
 #define GRAVITY -1
 

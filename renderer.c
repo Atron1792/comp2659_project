@@ -5,8 +5,14 @@ void render(const GameMdl *model)
 {
     clearScreen(model->base);
     
+    renderGround(model);
     renderDino(model->dino, model->base);
     renderCactus(model->cactus, model->base);
+}
+
+void renderGround(const GameMdl *model)
+{
+    plotHorizontalLine(model->base, FLOOR_Y, 0, SCRN_W);
 }
 
 void renderDino(const Dino *dino, UINT32 *base)

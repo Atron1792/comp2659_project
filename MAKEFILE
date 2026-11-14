@@ -1,5 +1,5 @@
 all: tests
-tests: tst_mvnt tst_rend
+tests: tst_rend tst_mvnt
 
 tst_game: game.o model.o raster.o font.o bitmaps.o renderer.o asynch.o synch.o cond.o
 	cc68x -g game.o model.o raster.o font.o bitmaps.o renderer.o asynch.o synch.o cond.o -o tst_game.tos
