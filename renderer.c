@@ -5,17 +5,17 @@
 #include "TYPES.H"
 #include "model.h"
 
-void render(const GameMdl *model, UINT32 *base)
+void render(GameMdl *model)
 {
-    clearScreen(base);
-    renderDino(model->dino, (UINT16 *)base);
-
-    renderCactus(model->cactus, (UINT16 *)base);
+    clearScreen(model->base);
+    
+    renderDino(model->dino, (UINT32 *)model->base);
+    renderCactus(model->cactus, (UINT32 *)model->base);
 }
 
-void renderDino(const Dino *dino, UINT16 *base)
+void renderDino(const Dino *dino, UINT32 *base)
 {
-    const UINT16 *bitmap;
+    const UINT32 *bitmap;
 
     if (dino->yVel < 0) {
         bitmap = dinoBitmap2;
@@ -25,10 +25,10 @@ void renderDino(const Dino *dino, UINT16 *base)
         bitmap = dinoBitmap0;
     }
 
-    plot16bitBitmap(base, dino->y, dino->x, bitmap, HEIGHT_DINO);
+    plot32bitBitmap(base, dino->y, dino->x, bitmap, DINO_HEIGHT);
 }
 
-void renderCactus(const Cactus *cactus, UINT16 *base)
+void renderCactus(const Cactus *cactus, UINT32 *base)
 {
-    plot16bitBitmap(base, cactus->y, cactus->x, cactusBitmap, HEIGHT_CACTUS);
+    plot32bitBitmap(base, cactus->y, cactus->x, cactusBitmap, CACTUS_HEIGHT);
 }
