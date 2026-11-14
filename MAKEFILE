@@ -50,10 +50,10 @@ raster.o: raster.c raster.h font.h
 tst_mdl: tst_mdl.o model.o
 	cc68x -g tst_mdl.o model.o -o tst_mdl.tos
 
-tst_mvnt: tst_mvnt.o model.o raster.o font.o bitmaps.o renderer.o cond.o
-	cc68x -g tst_mvnt.o model.o raster.o font.o bitmaps.o renderer.o cond.o -o tst_mvnt.tos
+tst_mvnt: tst_mvnt.o model.o raster.o font.o bitmaps.o renderer.o asynch.o cond.o
+	cc68x -g tst_mvnt.o model.o raster.o font.o bitmaps.o renderer.o asynch.o cond.o -o tst_mvnt.tos
 
-tst_mvnt.o: tst_mvnt.c model.h raster.h renderer.h cond.h
+tst_mvnt.o: tst_mvnt.c model.h raster.h renderer.h asynch.h cond.h
 	cc68x -g -c tst_mvnt.c
 
 tst_mdl.o: tst_mdl.c model.h TYPES.H

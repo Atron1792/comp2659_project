@@ -46,22 +46,6 @@ void moveDino(Dino* dino) {
     }
 }
 
-void dinoJump(Dino* dino) {
-    if (dino -> y >= DINO_Y_POS && dino -> yVel >= 0) {
-        dino -> y = DINO_Y_POS;
-        dino -> yVel = -JUMP_Y_VELOCITY;
-    }
-
-    dino -> y += dino -> yVel;
-    dino -> yVel += 1;
-
-    if (dino -> y >= DINO_Y_POS) {
-        dino -> y = DINO_Y_POS;
-        dino -> yVel = 0;
-    }
-}
-
-
 /*
 CACTUS FUNCTIONS
 */
