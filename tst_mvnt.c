@@ -15,8 +15,8 @@ static void initMovementModel(GameMdl *model, Dino *dino, Cactus *cactus)
     model->cactus = cactus;
     model->base = Physbase();
 
-    initDino(dino, 0, 0, DINO_X_POS, DINO_Y_POS, 0, 0, 0);
-    initCactus(cactus, 640 - CACTUS_WIDTH, FLOOR_Y - CACTUS_HEIGHT, -4, 0);
+    initDino(dino, DINO_X_POS, DINO_Y_POS);
+    initCactus(cactus, 640 - CACTUS_WIDTH, FLOOR_Y - CACTUS_HEIGHT, -4);
 }
 
 int main(void)

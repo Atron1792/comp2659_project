@@ -59,10 +59,10 @@ typedef struct {
 /* Prototypes */
 void initGameMdl(GameMdl* model);
 
-void initDino(Dino* dino, int xVel, int yVel, int x, int y, int dx, int dy, int a);
+void initDino(Dino* dino, int x, int y);
 void moveDino(Dino* dino);
 
-void initCactus(Cactus* cactus, int x, int y, int dx, int dy);
+void initCactus(Cactus* cactus, int x, int y, int dx);
 void moveCactus(Cactus* cactus);
 
 

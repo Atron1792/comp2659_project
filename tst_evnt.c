@@ -13,8 +13,8 @@ static void initTestModel(GameMdl *model, Dino *dino, Cactus *cactus)
     model->cactus = cactus;
     model->base = (UINT32 *)0;
 
-    initDino(dino, 0, 0, DINO_X_POS, DINO_Y_POS, 0, 0, 0);
-    initCactus(cactus, 320, DINO_Y_POS, 0, 0);
+    initDino(dino, DINO_X_POS, DINO_Y_POS);
+    initCactus(cactus, 320, DINO_Y_POS, 0);
 }
 
 static void tstJumpRequest(void)

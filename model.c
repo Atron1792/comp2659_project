@@ -5,8 +5,8 @@ void initGameMdl(GameMdl* mdl) {
 	mdl -> score = 0L;
 	mdl -> gameStatus = 0;
     
-    initDino(mdl -> dino, 0, 0, DINO_X_POS, DINO_Y_POS, 0, 0, 0);
-    initCactus(mdl -> cactus, 0,0,0,0);
+    initDino(mdl -> dino, DINO_X_POS, DINO_Y_POS);
+    initCactus(mdl -> cactus, 0, 0, 0);
     
     mdl -> base = Physbase();
 }
@@ -14,16 +14,15 @@ void initGameMdl(GameMdl* mdl) {
 /*
 DINO FUNCTIONS
 */
-void initDino(Dino* dino, int xVel, int yVel, int x, int y, int dx, int dy, int a) {
-    /* This function is still being developed */
+void initDino(Dino* dino, int x, int y) {
+    dino -> xVel = 0;
+    dino -> yVel = 0;
     dino -> x = x;
-    dino -> dx = dx;
-    dino -> xVel = xVel;
-    
     dino -> y = y;
-    dino -> dy = dy;
-    dino -> yVel = yVel;
-    dino -> a = a;
+    dino -> dx = 0;
+    dino -> dy = 0;
+    dino -> a = 0;
+    dino -> counter = 0;
 }
 
 void moveDino(Dino* dino) {
@@ -60,11 +59,11 @@ void dinoJump(Dino* dino) {
 /*
 CACTUS FUNCTIONS
 */
-void initCactus(Cactus* cactus, int x, int y, int dx, int dy) {
+void initCactus(Cactus* cactus, int x, int y, int dx) {
     cactus -> x = x;
     cactus -> y = y;
     cactus -> dx = dx;
-    cactus -> dy = dy;
+    cactus -> dy = 0;
 }
 
 void moveCactus(Cactus* cactus) {
