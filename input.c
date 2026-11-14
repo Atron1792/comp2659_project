@@ -1,3 +1,10 @@
+/*
+file name: input.c
+authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
+
+Encapsulates TOS keyboard polling and keyboard-character retrieval.
+*/
+
 #include <osbind.h>
 
 #include "input.h"

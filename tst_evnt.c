@@ -1,3 +1,10 @@
+/*
+file name: tst_evnt.c
+authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
+
+Manually exercises asynchronous requests, clock ticks, and collision events.
+*/
+
 #include <osbind.h>
 #include <stdio.h>
 

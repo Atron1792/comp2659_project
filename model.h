@@ -1,3 +1,10 @@
+/*
+file name: model.h
+authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
+
+Declares game-state structures, constants, initialization, and movement logic.
+*/
+
 #ifndef MODEL_H
 #define MODEL_H
 
@@ -67,14 +74,70 @@ typedef struct {
 
 
 /* Prototypes */
+/*----- Function: initGameMdl -----
+
+ PURPOSE: Initializes scalar game state and any supplied sprite objects.
+
+ INPUT: model - game model to initialize; its sprite pointers may be null.
+
+ OUTPUT: None.
+
+ ASSUMPTIONS: The framebuffer returned by Physbase is valid.
+*/
 void initGameMdl(GameMdl* model);
 
+/*----- Function: initDino -----
+
+ PURPOSE: Initializes a dinosaur's position, velocity, and animation state.
+
+ INPUT: dino - dinosaur to initialize; x and y - starting coordinates.
+
+ OUTPUT: None.
+*/
 void initDino(Dino* dino, int x, int y);
+
+/*----- Function: moveDino -----
+
+ PURPOSE: Advances dinosaur position, gravity, and floor clamping by one tick.
+
+ INPUT: dino - dinosaur state to update.
+
+ OUTPUT: None.
+
+ ASSUMPTIONS: A negative y velocity moves upward and GRAVITY is negative.
+*/
 void moveDino(Dino* dino);
 
+/*----- Function: initCactus -----
+
+ PURPOSE: Initializes a cactus's position and horizontal velocity.
+
+ INPUT: cactus - cactus to initialize; x and y - starting coordinates;
+        dx - horizontal movement per update.
+
+ OUTPUT: None.
+*/
 void initCactus(Cactus* cactus, int x, int y, int dx);
+
+/*----- Function: moveCactus -----
+
+ PURPOSE: Advances a cactus and wraps it to the right edge after leaving screen.
+
+ INPUT: cactus - cactus state to update.
+
+ OUTPUT: None.
+*/
 void moveCactus(Cactus* cactus);
 
+/*----- Function: checkIntersect -----
 
+ PURPOSE: Tests whether the dinosaur and cactus rectangles overlap.
+
+ INPUT: dino - dinosaur bounds; cactus - cactus bounds.
+
+ OUTPUT: Nonzero for overlap, zero otherwise.
+
+ ASSUMPTIONS: Sprite dimensions are DINO_WIDTH/HEIGHT and CACTUS_WIDTH/HEIGHT.
+*/
 int checkIntersect(const Dino* dino, const Cactus* cactus);
 #endif

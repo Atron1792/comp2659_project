@@ -1,3 +1,10 @@
+/*
+file name: asynch.c
+authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
+
+Handles asynchronous user requests such as jumping and quitting.
+*/
+
 #include "asynch.h"
 
 void onJumpRequest(GameMdl *model)

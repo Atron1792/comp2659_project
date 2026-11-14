@@ -1,3 +1,10 @@
+/*
+file name: cond.c
+authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
+
+Provides collision detection and game-status condition handlers.
+*/
+
 #include "cond.h"
 #include "bitmaps.h"
 

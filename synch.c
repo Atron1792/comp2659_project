@@ -1,3 +1,10 @@
+/*
+file name: synch.c
+authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
+
+Processes synchronous clock-tick updates for score, movement, and collision.
+*/
+
 #include "synch.h"
 #include "cond.h"
 

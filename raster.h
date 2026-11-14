@@ -1,3 +1,11 @@
+/*
+file name: raster.h
+authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
+
+Declares framebuffer clearing, primitive drawing, bitmap plotting,
+and font rendering routines.
+*/
+
 #ifndef RASTER_H
 #define RASTER_H
 

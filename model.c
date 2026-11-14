@@ -1,3 +1,10 @@
+/*
+file name: model.c
+authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
+
+Initializes and updates the dinosaur, cactus, and overall game model state.
+*/
+
 #include "model.h"
 #include "bitmaps.h"
 
