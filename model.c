@@ -3,7 +3,7 @@
 
 void initGameMdl(GameMdl* mdl) {
 	mdl -> score = 0L;
-	mdl -> gameStatus = 0x00 | (char)(GAME_ON_FLG);
+	mdl -> gameStatus = 0;
     
     initDino(mdl -> dino, 0, 0, DINO_X_POS, DINO_Y_POS, 0, 0, 0);
     initCactus(mdl -> cactus, 0,0,0,0);
@@ -41,6 +41,21 @@ void moveDino(Dino* dino) {
     dino -> y = newY;
 }
 
+void dinoJump(Dino* dino) {
+    if (dino -> y >= DINO_Y_POS && dino -> yVel >= 0) {
+        dino -> y = DINO_Y_POS;
+        dino -> yVel = -JUMP_Y_VELOCITY;
+    }
+
+    dino -> y += dino -> yVel;
+    dino -> yVel += 1;
+
+    if (dino -> y >= DINO_Y_POS) {
+        dino -> y = DINO_Y_POS;
+        dino -> yVel = 0;
+    }
+}
+
 
 /*
 CACTUS FUNCTIONS
@@ -62,19 +77,4 @@ int checkIntersect(const Dino* dino, const Cactus* cactus) {
            dino->x + DINO_WIDTH > cactus->x) &&
            (dino->y < cactus->y + CACTUS_HEIGHT &&
            dino->y + DINO_HEIGHT > cactus->y);
-}
-
-void dinoJump(Dino* dino) {
-    if (dino -> y >= DINO_Y_POS && dino -> yVel >= 0) {
-        dino -> y = DINO_Y_POS;
-        dino -> yVel = -JUMP_Y_VELOCITY;
-    }
-
-    dino -> y += dino -> yVel;
-    dino -> yVel += 1;
-
-    if (dino -> y >= DINO_Y_POS) {
-        dino -> y = DINO_Y_POS;
-        dino -> yVel = 0;
-    }
 }

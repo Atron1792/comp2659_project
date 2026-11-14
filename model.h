@@ -18,14 +18,14 @@
 #define DINO_X_POS 32
 #define DINO_Y_POS 168
 
-#define GRAVITY -10 /* m/s */
+#define GRAVITY -1
 
 
 /* Game status flags */
-#define GAME_ON_FLG 0x01
-#define WIN_FLG 0x02
-#define LOSS_FLG 0x04
-#define QUIT_FLG 0x08
+#define WIN_FLG 0x01
+#define LOSS_FLG 0x02
+#define QUIT_FLG 0x04
+#define D_FLG 0x80 /* Unused flag */
 #define E_FLG 0x10 /* Unused flag */
 #define F_FLG 0x20 /* Unused flag */
 #define G_FLG 0x40 /* Unused flag */

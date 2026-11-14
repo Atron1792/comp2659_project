@@ -2,10 +2,8 @@
 
 void onJumpRequest(GameMdl *model)
 {
-    if (model->dino) {
-        if (model->dino->y == DINO_Y_POS) {
-            model->dino->yVel = -JUMP_Y_VELOCITY;
-        }
+    if (model->dino->y == DINO_Y_POS) {
+        model->dino->yVel = -JUMP_Y_VELOCITY;
     }
 }
 
