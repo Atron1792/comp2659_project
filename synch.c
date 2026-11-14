@@ -1,6 +1,6 @@
 /*
-file name: synch.c
-authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
+File Name: synch.c
+Authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
 
 Processes synchronous clock-tick updates for score, movement, and collision.
 */

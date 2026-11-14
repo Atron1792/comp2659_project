@@ -1,6 +1,6 @@
 /*
-file name: game.h
-authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
+File Name: game.h
+Authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
 
 Declares game initialization, timing, screen setup, and main-loop routines.
 */

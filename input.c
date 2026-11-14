@@ -1,6 +1,6 @@
 /*
-file name: input.c
-authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
+File Name: input.c
+Authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
 
 Encapsulates TOS keyboard polling and keyboard-character retrieval.
 */

@@ -1,6 +1,6 @@
 /*
-file name: cond.h
-authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
+File Name: cond.h
+Authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
 
 Declares collision detection and game-status condition handlers.
 */

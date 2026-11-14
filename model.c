@@ -1,6 +1,6 @@
 /*
-file name: model.c
-authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
+File Name: model.c
+Authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
 
 Initializes and updates the dinosaur, cactus, and overall game model state.
 */
@@ -38,7 +38,7 @@ void initDino(Dino* dino, int x, int y) {
 }
 
 void moveDino(Dino* dino) {
-    if (dino->y > DINO_Y_POS && dino->yVel != 0) {
+    if (dino->y >= DINO_Y_POS && dino->yVel >= 0) {
         dino->yVel = 0;
         dino->y = DINO_Y_POS;
         return;

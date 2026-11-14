@@ -1,6 +1,6 @@
 /*
-file name: renderer.h
-authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
+File Name: renderer.h
+Authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
 
 Declares scene and sprite rendering routines for the game framebuffer.
 */

@@ -1,6 +1,6 @@
 /*
-file name: tst_rast.c
-authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
+File Name: tst_rast.c
+Authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
 
 Manually exercises framebuffer primitives, bitmap plotting, and font output.
 */
