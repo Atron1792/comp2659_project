@@ -12,7 +12,7 @@ void gameInit(GameMdl* model) {
 	
 	/* Initialise time checking variables */
 	timeThen = getTime();
-	timeNow = tiemThen;
+	timeNow = timeThen;
 }
 
 
@@ -47,18 +47,19 @@ void gameLoop(GameMdl* model) {
 		if (key == ' ') {
 			onJumpRequest(model);
 			key = '\0';
-		} else if (key == ESC) {
+		} else if (key == ESC_KEY) {
 			onQuitRequest(model);
 			key = '\0';
 		}
 	}
 
+	clearScreen(model->base);
 	if (model -> gameStatus & WIN_FLG) {
-		/* Go to 'win' screen */
+		plotString((UINT8 *)model->base, 180, 280, "YOU WIN");
 	} else if (model -> gameStatus & LOSS_FLG) {
-		/* Go to lose screen */
+		plotString((UINT8 *)model->base, 180, 280, "GAME OVER");
 	} else if (model -> gameStatus & QUIT_FLG) {
-		/* Go to quit screen */
+		plotString((UINT8 *)model->base, 180, 280, "QUIT");
 	}
 }
 

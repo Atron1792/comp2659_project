@@ -3,6 +3,8 @@
 
 signed int onClockTick(GameMdl *model)
 {
+    model->score += 1;
+
     if (model->dino) {
         moveDino(model->dino);
     }

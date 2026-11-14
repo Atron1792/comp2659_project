@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "TYPES.H"
+#include "bitmaps.h"
 
 
 /* Dino constants */
@@ -21,10 +22,10 @@
 #define SCRN_W 640
 #define SCRN_H 400
 
-#define FLOOR_Y (SCRN_H - 32) 
+#define FLOOR_Y (SCRN_H - DINO_HEIGHT)
 
 #define DINO_X_POS 32
-#define DINO_Y_POS (FLOOR_Y - 32)
+#define DINO_Y_POS (FLOOR_Y - DINO_HEIGHT)
 
 #define GRAVITY -1
 

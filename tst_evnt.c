@@ -8,7 +8,7 @@
 static void initTestModel(GameMdl *model, Dino *dino, Cactus *cactus)
 {
     model->score = 0L;
-    model->gameStatus = GAME_ON_FLG;
+    model->gameStatus = 0;
     model->dino = dino;
     model->cactus = cactus;
     model->base = (UINT32 *)0;

@@ -5,8 +5,12 @@ void initGameMdl(GameMdl* mdl) {
 	mdl -> score = 0L;
 	mdl -> gameStatus = 0;
     
-    initDino(mdl -> dino, DINO_X_POS, DINO_Y_POS);
-    initCactus(mdl -> cactus, 0, 0, 0);
+    if (mdl->dino) {
+        initDino(mdl -> dino, DINO_X_POS, DINO_Y_POS);
+    }
+    if (mdl->cactus) {
+        initCactus(mdl -> cactus, SCRN_W - CACTUS_WIDTH, FLOOR_Y - CACTUS_HEIGHT, DX_CACTUS);
+    }
     
     mdl -> base = Physbase();
 }
@@ -26,18 +30,18 @@ void initDino(Dino* dino, int x, int y) {
 }
 
 void moveDino(Dino* dino) {
-    int currY, newY;
-    int currVel, newVel;
-    
-    currVel = dino -> yVel;
-    newVel = currVel + ((int)GRAVITY / (1.0/35.0));
+    if (dino->y == DINO_Y_POS && dino->yVel >= 0) {
+        dino->yVel = 0;
+        return;
+    }
 
-    currY = dino -> y;
-    newY = newVel * (1.0/35.0);
+    dino->y += dino->yVel;
+    dino->yVel -= GRAVITY;
 
-
-    dino -> yVel = newVel;
-    dino -> y = newY;
+    if (dino->y >= DINO_Y_POS) {
+        dino->y = DINO_Y_POS;
+        dino->yVel = 0;
+    }
 }
 
 void dinoJump(Dino* dino) {
@@ -68,6 +72,11 @@ void initCactus(Cactus* cactus, int x, int y, int dx) {
 
 void moveCactus(Cactus* cactus) {
     cactus -> x += cactus -> dx;
+
+    if (cactus->x + CACTUS_WIDTH <= 0) {
+        cactus->x = SCRN_W;
+        cactus->y = FLOOR_Y - CACTUS_HEIGHT;
+    }
 }
 
 

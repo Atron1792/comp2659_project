@@ -3,6 +3,6 @@
 
 #include "model.h"
 
-int onClockTick(GameMdl *model);
+signed int onClockTick(GameMdl *model);
 
 #endif

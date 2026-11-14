@@ -1,4 +1,5 @@
 #include "renderer.h"
+#include "model.h"
 
 
 void render(const GameMdl *model)
@@ -8,6 +9,7 @@ void render(const GameMdl *model)
     renderGround(model);
     renderDino(model->dino, model->base);
     renderCactus(model->cactus, model->base);
+    renderScore(model->score, model->base);
 }
 
 void renderGround(const GameMdl *model)
@@ -37,7 +39,16 @@ void renderCactus(const Cactus *cactus, UINT32 *base)
 
 
 void renderScore(UINT32 score, UINT32* base) {
-    /* IMPLEMENT ME */
+    char scoreText[6];
+    int i;
+
+    scoreText[5] = '\0';
+    for (i = 4; i >= 0; i--) {
+        scoreText[i] = (char)('0' + (score % 10));
+        score /= 10;
+    }
+
+    plotString((UINT8 *)base, 8, SCRN_W - (5 * 8) - 8, scoreText);
 }
 
 

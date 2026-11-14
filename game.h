@@ -12,6 +12,7 @@
 
 UINT32 getTime();
 
+void gameInit(GameMdl* model);
 void gameLoop(GameMdl* model);
 void initScreen(GameMdl* model);
 
