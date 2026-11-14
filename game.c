@@ -54,7 +54,7 @@ void gameLoop(GameMdl* model) {
 	}
 
 	if (model -> gameStatus & WIN_FLG) {
-		/* Go to  */
+		/* Go to 'win' screen */
 	} else if (model -> gameStatus & LOSS_FLG) {
 		/* Go to lose screen */
 	} else if (model -> gameStatus & QUIT_FLG) {
