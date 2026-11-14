@@ -1,3 +1,10 @@
+/*
+file name: bitmaps.c
+authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
+
+Defines the 32-bit dinosaur and cactus bitmap data used by the renderer.
+*/
+
 #include "bitmaps.h"
 
 /* dino bitmap */

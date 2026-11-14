@@ -1,3 +1,11 @@
+/*
+file name: raster.c
+authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
+
+Implements framebuffer clearing, primitive drawing, bitmap plotting,
+and font rendering routines.
+*/
+
 #include "TYPES.H"
 #include "font.h"
 #include "raster.h"

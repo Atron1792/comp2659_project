@@ -1,3 +1,10 @@
+/*
+file name: TST_MDL.c
+authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
+
+Manually exercises initialization and dinosaur model movement routines.
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <osbind.h>

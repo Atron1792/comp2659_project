@@ -1,3 +1,10 @@
+/*
+file name: tst_rend.c
+authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
+
+Exercises complete scene rendering using initialized game-model objects.
+*/
+
 #include <osbind.h>
 
 #include "TYPES.H"

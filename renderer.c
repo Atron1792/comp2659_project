@@ -1,3 +1,10 @@
+/*
+file name: renderer.c
+authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
+
+Composes the game scene, sprites, ground line, and score on the framebuffer.
+*/
+
 #include "renderer.h"
 #include "model.h"
 

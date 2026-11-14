@@ -1,3 +1,11 @@
+/*
+file name: game.c
+authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
+
+Initializes and runs the game loop, including timing, input, updates,
+rendering, and terminal game-state screens.
+*/
+
 #include "game.h"
 #include "raster.h"
 #include "input.h"
