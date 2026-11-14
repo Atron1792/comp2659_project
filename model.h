@@ -48,6 +48,7 @@ typedef struct {
     int dx, dy;
     int a;
     int counter;
+    char isDead;
 } Dino;
 
 typedef struct {

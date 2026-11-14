@@ -27,6 +27,7 @@ void initDino(Dino* dino, int x, int y) {
     dino -> dy = 0;
     dino -> a = 0;
     dino -> counter = 0;
+    dino -> isDead = 0;
 }
 
 void moveDino(Dino* dino) {
