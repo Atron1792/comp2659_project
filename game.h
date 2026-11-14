@@ -7,8 +7,12 @@
 #include <stdlib.h>
 
 #include "TYPES.H"
+#include "raster.h"
 #include "renderer.h"
 #include "model.h"
+#include "asynch.h"
+#include "synch.h"
+#include "cond.h"
 
 UINT32 getTime();
 

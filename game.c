@@ -3,16 +3,18 @@
 #define ESC_KEY '\x1b'
 
 volatile UINT32 *timer = (UINT32 *)0x462;
-static UINT32 timeThen, timeNow;
+static UINT32 cactusThen, dinoThen, timeNow;
 
 
 void gameInit(GameMdl* model) {
-	disableCursor();
 	initGameMdl(model);
+	disableCursor();
+	render(model);
 	
 	/* Initialise time checking variables */
-	timeThen = getTime();
-	timeNow = timeThen;
+	timeNow = getTime();
+	cactusThen = timeNow;
+	dinoThen = timeNow;
 }
 
 
@@ -29,14 +31,16 @@ void gameLoop(GameMdl* model) {
 	while (!model -> gameStatus) {
 		/* Handle synchronous events */
 		timeNow = getTime();
-		timeDiff = timeThen - timeNow;
-		if (timeDiff >= CACTUS_MOVE_RATE) {
-			moveCactus(model->cactus);
+		if (cactusThen - timeNow >= CACTUS_MOVE_RATE) {
+			clearRegion(model -> base, model -> cactus -> y, model -> cactus -> x, CACTUS_HEIGHT, CACTUS_WIDTH);
+			moveCactus(model -> cactus);
+			renderCactus(model -> cactus, model -> base);
+			cactusThen = timeNow;
 		}
-		if (timeDiff >= 1) {
-			onJumpRequest(model);
+		if (dinoThen - timeNow >= 1) {
+			renderDino(model -> dino, model -> base);
+			dinoThen = timeNow;
 		}
-		
 		
 		/* Poll for user input */
 		if (Cconis()) {
@@ -76,7 +80,7 @@ UINT32 getTime() {
 
 int main() {
 	GameMdl model;
-
+	gameInit(&model);
 	gameLoop(&model);
 	return 0;
 }
