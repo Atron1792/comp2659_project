@@ -12,7 +12,7 @@ rendering, and terminal game-state screens.
 #define ESC_KEY '\x1b'
 
 volatile UINT32 *timer = (UINT32 *)0x462;
-static UINT32 cactusThen, dinoThen, timeNow;
+static UINT32 cactusThen, dinoThen, scoreThen, timeNow;
 
 
 void gameInit(GameMdl* model) {
