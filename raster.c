@@ -27,7 +27,6 @@ void clearScreen(UINT32 *base)
 void clearRegion(UINT32 *base, int row, int col, UINT16 length, UINT16 width) {
     int curr_row, curr_col;
     UINT8 *byte_base = (UINT8 *)base;
-    UINT8* loc = byte_base + (row * BYTES_PER_SCANLINE) + (col >> 3);
     UINT8 mask;
 
     for (curr_row = row; curr_row < row + length; curr_row++)
@@ -36,7 +35,7 @@ void clearRegion(UINT32 *base, int row, int col, UINT16 length, UINT16 width) {
         {
             if (curr_row >= 0 && curr_row < SCREEN_HEIGHT && curr_col >= 0 && curr_col < SCREEN_WIDTH) {
                 mask = 1 << (BITS_PER_BYTE - 1 - (curr_col & (BITS_PER_BYTE - 1)));
-                *loc &= ~mask;
+                *(byte_base + (curr_row * BYTES_PER_SCANLINE) + (curr_col >> 3)) &= ~mask;
             }
         }
     }
@@ -53,19 +52,20 @@ void plotPixel(UINT8 *base, int row, int col)
 void plotHorizontalLine(UINT32 *base, int row, int col, UINT16 length)
 {
     UINT8 *byte_base = (UINT8 *)base;
-    UINT8* loc = byte_base + (row * BYTES_PER_SCANLINE) + (col >> 3);
     UINT8 mask;
     int i;
-    int curr_col = (col>>3);
+    int curr_col;
 
-    for (i = 0; i < length; i++)
-    {
-        if (row >= 0 && row < SCREEN_HEIGHT && curr_col >= 0 && curr_col < SCREEN_WIDTH)
+    if (row < 0 || row >= SCREEN_HEIGHT) {
+        return;
+    }
+
+    for (i = 0; i < length; i++) {
+        curr_col = col + i;
+        if (curr_col >= 0 && curr_col < SCREEN_WIDTH)
         {
             mask = 1 << (BITS_PER_BYTE - 1 - (curr_col & (BITS_PER_BYTE - 1)));
-            *loc |= mask;
-            loc++;
-            curr_col++;
+            *(byte_base + (row * BYTES_PER_SCANLINE) + (curr_col >> 3)) |= mask;
         }
     }
 }
@@ -73,10 +73,9 @@ void plotHorizontalLine(UINT32 *base, int row, int col, UINT16 length)
 void plotVerticalLine(UINT32 *base, int row, int col, UINT16 length)
 {
     UINT8 *byte_base = (UINT8 *)base;
-    UINT8* loc = byte_base + (row * BYTES_PER_SCANLINE) + (col >> 3);
     UINT8 mask;
     int i;
-    int curr_row = row;
+    int curr_row;
 
     for (i = 0; i < length; i++)
     {
@@ -86,9 +85,7 @@ void plotVerticalLine(UINT32 *base, int row, int col, UINT16 length)
         {
             mask = 1 << (BITS_PER_BYTE - 1 - (col & (BITS_PER_BYTE - 1)));
 
-            *loc |= mask;
-            loc += BYTES_PER_SCANLINE;
-            curr_row++;
+            *(byte_base + (curr_row * BYTES_PER_SCANLINE) + (col >> 3)) |= mask;
         }
     }
 }
@@ -357,28 +354,30 @@ void plot16bitBitmap(UINT16 *base, int row, int col, const UINT16 *bitmap, UINT1
 
 void plot32bitBitmap(UINT32 *base, int row, int col, const UINT32 *bitmap, UINT16 height)
 {
-    UINT32 *loc = base + (row * LONGS_PER_SCANLINE) + (col >> 5);
+    UINT32 *loc;
     int r;
     int currRow;
     int shift = col & 31; /* col % 32 */
     int invShift = LONG_BIT_COUNT - shift;
 
-    if ((col >> 5) < 0 || col > SCREEN_WIDTH) {
+    if (col < 0 || col >= SCREEN_WIDTH) {
         /* Out of bounds; return early */
         return;
     }
 
     currRow = row;
+    loc = base;
     while (currRow < 0) {
         /* Move base pointer into screen */
         loc += LONGS_PER_SCANLINE;
         currRow++;
     }
+    loc += (currRow * LONGS_PER_SCANLINE) + (col >> 5);
 
     for (r = 0; r < height; r++) {
         if (currRow >= 0 && currRow < SCREEN_HEIGHT) {
             *loc |= bitmap[r] >> shift;
-            if (shift != 0) {
+            if (shift != 0 && (col >> 5) + 1 < LONGS_PER_SCANLINE) {
                 *(loc + 1) |= bitmap[r] << invShift;
             }
 
