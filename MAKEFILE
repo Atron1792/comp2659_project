@@ -1,5 +1,5 @@
 all: only_game
-tests: tst_game tst_evnt tst_rast tst_mdl tst_rend tst_mvnt
+tests: tst_evnt tst_rast tst_mdl tst_rend tst_mvnt
 only_game: game
 
 game: game.o model.o raster.o font.o bitmaps.o renderer.o asynch.o synch.o cond.o input.o

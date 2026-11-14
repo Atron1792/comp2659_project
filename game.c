@@ -12,7 +12,7 @@ rendering, and terminal game-state screens.
 #define ESC_KEY '\x1b'
 
 volatile UINT32 *timer = (UINT32 *)0x462;
-static UINT32 cactusThen, dinoThen, scoreThen, timeNow;
+static UINT32 cactusThen, dinoThen, timeNow;
 
 
 void gameInit(GameMdl* model) {
@@ -38,7 +38,24 @@ void gameLoop(GameMdl* model) {
 	char key = '\0';
 	
 	while (!model -> gameStatus) {
-		/* Handle synchronous events */
+		/* Process asynchronous input requests first. */
+		if (has_input()) {
+			key = get_input();
+		}
+
+		if (key == ' ') {
+			onJumpRequest(model);
+			key = '\0';
+		} else if (key == ESC_KEY) {
+			onQuitRequest(model);
+			key = '\0';
+		}
+
+		if (model -> gameStatus) {
+			break;
+		}
+
+		/* Apply clock-triggered movement updates. */
 		timeNow = getTime();
 		if (timeNow - cactusThen >= CACTUS_MOVE_RATE) {
 			clearRegion(model -> base, model -> cactus -> y, model -> cactus -> x, CACTUS_HEIGHT, CACTUS_WIDTH);
@@ -55,31 +72,18 @@ void gameLoop(GameMdl* model) {
 			movements++;
 		}
 
+		/* Evaluate conditional events after movement. */
 		if (movements) {
 			if (checkCollision(model)) {
 				onCollision(model);
 				model -> dino -> isDead = 1;
 			}
-			movements = 0;
-		}
-		
-		if (model -> gameStatus) {
-			break;
-		}
-		
-		
-		/* Poll for user input */
-		if (has_input()) {
-			key = get_input();
 		}
 
-		/* Process user input (if any) */
-		if (key == ' ') {
-			onJumpRequest(model);
-			key = '\0';
-		} else if (key == ESC_KEY) {
-			onQuitRequest(model);
-			key = '\0';
+		/* Render only after all updates and conditional events. */
+		if (movements) {
+			render(model);
+			movements = 0;
 		}
 	}
 
