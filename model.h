@@ -12,6 +12,11 @@
 #define JUMP_Y_VELOCITY 5 /* m/s */
 
 
+/* Cactus constants */
+#define DX_CACTUS -2
+#define DY_CACTUS 0
+#define CACTUS_MOVE_RATE 2 /* frames */
+
 /* Environment Constants */
 #define FLOOR_Y 200
 

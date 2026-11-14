@@ -67,7 +67,7 @@ void initCactus(Cactus* cactus, int x, int y, int dx) {
 }
 
 void moveCactus(Cactus* cactus) {
-    cactus -> x += cactus -> dx; 
+    cactus -> x += cactus -> dx;
 }
 
 

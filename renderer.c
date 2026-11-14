@@ -1,9 +1,5 @@
 #include "renderer.h"
 
-#include "raster.h"
-#include "bitmaps.h"
-#include "TYPES.H"
-#include "model.h"
 
 void render(const GameMdl *model)
 {

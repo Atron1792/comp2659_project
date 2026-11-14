@@ -9,6 +9,10 @@ static UINT32 timeThen, timeNow;
 void gameInit(GameMdl* model) {
 	disableCursor();
 	initGameMdl(model);
+	
+	/* Initialise time checking variables */
+	timeThen = getTime();
+	timeNow = tiemThen;
 }
 
 
@@ -19,10 +23,22 @@ void initScreen(GameMdl* model) {
 
 
 void gameLoop(GameMdl* model) {
+	UINT32 timeDiff;
 	char key = '\0';
 	
 	while (!model -> gameStatus) {
-		/* Check for user input */
+		/* Handle synchronous events */
+		timeNow = getTime();
+		timeDiff = timeThen - timeNow;
+		if (timeDiff >= CACTUS_MOVE_RATE) {
+			moveCactus(model->cactus);
+		}
+		if (timeDiff >= 1) {
+			onJumpRequest(model);
+		}
+		
+		
+		/* Poll for user input */
 		if (Cconis()) {
 			key = (char)Cnecin();
 		}
@@ -35,9 +51,6 @@ void gameLoop(GameMdl* model) {
 			onQuitRequest(model);
 			key = '\0';
 		}
-
-		/* Handle synchronous events */
-		timeNow = getTime();
 	}
 
 	if (model -> gameStatus & WIN_FLG) {
