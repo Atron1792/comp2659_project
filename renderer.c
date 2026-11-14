@@ -32,3 +32,14 @@ void renderCactus(const Cactus *cactus, UINT32 *base)
 {
     plot32bitBitmap(base, cactus->y, cactus->x, cactusBitmap, CACTUS_HEIGHT);
 }
+
+
+void renderScore(UINT32 score, UINT32* base) {
+    /* IMPLEMENT ME */
+}
+
+
+void disableCursor() {
+	printf("\033f");
+	fflush(stdout);
+}

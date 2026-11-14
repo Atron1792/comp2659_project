@@ -5,5 +5,6 @@
 
 signed int checkCollision(const GameMdl *model);
 void onCollision(GameMdl *model);
+void onQuit(GameMdl* model);
 
 #endif

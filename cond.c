@@ -13,7 +13,12 @@ signed int checkCollision(const GameMdl *model)
     }
     return 0;
 }
+
 void onCollision(GameMdl *model)
 {
-    model->gameStatus |= LOSS_FLG;
+    model->gameStatus ^= GAME_ON_FLG | LOSS_FLG;
+}
+
+void onQuit(GameMdl* model) {
+    model -> gameStatus ^= GAME_ON_FLG | QUIT_FLG;
 }
