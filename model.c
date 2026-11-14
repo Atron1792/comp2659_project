@@ -1,14 +1,13 @@
 #include "model.h"
-#include "bitmaps.h"
 
 void initGameMdl(GameMdl* mdl) {
 	mdl -> score = 0L;
-	mdl -> gameStatus = 0;
+	mdl -> gameStatus = 0x00 | (char)(GAME_ON_FLG);
     
     initDino(mdl -> dino, 0, 0, DINO_X_POS, DINO_Y_POS, 0, 0, 0);
     initCactus(mdl -> cactus, 0,0,0,0);
     
-    mdl -> base = Physbase();
+    mdl -> base = (UINT16*)Physbase();
 }
 
 /*
@@ -41,21 +40,6 @@ void moveDino(Dino* dino) {
     dino -> y = newY;
 }
 
-void dinoJump(Dino* dino) {
-    if (dino -> y >= DINO_Y_POS && dino -> yVel >= 0) {
-        dino -> y = DINO_Y_POS;
-        dino -> yVel = -JUMP_Y_VELOCITY;
-    }
-
-    dino -> y += dino -> yVel;
-    dino -> yVel += 1;
-
-    if (dino -> y >= DINO_Y_POS) {
-        dino -> y = DINO_Y_POS;
-        dino -> yVel = 0;
-    }
-}
-
 
 /*
 CACTUS FUNCTIONS
@@ -69,12 +53,42 @@ void initCactus(Cactus* cactus, int x, int y, int dx, int dy) {
 
 void moveCactus(Cactus* cactus) {
     cactus -> x += cactus -> dx; 
+    cactus -> y += cactus -> dy; /*we can remove this catus not changing y*/
 }
 
 
-int checkIntersect(const Dino* dino, const Cactus* cactus) {
-    return (dino->x < cactus->x + CACTUS_WIDTH &&
-           dino->x + DINO_WIDTH > cactus->x) &&
-           (dino->y < cactus->y + CACTUS_HEIGHT &&
-           dino->y + DINO_HEIGHT > cactus->y);
+int checkIntersect(Dino* dino, Cactus* cactus) {
+    int dbrxp, cx, dy; /*dino bottem right x-axius pixel*/
+    dbrxp = DINO_X_POS;
+    dbrxp += 15;
+    cx = cactus -> x;
+    if (dbrxp > cx) { /*if catus could possibly have its x interspt in dinos*/
+        dy = dino -> y;
+        dy -= 15; /*we do this to find lowest pixel of dinos y*/
+        if (cactus -> y > dy) { /*dinos and catus y axus intersects.*/
+            cx += 15;
+            if (cx > DINO_X_POS) { /*if upper right most pixel isn't farther than dino */
+                return 1;
+            } else {
+                return 0;
+            }
+        } else {
+            return 0;
+        }
+    } else {
+        return 0;
+    }
+}
+
+void dinoJump(Dino* dino) {
+    if (dino -> y == DINO_Y_POS) { /* sets up start of dino jump(dino on ground) */
+        dino -> yVel = 2;
+        dino -> counter = 0;
+    }
+    dino -> y -= dino -> yVel;
+    dino -> counter += 1;
+    if (dino -> counter == 16) { /*for changeing yvel accounting for acceleration.*/
+        dino -> yVel += dino -> a;
+        dino -> counter = 0;
+    }
 }
