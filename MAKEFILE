@@ -1,5 +1,5 @@
 all: tests
-tests: tst_rend tst_game tst_evnt tst_rast tst_mdl
+tests: tst_mvnt
 
 tst_game: game.o model.o raster.o font.o bitmaps.o renderer.o asynch.o synch.o cond.o
 	cc68x -g game.o model.o raster.o font.o bitmaps.o renderer.o asynch.o synch.o cond.o -o tst_game.tos
@@ -46,10 +46,16 @@ raster.o: raster.c raster.h font.h
 tst_mdl: tst_mdl.o model.o
 	cc68x -g tst_mdl.o model.o -o tst_mdl.tos
 
+tst_mvnt: tst_mvnt.o model.o raster.o font.o bitmaps.o renderer.o cond.o
+	cc68x -g tst_mvnt.o model.o raster.o font.o bitmaps.o renderer.o cond.o -o tst_mvnt.tos
+
+tst_mvnt.o: tst_mvnt.c model.h raster.h renderer.h cond.h
+	cc68x -g -c tst_mvnt.c
+
 tst_mdl.o: tst_mdl.c model.h TYPES.H
 	cc68x -g -c tst_mdl.c
 
-model.o: model.c model.h TYPES.H
+model.o: model.c model.h bitmaps.h TYPES.H
 	cc68x -g -c model.c
 
 font.o: font.c font.h TYPES.H

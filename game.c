@@ -1,8 +1,10 @@
 #include "game.h"
+#include "raster.h"
 
 
 void initScreen(GameMdl* model) {
-    /* IMPLEMENT ME */
+    model->base = Physbase();
+    clearScreen(model->base);
 }
 
 

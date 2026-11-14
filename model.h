@@ -66,6 +66,6 @@ void initCactus(Cactus* cactus, int x, int y, int dx, int dy);
 void moveCactus(Cactus* cactus);
 
 
-int checkIntersect(Dino* dino, Cactus* cactus);
+int checkIntersect(const Dino* dino, const Cactus* cactus);
 void dinoJump(Dino* dino);
 #endif
