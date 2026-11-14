@@ -2,11 +2,14 @@ all: only_game
 tests: tst_game tst_evnt tst_rast tst_mdl tst_rend tst_mvnt
 only_game: game
 
-game: game.o model.o raster.o font.o bitmaps.o renderer.o asynch.o synch.o cond.o
-	cc68x -g game.o model.o raster.o font.o bitmaps.o renderer.o asynch.o synch.o cond.o -o game.tos
+game: game.o model.o raster.o font.o bitmaps.o renderer.o asynch.o synch.o cond.o input.o
+	cc68x -g game.o model.o raster.o font.o bitmaps.o renderer.o asynch.o synch.o cond.o input.o -o game.tos
 
-game.o: game.c game.h model.h renderer.h raster.h asynch.h synch.h cond.h
+game.o: game.c game.h model.h renderer.h raster.h asynch.h synch.h cond.h input.h
 	cc68x -g -c game.c
+
+input.o: input.c input.h
+	cc68x -g -c input.c
 
 tst_evnt: tst_evnt.o model.o asynch.o synch.o cond.o bitmaps.o
 	cc68x -g tst_evnt.o model.o asynch.o synch.o cond.o bitmaps.o -o tst_evnt.tos

@@ -1,5 +1,6 @@
 #include "game.h"
 #include "raster.h"
+#include "input.h"
 #define ESC_KEY '\x1b'
 
 volatile UINT32 *timer = (UINT32 *)0x462;
@@ -43,8 +44,8 @@ void gameLoop(GameMdl* model) {
 		}
 		
 		/* Poll for user input */
-		if (Cconis()) {
-			key = (char)Cnecin();
+		if (has_input()) {
+			key = get_input();
 		}
 
 		/* Process user input (if any) */
@@ -80,6 +81,12 @@ UINT32 getTime() {
 
 int main() {
 	GameMdl model;
+	Dino dino;
+	Cactus cactus;
+
+	model.dino = &dino;
+	model.cactus = &cactus;
+
 	gameInit(&model);
 	gameLoop(&model);
 	return 0;
