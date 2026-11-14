@@ -1,5 +1,23 @@
 #include "cond.h"
 
+#define DINO_WIDTH 16
+#define DINO_HEIGHT 16
+#define CACTUS_WIDTH 16
+#define CACTUS_HEIGHT 16
+
+signed int checkCollision(const GameMdl *model)
+{
+    if (model->dino && model->cactus) {
+        if (model->dino->x < model->cactus->x + CACTUS_WIDTH &&
+            model->dino->x + DINO_WIDTH > model->cactus->x &&
+            model->dino->y < model->cactus->y + CACTUS_HEIGHT &&
+            model->dino->y + DINO_HEIGHT > model->cactus->y) {
+            onCollision(model);
+            return 1;
+        }
+    }
+    return 0;
+}
 void onCollision(GameMdl *model)
 {
     model->gameStatus |= LOSS_FLG;

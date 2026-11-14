@@ -5,166 +5,124 @@
 
 #define SCREEN_WIDTH 640
 #define SCREEN_HEIGHT 400
-static void waitForKey(void)
-{
-    Cconin();
-}
-
-static void clearAfterCase(UINT32 *base)
-{
-    clearScreen(base);
-}
-
-static void clearAndWait(UINT32 *base)
-{
-    clearAfterCase(base);
-}
 
 static void tstClearRegion(UINT32 *base)
 {
-    plotRectangle(base, 0, 0, 10, 10);
-    waitForKey();
+    plotRectangle(base, 0, 0, 100, 100);
+    Cconin();
     clearRegion(base, 0, 0, 10, 10);
-    waitForKey();
+    Cconin();
 }
 
 static void tstClearScreen(UINT32 *base)
 {
     clearScreen(base);
-    waitForKey();
+    Cconin();
 }
 
 static void tstPlotPixel(UINT8 *base)
 {
     plotPixel(base, 0, 0);
-    waitForKey();
-    clearAfterCase((UINT32 *)base);
+    Cconin();
 
     plotPixel(base, 0, SCREEN_WIDTH - 1);
-    waitForKey();
-    clearAfterCase((UINT32 *)base);
+    Cconin();
 
     plotPixel(base, SCREEN_HEIGHT - 1, SCREEN_WIDTH - 1);
-    waitForKey();
-    clearAfterCase((UINT32 *)base);
+    Cconin();
 
     plotPixel(base, SCREEN_HEIGHT - 1, 0);
-    waitForKey();
-    clearAfterCase((UINT32 *)base);
+    Cconin();
 }
 
 static void tstPlotHorizontalLine(UINT32 *base)
 {
     plotHorizontalLine(base, 0, 0, 80);
-    waitForKey();
-    clearAfterCase(base);
+    Cconin();
 
     plotHorizontalLine(base, 0, SCREEN_WIDTH - 80, 80);
-    waitForKey();
-    clearAfterCase(base);
+    Cconin();
 
     plotHorizontalLine(base, SCREEN_HEIGHT - 1, SCREEN_WIDTH - 80, 80);
-    waitForKey();
-    clearAfterCase(base);
+    Cconin();
 
     plotHorizontalLine(base, SCREEN_HEIGHT - 1, 0, 80);
-    waitForKey();
-    clearAfterCase(base);
+    Cconin();
 }
 
 static void tstPlotVerticalLine(UINT32 *base)
 {
     plotVerticalLine(base, 0, 0, 80);
-    waitForKey();
-    clearAfterCase(base);
+    Cconin();
 
     plotVerticalLine(base, 0, SCREEN_WIDTH - 1, 80);
-    waitForKey();
-    clearAfterCase(base);
+    Cconin();
 
     plotVerticalLine(base, SCREEN_HEIGHT - 80, SCREEN_WIDTH - 1, 80);
-    waitForKey();
-    clearAfterCase(base);
+    Cconin();
 
     plotVerticalLine(base, SCREEN_HEIGHT - 80, 0, 80);
-    waitForKey();
-    clearAfterCase(base);
+    Cconin();
 }
 
 static void tstPlotLine(UINT32 *base)
 {
     plotLine(base, 0, 0, 80, 80);
-    waitForKey();
-    clearAfterCase(base);
+    Cconin();
 
     plotLine(base, 0, SCREEN_WIDTH - 1, 80, SCREEN_WIDTH - 81);
-    waitForKey();
-    clearAfterCase(base);
+    Cconin();
 
     plotLine(base, SCREEN_HEIGHT - 81, SCREEN_WIDTH - 81, SCREEN_HEIGHT - 1, SCREEN_WIDTH - 1);
-    waitForKey();
-    clearAfterCase(base);
+    Cconin();
 
     plotLine(base, SCREEN_HEIGHT - 81, 0, SCREEN_HEIGHT - 1, 80);
-    waitForKey();
-    clearAfterCase(base);
+    Cconin();
 }
 
 static void tstPlotRectangle(UINT32 *base)
 {
     plotRectangle(base, 0, 0, 40, 80);
-    waitForKey();
-    clearAndWait(base);
+    Cconin();
 
     plotRectangle(base, 0, SCREEN_WIDTH - 80, 40, 80);
-    waitForKey();
-    clearAndWait(base);
+    Cconin();
 
     plotRectangle(base, SCREEN_HEIGHT - 40, SCREEN_WIDTH - 80, 40, 80);
-    waitForKey();
-    clearAndWait(base);
+    Cconin();
 
     plotRectangle(base, SCREEN_HEIGHT - 40, 0, 40, 80);
-    waitForKey();
-    clearAndWait(base);
+    Cconin();
 }
 
 static void tstPlotSquare(UINT32 *base)
 {
     plotSquare(base, 0, 0, 40);
-    waitForKey();
-    clearAndWait(base);
+    Cconin();
 
     plotSquare(base, 0, SCREEN_WIDTH - 40, 40);
-    waitForKey();
-    clearAndWait(base);
+    Cconin();
 
     plotSquare(base, SCREEN_HEIGHT - 40, SCREEN_WIDTH - 40, 40);
-    waitForKey();
-    clearAndWait(base);
+    Cconin();
 
     plotSquare(base, SCREEN_HEIGHT - 40, 0, 40);
-    waitForKey();
-    clearAndWait(base);
+    Cconin();
 }
 
 static void tstPlotTriangle(UINT32 *base)
 {
     plotTriangle(base, 0, 0, 40, 40, 0);
-    waitForKey();
-    clearAndWait(base);
+    Cconin();
 
     plotTriangle(base, 0, SCREEN_WIDTH - 1, 40, 40, 1);
-    waitForKey();
-    clearAndWait(base);
+    Cconin();
 
     plotTriangle(base, SCREEN_HEIGHT - 1, SCREEN_WIDTH - 1, 40, 40, 3);
-    waitForKey();
-    clearAndWait(base);
+    Cconin();
 
     plotTriangle(base, SCREEN_HEIGHT - 1, 0, 40, 40, 2);
-    waitForKey();
-    clearAndWait(base);
+    Cconin();
 }
 
 static void tstPlot8bitBitmap(UINT8 *base)
@@ -174,20 +132,16 @@ static void tstPlot8bitBitmap(UINT8 *base)
     };
 
     plot8bitBitmap(base, 0, 0, bitmap, 8);
-    waitForKey();
-    clearAfterCase((UINT32 *)base);
+    Cconin();
 
     plot8bitBitmap(base, 0, SCREEN_WIDTH - 8, bitmap, 8);
-    waitForKey();
-    clearAfterCase((UINT32 *)base);
+    Cconin();
 
     plot8bitBitmap(base, SCREEN_HEIGHT - 8, SCREEN_WIDTH - 8, bitmap, 8);
-    waitForKey();
-    clearAfterCase((UINT32 *)base);
+    Cconin();
     
     plot8bitBitmap(base, SCREEN_HEIGHT - 8, 0, bitmap, 8);
-    waitForKey();
-    clearAfterCase((UINT32 *)base);
+    Cconin();
 }
 
 static void tstPlot16bitBitmap(UINT16 *base)
@@ -200,20 +154,16 @@ static void tstPlot16bitBitmap(UINT16 *base)
     };
 
     plot16bitBitmap(base, 0, 0, bitmap, 16);
-    waitForKey();
-    clearAfterCase((UINT32 *)base);
+    Cconin();
 
     plot16bitBitmap(base, 0, SCREEN_WIDTH - 16, bitmap, 16);
-    waitForKey();
-    clearAfterCase((UINT32 *)base);
+    Cconin();
 
     plot16bitBitmap(base, SCREEN_HEIGHT - 16, SCREEN_WIDTH - 16, bitmap, 16);
-    waitForKey();
-    clearAfterCase((UINT32 *)base);
+    Cconin();
 
     plot16bitBitmap(base, SCREEN_HEIGHT - 16, 0, bitmap, 16);
-    waitForKey();
-    clearAfterCase((UINT32 *)base);
+    Cconin();
 }
 
 static void tstPlot32bitBitmap(UINT32 *base)
@@ -230,60 +180,47 @@ static void tstPlot32bitBitmap(UINT32 *base)
     };
 
     plot32bitBitmap(base, 0, 0, bitmap, 32);
-    waitForKey();
-    clearAndWait(base);
+    Cconin();
 
     plot32bitBitmap(base, 0, SCREEN_WIDTH - 32, bitmap, 32);
-    waitForKey();
-    clearAndWait(base);
+    Cconin();
 
     plot32bitBitmap(base, SCREEN_HEIGHT - 32, SCREEN_WIDTH - 32, bitmap, 32);
-    waitForKey();
-    clearAndWait(base);
+    Cconin();
 
     plot32bitBitmap(base, SCREEN_HEIGHT - 32, 0, bitmap, 32);
-    waitForKey();
-    clearAndWait(base);
+    Cconin();
 }
 
 static void tstPlotCharacter(UINT8 *base)
 {
     plotCharacter(base, 0, 0, 'A');
-    waitForKey();
-    clearAndWait((UINT32 *)base);
+    Cconin();
 
     plotCharacter(base, 0, SCREEN_WIDTH - 8, 'A');
-    waitForKey();
-    clearAndWait((UINT32 *)base);
+    Cconin();
 
     plotCharacter(base, SCREEN_HEIGHT - 8, SCREEN_WIDTH - 8, 'A');
-    waitForKey();
-    clearAndWait((UINT32 *)base);
+    Cconin();
 
     plotCharacter(base, SCREEN_HEIGHT - 8, 0, 'A');
-    waitForKey();
-    clearAndWait((UINT32 *)base);
+    Cconin();
 }
 
 static void tstPlotString(UINT8 *base)
 {
     plotString(base, 0, 0, "TEST");
-    waitForKey();
-    clearAndWait((UINT32 *)base);
+    Cconin();
 
     plotString(base, 0, SCREEN_WIDTH - 32, "TEST");
-    waitForKey();
-    clearAndWait((UINT32 *)base);
+    Cconin();
 
     plotString(base, SCREEN_HEIGHT - 8, SCREEN_WIDTH - 32, "TEST");
-    waitForKey();
-    clearAndWait((UINT32 *)base);
+    Cconin();
 
     plotString(base, SCREEN_HEIGHT - 8, 0, "TEST");
-    waitForKey();
-    clearAndWait((UINT32 *)base);
+    Cconin();
 }
-
 
 int main(void){
     UINT32 *base;
@@ -293,18 +230,29 @@ int main(void){
     tstClearRegion(base);
     tstClearScreen(base);
     tstPlotPixel((UINT8 *)base);
-    tstPlotHorizontalLine(base);
-    tstPlotVerticalLine(base);
-    tstPlotLine(base);
-    tstPlotRectangle(base);
-    tstPlotSquare(base);
-    tstPlotTriangle(base);
-    tstPlot8bitBitmap((UINT8 *)base);
-    tstPlot16bitBitmap((UINT16 *)base);
-    tstPlot32bitBitmap(base);
-    tstPlotCharacter((UINT8 *)base);
-    tstPlotString((UINT8 *)base);
-
     clearScreen(base);
+    tstPlotHorizontalLine(base);
+    clearScreen(base);
+    tstPlotVerticalLine(base);
+    clearScreen(base);
+    tstPlotLine(base);
+    clearScreen(base);
+    tstPlotRectangle(base);
+    clearScreen(base);
+    tstPlotSquare(base);
+    clearScreen(base);
+    tstPlotTriangle(base);
+    clearScreen(base);
+    tstPlot8bitBitmap((UINT8 *)base);
+    clearScreen(base);
+    tstPlot16bitBitmap((UINT16 *)base);
+    clearScreen(base);
+    tstPlot32bitBitmap(base);
+    clearScreen(base);
+    tstPlotCharacter((UINT8 *)base);
+    clearScreen(base);
+    tstPlotString((UINT8 *)base);
+    clearScreen(base);
+
     return 0;
 }

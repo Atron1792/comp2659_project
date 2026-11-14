@@ -1,5 +1,5 @@
-all: tests #prog.tos tst_model
-tests: tst_rend
+all: tests
+tests: tst_rend tst_game tst_evnt tst_rast tst_mdl
 
 tst_game: game.o model.o raster.o font.o bitmaps.o renderer.o asynch.o synch.o cond.o
 	cc68x -g game.o model.o raster.o font.o bitmaps.o renderer.o asynch.o synch.o cond.o -o tst_game.tos
@@ -25,7 +25,7 @@ renderer.o: renderer.c renderer.h model.h raster.h bitmaps.h
 asynch.o: asynch.c asynch.h model.h
 	cc68x -g -c asynch.c
 
-synch.o: synch.c synch.h model.h
+synch.o: synch.c synch.h cond.h model.h
 	cc68x -g -c synch.c
 
 cond.o: cond.c cond.h model.h bitmaps.h

@@ -3,10 +3,8 @@
 
 #include "TYPES.H"
 
-
 #define HEIGHT_DINO 16
 #define HEIGHT_CACTUS 16
-
 
 /*dino bitmap*/ 
 extern const UINT16 dinoBitmap0[HEIGHT_DINO];
