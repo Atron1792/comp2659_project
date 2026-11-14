@@ -11,5 +11,5 @@ void onJumpRequest(GameMdl *model)
 
 void onQuitRequest(GameMdl *model)
 {
-    model->gameStatus |= QUIT_FLG;
+    model->gameStatus ^= GAME_ON_FLG | QUIT_FLG;
 }

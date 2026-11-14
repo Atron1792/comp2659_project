@@ -7,7 +7,10 @@
 #include <stdlib.h>
 
 #include "TYPES.H"
+#include "renderer.h"
 #include "model.h"
+
+UINT32 getTime();
 
 void gameLoop(GameMdl* model);
 void initScreen(GameMdl* model);
