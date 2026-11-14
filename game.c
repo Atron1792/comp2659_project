@@ -39,7 +39,9 @@ void gameLoop(GameMdl* model) {
 			cactusThen = timeNow;
 			movements++;
 		}
-		if (dinoThen - timeNow >= 1) {
+		if (dinoThen - timeNow >= 1 && model -> dino -> yVel != 0) {
+			clearRegion(model -> base, model -> dino -> y, model -> dino -> x, DINO_HEIGHT, DINO_WIDTH);
+			moveDino(model -> dino);
 			renderDino(model -> dino, model -> base);
 			dinoThen = timeNow;
 			movements++;
