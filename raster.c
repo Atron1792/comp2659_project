@@ -358,8 +358,7 @@ void plot16bitBitmap(UINT16 *base, int row, int col, const UINT16 *bitmap, UINT1
 void plot32bitBitmap(UINT32 *base, int row, int col, const UINT32 *bitmap, UINT16 height)
 {
     UINT32 *loc = base + (row * LONGS_PER_SCANLINE) + (col >> 5);
-    UINT32 prevLong; /* Holds overflow bits */
-    int r, c;
+    int r;
     int currRow;
     int shift = col & 31; /* col % 32 */
     int invShift = LONG_BIT_COUNT - shift;
@@ -376,24 +375,19 @@ void plot32bitBitmap(UINT32 *base, int row, int col, const UINT32 *bitmap, UINT1
         currRow++;
     }
 
-    prevLong = 0;
     for (r = 0; r < height; r++) {
         if (currRow >= 0 && currRow < SCREEN_HEIGHT) {
             *loc |= bitmap[r] >> shift;
-            *loc |= prevLong;
-            
-            prevLong = bitmap[r] << invShift;
+            if (shift != 0) {
+                *(loc + 1) |= bitmap[r] << invShift;
+            }
+
             loc += LONGS_PER_SCANLINE; /* Move base to next line */
         } else if (currRow >= SCREEN_HEIGHT) {
             /* Plotting below screen; end early */
             break;
         }
         currRow++;
-    }
-
-    if (shift != 0 && currRow < SCREEN_HEIGHT) {
-        /* Apply leftover bits */
-        *loc |= prevLong;
     }
 }
 
