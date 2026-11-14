@@ -30,10 +30,6 @@ void initDino(Dino* dino, int x, int y) {
     dino -> yVel = 0;
     dino -> x = x;
     dino -> y = y;
-    dino -> dx = 0;
-    dino -> dy = 0;
-    dino -> a = 0;
-    dino -> counter = 0;
     dino -> isDead = 0;
 }
 

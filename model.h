@@ -17,7 +17,7 @@ Declares game-state structures, constants, initialization, and movement logic.
 
 
 /* Dino constants */
-#define JUMP_Y_VELOCITY 10 /* m/s */
+#define JUMP_Y_VELOCITY 10 /* frames */
 
 
 /* Cactus constants */
@@ -52,9 +52,6 @@ Declares game-state structures, constants, initialization, and movement logic.
 typedef struct {
     int xVel, yVel;
     int x, y;
-    int dx, dy;
-    int a;
-    int counter;
     char isDead;
 } Dino;
 

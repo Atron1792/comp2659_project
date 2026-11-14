@@ -1,10 +1,9 @@
-/*
- * File Name: raster.c
- * Authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
- *
- * Implements framebuffer clearing, primitive drawing, bitmap plotting,
- * and font rendering routines.
- */
+;; File Name: raster.s
+;; Authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
+;; 
+;; Implements framebuffer clearing, primitive drawing, bitmap plotting,
+;; and font rendering routines in Assembly 68000
+;; 
 	text
 	even
 _clearScreen:
