@@ -16,9 +16,9 @@ signed int checkCollision(const GameMdl *model)
 
 void onCollision(GameMdl *model)
 {
-    model->gameStatus ^= GAME_ON_FLG | LOSS_FLG;
+    model->gameStatus |= LOSS_FLG;
 }
 
 void onQuit(GameMdl* model) {
-    model -> gameStatus ^= GAME_ON_FLG | QUIT_FLG;
+    model -> gameStatus |= QUIT_FLG;
 }

@@ -21,29 +21,32 @@ void initScreen(GameMdl* model) {
 void gameLoop(GameMdl* model) {
 	char key = '\0';
 	
-	while (model -> gameStatus & GAME_ON_FLG) {
+	while (!model -> gameStatus) {
+		/* Check for user input */
 		if (Cconis()) {
 			key = (char)Cnecin();
 		}
 
+		/* Process user input (if any) */
 		if (key == ' ') {
-			/*  */
 			onJumpRequest(model);
 			key = '\0';
 		} else if (key == ESC) {
-			/*  */
 			onQuitRequest(model);
 			key = '\0';
 		}
+
+		/* Handle synchronous events */
+		timeNow = getTime();
 	}
 
 	if (model -> gameStatus & WIN_FLG) {
-		/*  */
+		/* Go to  */
 	} else if (model -> gameStatus & LOSS_FLG) {
-		/*  */
+		/* Go to lose screen */
 	} else if (model -> gameStatus & QUIT_FLG) {
-		/*  */
-	} else {}
+		/* Go to quit screen */
+	}
 }
 
 
@@ -58,5 +61,8 @@ UINT32 getTime() {
 
 
 int main() {
+	GameMdl model;
+
+	gameLoop(&model);
 	return 0;
 }
