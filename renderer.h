@@ -4,10 +4,10 @@
 #include "model.h"
 #include "TYPES.H"
 
-void render(const GameMdl *model, UINT32 *base);
+void render(const GameMdl *model);
 
-void renderDino(const Dino *dino, UINT16 *base);
+void renderDino(const Dino *dino, UINT32 *base);
 
-void renderCactus(const Cactus *cactus, UINT16 *base);
+void renderCactus(const Cactus *cactus, UINT32 *base);
 
 #endif
