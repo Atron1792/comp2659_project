@@ -10,6 +10,7 @@ signed int onClockTick(GameMdl *model)
         moveCactus(model->cactus);
     }
     if (checkCollision(model)) {
+        onCollision(model);
         return 1;
     }
     return 0;

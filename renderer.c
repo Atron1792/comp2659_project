@@ -5,12 +5,12 @@
 #include "TYPES.H"
 #include "model.h"
 
-void render(GameMdl *model)
+void render(const GameMdl *model)
 {
     clearScreen(model->base);
     
-    renderDino(model->dino, (UINT32 *)model->base);
-    renderCactus(model->cactus, (UINT32 *)model->base);
+    renderDino(model->dino, model->base);
+    renderCactus(model->cactus, model->base);
 }
 
 void renderDino(const Dino *dino, UINT32 *base)

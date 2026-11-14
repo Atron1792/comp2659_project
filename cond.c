@@ -1,9 +1,5 @@
 #include "cond.h"
-
-#define DINO_WIDTH 16
-#define DINO_HEIGHT 16
-#define CACTUS_WIDTH 16
-#define CACTUS_HEIGHT 16
+#include "bitmaps.h"
 
 signed int checkCollision(const GameMdl *model)
 {
@@ -12,7 +8,6 @@ signed int checkCollision(const GameMdl *model)
             model->dino->x + DINO_WIDTH > model->cactus->x &&
             model->dino->y < model->cactus->y + CACTUS_HEIGHT &&
             model->dino->y + DINO_HEIGHT > model->cactus->y) {
-            onCollision(model);
             return 1;
         }
     }

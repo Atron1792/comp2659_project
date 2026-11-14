@@ -7,7 +7,7 @@ void initGameMdl(GameMdl* mdl) {
     initDino(mdl -> dino, 0, 0, DINO_X_POS, DINO_Y_POS, 0, 0, 0);
     initCactus(mdl -> cactus, 0,0,0,0);
     
-    mdl -> base = (UINT16*)Physbase();
+    mdl -> base = Physbase();
 }
 
 /*

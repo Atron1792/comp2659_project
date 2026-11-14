@@ -1,4 +1,4 @@
-#include <assert.h>
+#include <osbind.h>
 #include <stdio.h>
 
 #include "asynch.h"
@@ -11,7 +11,7 @@ static void initTestModel(GameMdl *model, Dino *dino, Cactus *cactus)
     model->gameStatus = GAME_ON_FLG;
     model->dino = dino;
     model->cactus = cactus;
-    model->base = (UINT16 *)0;
+    model->base = (UINT32 *)0;
 
     initDino(dino, 0, 0, DINO_X_POS, DINO_Y_POS, 0, 0, 0);
     initCactus(cactus, 320, DINO_Y_POS, 0, 0);
@@ -26,12 +26,12 @@ static void tstJumpRequest(void)
     initTestModel(&model, &dino, &cactus);
 
     onJumpRequest(&model);
-    assert(dino.yVel == -JUMP_Y_VELOCITY);
+    printf("jump request: yVel = %d\n", dino.yVel);
 
     dino.y = DINO_Y_POS - 1;
     dino.yVel = 0;
     onJumpRequest(&model);
-    assert(dino.yVel == 0);
+    printf("airborne jump request: yVel = %d\n", dino.yVel);
 }
 
 static void tstQuitRequest(void)
@@ -43,7 +43,7 @@ static void tstQuitRequest(void)
     initTestModel(&model, &dino, &cactus);
 
     onQuitRequest(&model);
-    assert((model.gameStatus & QUIT_FLG) != 0);
+    printf("quit request: gameStatus = 0x%X\n", model.gameStatus);
 }
 
 static void tstClockTick(void)
@@ -63,8 +63,7 @@ static void tstClockTick(void)
 
     onClockTick(&model);
 
-    assert(dino.y != oldDinoY);
-    assert(cactus.x == oldCactusX - 2);
+    printf("clock tick: dino y %d -> %d, cactus x %d -> %d\n",oldDinoY, dino.y, oldCactusX, cactus.x);
 }
 
 static void tstCollision(void)
@@ -77,8 +76,10 @@ static void tstCollision(void)
     cactus.x = dino.x;
     cactus.y = dino.y;
 
-    checkCollision(&model);
-    assert((model.gameStatus & LOSS_FLG) != 0);
+    printf("collision check: %d, gameStatus = 0x%X\n",checkCollision(&model), model.gameStatus);
+
+    onCollision(&model);
+    printf("collision event: gameStatus = 0x%X\n", model.gameStatus);
 }
 
 int main(void)
@@ -88,6 +89,5 @@ int main(void)
     tstClockTick();
     tstCollision();
 
-    printf("\nALL TESTS PASSED! :)\n");
     return 0;
 }

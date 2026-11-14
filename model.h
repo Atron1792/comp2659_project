@@ -50,7 +50,7 @@ typedef struct {
 	unsigned long score;
     Dino* dino;
     Cactus* cactus;
-    UINT16* base;
+    UINT32* base;
 	char gameStatus;
 } GameMdl;
 
