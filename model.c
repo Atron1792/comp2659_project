@@ -30,7 +30,8 @@ void initDino(Dino* dino, int x, int y) {
 }
 
 void moveDino(Dino* dino) {
-    if (dino->y == DINO_Y_POS && dino->yVel >= 0) {
+    if (dino->y >= DINO_Y_POS && dino->yVel >= 0) {
+        dino->y = DINO_Y_POS;
         dino->yVel = 0;
         return;
     }
@@ -43,22 +44,6 @@ void moveDino(Dino* dino) {
         dino->yVel = 0;
     }
 }
-
-void dinoJump(Dino* dino) {
-    if (dino -> y >= DINO_Y_POS && dino -> yVel >= 0) {
-        dino -> y = DINO_Y_POS;
-        dino -> yVel = -JUMP_Y_VELOCITY;
-    }
-
-    dino -> y += dino -> yVel;
-    dino -> yVel += 1;
-
-    if (dino -> y >= DINO_Y_POS) {
-        dino -> y = DINO_Y_POS;
-        dino -> yVel = 0;
-    }
-}
-
 
 /*
 CACTUS FUNCTIONS

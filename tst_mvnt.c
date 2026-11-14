@@ -2,6 +2,7 @@
 #include <stdio.h>
 
 #include "bitmaps.h"
+#include "asynch.h"
 #include "cond.h"
 #include "model.h"
 #include "raster.h"
@@ -28,7 +29,8 @@ int main(void)
 
     initMovementModel(&model, &dino, &cactus);
     for (counter = 0; counter < 160; counter++) {
-        dinoJump(model.dino);
+        onJumpRequest(&model);
+        moveDino(model.dino);
         moveCactus(model.cactus);
 
         clearScreen(model.base);
