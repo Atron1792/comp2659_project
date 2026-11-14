@@ -26,7 +26,7 @@ void initScreen(GameMdl* model) {
 
 
 void gameLoop(GameMdl* model) {
-	UINT32 timeDiff;
+	char movements = 0;
 	char key = '\0';
 	
 	while (!model -> gameStatus) {
@@ -37,11 +37,26 @@ void gameLoop(GameMdl* model) {
 			moveCactus(model -> cactus);
 			renderCactus(model -> cactus, model -> base);
 			cactusThen = timeNow;
+			movements++;
 		}
 		if (dinoThen - timeNow >= 1) {
 			renderDino(model -> dino, model -> base);
 			dinoThen = timeNow;
+			movements++;
 		}
+
+		if (movements) {
+			if (checkCollision(model)) {
+				onCollision(model);
+				model -> dino -> isDead = 1;
+			}
+			movements = 0;
+		}
+		
+		if (model -> gameStatus) {
+			break;
+		}
+		
 		
 		/* Poll for user input */
 		if (has_input()) {
@@ -58,14 +73,19 @@ void gameLoop(GameMdl* model) {
 		}
 	}
 
-	clearScreen(model->base);
+	/*clearScreen(model->base);*/
 	if (model -> gameStatus & WIN_FLG) {
-		plotString((UINT8 *)model->base, 180, 280, "YOU WIN");
+		plotString((UINT8 *)model->base, 180, 280, "YOU WIN!");
 	} else if (model -> gameStatus & LOSS_FLG) {
 		plotString((UINT8 *)model->base, 180, 280, "GAME OVER");
+		
+		clearRegion(model -> base, model -> dino -> y, model -> dino -> x, DINO_HEIGHT, DINO_WIDTH);
+		renderDino(model -> dino, model -> base);
+		renderCactus(model -> cactus, model -> base);
 	} else if (model -> gameStatus & QUIT_FLG) {
 		plotString((UINT8 *)model->base, 180, 280, "QUIT");
 	}
+	key = (char)Cnecin();
 }
 
 

@@ -21,7 +21,9 @@ void renderDino(const Dino *dino, UINT32 *base)
 {
     const UINT32 *bitmap;
 
-    if (dino->yVel < 0) {
+    if (dino -> isDead) {
+        bitmap = dinoBitmapDeath;
+    } else if (dino->yVel < 0) {
         bitmap = dinoBitmap2;
     } else if (dino->yVel > 0) {
         bitmap = dinoBitmap1;
