@@ -27,11 +27,11 @@ void render(const GameMdl *model);
 
  PURPOSE: Draws the horizontal ground line.
 
- INPUT: model - game state containing the framebuffer.
+ INPUT: base - framebuffer address.
 
  OUTPUT: None.
 */
-void renderGround(const GameMdl *model);
+void renderGround(UINT32 *base);
 
 /*----- Function: renderDino -----
 

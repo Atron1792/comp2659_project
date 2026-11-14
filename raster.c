@@ -278,32 +278,33 @@ void plotTriangle(UINT32 *base, int row, int col, UINT16 triangle_base, UINT16 h
 }
 
 void plot8bitBitmap(UINT8 *base, int row, int col, const UINT8 *bitmap, UINT16 height) {
-    UINT8 *loc = base + (row * BYTES_PER_SCANLINE) + (col >> 3);
-    UINT8 prevChar; /* Holds overflow bits */
-    int r, c;
+    UINT8 *loc;
+    int r;
     int currRow;
     int shift = col & 7; /* col % 8 */
     int invShift = BITS_PER_BYTE - shift;
 
-    if ((col >> 3) < 0 || col > SCREEN_WIDTH) {
+    if (col < 0 || col >= SCREEN_WIDTH) {
         /* Out of bounds; return early */
         return;
     }
 
     currRow = row;
+    loc = base;
     while (currRow < 0) {
         /* Move base pointer into screen */
         loc += BYTES_PER_SCANLINE;
         currRow++;
     }
+    loc += (currRow * BYTES_PER_SCANLINE) + (col >> 3);
 
-    prevChar = 0;
     for (r = 0; r < height; r++) {
         if (currRow >= 0 && currRow < SCREEN_HEIGHT) {
             *loc |= bitmap[r] >> shift;
-            *loc |= prevChar;
-            
-            prevChar = bitmap[r] << invShift;
+            if (shift != 0 && (col >> 3) + 1 < BYTES_PER_SCANLINE) {
+                *(loc + 1) |= bitmap[r] << invShift;
+            }
+
             loc += BYTES_PER_SCANLINE; /* Move base to next line */
         } else if (currRow >= SCREEN_HEIGHT) {
             /* Plotting below screen; end early */
@@ -311,52 +312,43 @@ void plot8bitBitmap(UINT8 *base, int row, int col, const UINT8 *bitmap, UINT16 h
         }
         currRow++;
     }
-
-    if (shift != 0 && currRow < SCREEN_HEIGHT) {
-        /* Apply leftover bits */
-        *loc |= prevChar;
-    }
 }
 
 void plot16bitBitmap(UINT16 *base, int row, int col, const UINT16 *bitmap, UINT16 height)
 {
-    UINT16 *loc = base + (row * WORDS_PER_SCANLINE) + (col >> 4);
-    UINT16 prevWord; /* Holds overflow bits */
-    int r, c;
+    UINT16 *loc;
+    int r;
     int currRow;
     int shift = col & 15; /* col % 16 */
     int invShift = WORD_BIT_COUNT - shift;
 
-    if ((col >> 4) < 0 || col > SCREEN_WIDTH) {
+    if (col < 0 || col >= SCREEN_WIDTH) {
         /* Out of bounds; return early */
         return;
     }
 
     currRow = row;
+    loc = base;
     while (currRow < 0) {
         /* Move base pointer into screen */
         loc += WORDS_PER_SCANLINE;
         currRow++;
     }
+    loc += (currRow * WORDS_PER_SCANLINE) + (col >> 4);
 
-    prevWord = 0;
     for (r = 0; r < height; r++) {
         if (currRow >= 0 && currRow < SCREEN_HEIGHT) {
             *loc |= bitmap[r] >> shift;
-            *loc |= prevWord;
-            
-            prevWord = bitmap[r] << invShift;
+            if (shift != 0 && (col >> 4) + 1 < WORDS_PER_SCANLINE) {
+                *(loc + 1) |= bitmap[r] << invShift;
+            }
+
             loc += WORDS_PER_SCANLINE; /* Move base to next line */
         } else if (currRow >= SCREEN_HEIGHT) {
             /* Plotting below screen; end early */
             break;
         }
         currRow++;
-    }
-
-    if (shift != 0 && currRow < SCREEN_HEIGHT) {
-        /* Apply leftover bits */
-        *loc |= prevWord;
     }
 }
 
