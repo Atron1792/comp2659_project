@@ -1,6 +1,6 @@
 /*
-file name: raster.c
-authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
+File Name: raster.c
+Authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
 
 Implements framebuffer clearing, primitive drawing, bitmap plotting,
 and font rendering routines.

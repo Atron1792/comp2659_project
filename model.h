@@ -1,6 +1,6 @@
 /*
-file name: model.h
-authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
+File Name: model.h
+Authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
 
 Declares game-state structures, constants, initialization, and movement logic.
 */

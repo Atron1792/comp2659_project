@@ -1,6 +1,6 @@
 /*
-file name: game.c
-authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
+File Name: game.c
+Authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
 
 Initializes and runs the game loop, including timing, input, updates,
 rendering, and terminal game-state screens.
@@ -40,14 +40,14 @@ void gameLoop(GameMdl* model) {
 	while (!model -> gameStatus) {
 		/* Handle synchronous events */
 		timeNow = getTime();
-		if (cactusThen - timeNow >= CACTUS_MOVE_RATE) {
+		if (timeNow - cactusThen >= CACTUS_MOVE_RATE) {
 			clearRegion(model -> base, model -> cactus -> y, model -> cactus -> x, CACTUS_HEIGHT, CACTUS_WIDTH);
 			moveCactus(model -> cactus);
 			renderCactus(model -> cactus, model -> base);
 			cactusThen = timeNow;
 			movements++;
 		}
-		if (dinoThen - timeNow >= 1 && model -> dino -> yVel != 0) {
+		if (timeNow - dinoThen >= 1) {
 			clearRegion(model -> base, model -> dino -> y, model -> dino -> x, DINO_HEIGHT, DINO_WIDTH);
 			moveDino(model -> dino);
 			renderDino(model -> dino, model -> base);
@@ -95,7 +95,9 @@ void gameLoop(GameMdl* model) {
 	} else if (model -> gameStatus & QUIT_FLG) {
 		plotString((UINT8 *)model->base, 180, 280, "QUIT");
 	}
-	key = (char)Cnecin();
+	while (!has_input()) {
+	}
+	key = get_input();
 }
 
 

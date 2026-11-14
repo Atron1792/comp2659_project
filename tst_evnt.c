@@ -1,6 +1,6 @@
 /*
-file name: tst_evnt.c
-authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
+File Name: tst_evnt.c
+Authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
 
 Manually exercises asynchronous requests, clock ticks, and collision events.
 */

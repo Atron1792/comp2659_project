@@ -1,6 +1,6 @@
 /*
-file name: asynch.h
-authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
+File Name: asynch.h
+Authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
 
 Declares handlers for asynchronous user requests.
 */

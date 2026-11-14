@@ -1,6 +1,6 @@
 /*
-file name: bitmaps.h
-authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
+File Name: bitmaps.h
+Authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
 
 Declares shared dimensions and bitmap data for game sprites.
 */

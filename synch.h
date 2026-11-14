@@ -1,6 +1,6 @@
 /*
-file name: synch.h
-authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
+File Name: synch.h
+Authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
 
 Declares synchronous clock-tick processing for game state updates.
 */

@@ -1,6 +1,6 @@
 /*
-file name: tst_mvnt.c
-authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
+File Name: tst_mvnt.c
+Authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
 
 Demonstrates dinosaur jumping, cactus movement, rendering, and collision.
 */

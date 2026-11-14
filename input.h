@@ -1,6 +1,6 @@
 /*
-file name: input.h
-authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
+File Name: input.h
+Authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
 
 Declares the keyboard polling interface used by the game.
 */

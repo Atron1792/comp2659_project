@@ -1,6 +1,6 @@
 /*
-file name: TST_MDL.c
-authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
+File Name: TST_MDL.c
+Authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
 
 Manually exercises initialization and dinosaur model movement routines.
 */

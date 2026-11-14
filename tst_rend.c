@@ -1,6 +1,6 @@
 /*
-file name: tst_rend.c
-authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
+File Name: tst_rend.c
+Authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
 
 Exercises complete scene rendering using initialized game-model objects.
 */

@@ -1,6 +1,6 @@
 /*
-file name: raster.h
-authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
+File Name: raster.h
+Authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
 
 Declares framebuffer clearing, primitive drawing, bitmap plotting,
 and font rendering routines.
