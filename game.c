@@ -90,21 +90,18 @@ void gameLoop(GameMdl* model) {
 			break;
 		}
 
-void updateGame(GameMdl* model) {
-	timeNow = getTime();
-	if (timeNow - timeThen < 1) {
-		return;
+		/* Apply clock-triggered movement updates. */
+		timeNow = getTime();
+		if (timeNow - timeThen >= 1) {
+			if (onClockTick(model)) {
+				model -> dino -> isDead = 1;
+			}
+			render(model);
+			presentFrame(model);
+			timeThen = timeNow;
+		}
 	}
-
-	if (onClockTick(model)) {
-		model -> dino -> isDead = 1;
-	}
-	render(model);
-	presentFrame(model);
-	timeThen = timeNow;
-}
-
-void renderEndScreen(GameMdl* model) {
+	
 	if (model -> gameStatus & WIN_FLG) {
 		plotString((UINT8 *)model->base, 180, 280, "YOU WIN!");
 	} else if (model -> gameStatus & LOSS_FLG) {
