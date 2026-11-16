@@ -2,15 +2,24 @@
 File Name: synch.c
 Authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
 
-Processes synchronous clock-tick updates for score, movement, and collision.
+Processes synchronous clock-tick updates for score and object movement.
 */
 
 #include "synch.h"
-#include "cond.h"
 
-signed int onClockTick(GameMdl *model)
+static UINT16 scoreTickCount;
+
+void onClockTick(GameMdl *model)
 {
-    model->score += 1;
+    if (model->gameStatus) {
+        return;
+    }
+
+    scoreTickCount++;
+    if (scoreTickCount >= 7) {
+        model->score += 1;
+        scoreTickCount = 0;
+    }
 
     if (model->dino) {
         moveDino(model->dino);
@@ -18,10 +27,5 @@ signed int onClockTick(GameMdl *model)
     if (model->cactus) {
         moveCactus(model->cactus);
     }
-    if (checkCollision(model)) {
-        onCollision(model);
-        return 1;
-    }
-    return 0;
 }
 

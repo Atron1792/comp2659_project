@@ -24,6 +24,9 @@ signed int checkCollision(const GameMdl *model)
 void onCollision(GameMdl *model)
 {
     model->gameStatus |= LOSS_FLG;
+    if (model->dino) {
+        model->dino->isDead = 1;
+    }
 }
 
 void onQuit(GameMdl* model) {

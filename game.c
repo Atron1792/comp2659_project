@@ -34,6 +34,7 @@ void initDoubleBuffer(GameMdl* model) {
 
 	originalScreen = Physbase();
 	frontBuffer = originalScreen;
+	clearScreen(originalScreen);
 	alignedAddress = ((UINT32)backStorage + FRAMEBUFFER_ALIGNMENT - (UINT32)1) & ~(FRAMEBUFFER_ALIGNMENT - (UINT32)1);
 	backBuffer = (UINT32 *)alignedAddress;
 	model->base = backBuffer;
@@ -79,8 +80,9 @@ void updateGame(GameMdl *model) {
 	timeNow = getTime();
 
 	if (timeNow - timeThen >= 1) {
-		if (onClockTick(model)) {
-			model -> dino -> isDead = 1;
+		onClockTick(model);
+		if (checkCollision(model)) {
+			onCollision(model);
 		}
 		render(model);
 		presentFrame(model);

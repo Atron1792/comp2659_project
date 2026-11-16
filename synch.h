@@ -12,12 +12,15 @@ Declares synchronous clock-tick processing for game state updates.
 
 /*----- Function: onClockTick -----
 
- PURPOSE: Advances timed game state and applies collision handling.
+ PURPOSE: Advances dinosaur and cactus movement and updates the score.
 
  INPUT: model - writable game model to update.
 
- OUTPUT: Nonzero when a collision is detected; zero otherwise.
+ OUTPUT: None.
+
+ ASSUMPTIONS: One call represents one 70 Hz game tick. The score increases
+              once every seven calls.
 */
-signed int onClockTick(GameMdl *model);
+void onClockTick(GameMdl *model);
 
 #endif
