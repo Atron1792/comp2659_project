@@ -12,7 +12,6 @@ Composes the game scene, sprites, ground line, and score on the framebuffer.
 void render(const GameMdl *model)
 {
     clearScreen(model->base);
-    
     renderGround(model->base);
     clearRegion(model->base, model->dino->y, model->dino->x, DINO_HEIGHT, DINO_WIDTH);
     clearRegion(model->base, model->cactus->y, model->cactus->x, CACTUS_HEIGHT, CACTUS_WIDTH);
@@ -47,7 +46,7 @@ void renderDino(const Dino *dino, UINT32 *base)
 void renderCactus(const Cactus *cactus, UINT32 *base)
 {
     int i;
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < 3; i++) {
         plot32bitBitmap(base, cactus->y, cactus->ca[i], cactusBitmap, CACTUS_HEIGHT);
     }
 }

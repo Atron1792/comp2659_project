@@ -53,19 +53,27 @@ void moveDino(Dino* dino) {
 CACTUS FUNCTIONS
 */
 void initCactus(Cactus* cactus, int x, int y, int dx) {
-    cactus -> x = x;
+    int i;
     cactus -> y = y;
     cactus -> dx = dx;
     cactus -> dy = 0;
+    for (i = 0; i < 3; i++) {
+        cactus -> ca[i] = 200 + (i * 202);
+    }
+    cactus -> x = cactus -> ca[0];
 }
 
 void moveCactus(Cactus* cactus) {
-    cactus -> x += cactus -> dx;
-
-    if (cactus->x + CACTUS_WIDTH <= 0) {
-        cactus->x = SCRN_W;
-        cactus->y = FLOOR_Y - CACTUS_HEIGHT;
+    int i;
+    for (i = 0; i < 3; i++) {
+        cactus -> ca[i] += cactus -> dx;
     }
+    if (cactus -> ca[0] < 0) {
+        cactus -> ca[0] = cactus -> ca[1];
+        cactus -> ca[1] = cactus -> ca[2];
+        cactus -> ca[2] = 608;
+    }
+    cactus -> x = cactus -> ca[0];
 }
 
 

@@ -121,7 +121,6 @@ void gameLoop(GameMdl* model) {
 			updateGame(model);
 		}
 	}
-
 	renderEndScreen(model);
 	presentFrame(model);
 	while (!has_input()) {

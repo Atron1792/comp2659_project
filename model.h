@@ -21,7 +21,7 @@ Declares game-state structures, constants, initialization, and movement logic.
 
 
 /* Cactus constants */
-#define DX_CACTUS -5
+#define DX_CACTUS -7
 #define DY_CACTUS 0
 #define CACTUS_MOVE_RATE 2 /* frames */
 
@@ -58,6 +58,7 @@ typedef struct {
 typedef struct {
     int x, y;
     int dx, dy;
+    int ca[3]; /*for multiple cacti*/
 } Cactus;
 
 typedef struct {
