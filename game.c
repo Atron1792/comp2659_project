@@ -12,8 +12,15 @@ rendering, and terminal game-state screens.
 #define ESC_KEY '\x1b'
 
 volatile UINT32 *timer = (UINT32 *)0x462;
-static UINT32 cactusThen, dinoThen, timeNow;
+static UINT32 timeThen, timeNow;
 
+UINT32 getTime() {
+	UINT32 old_ssp, time;
+	old_ssp = Super(0);
+	time = *timer;
+	Super(old_ssp);
+	return time;
+}
 
 void gameInit(GameMdl* model) {
 	initGameMdl(model);
@@ -22,19 +29,10 @@ void gameInit(GameMdl* model) {
 	
 	/* Initialise time checking variables */
 	timeNow = getTime();
-	cactusThen = timeNow;
-	dinoThen = timeNow;
+	timeThen = timeNow;
 }
-
-
-void initScreen(GameMdl* model) {
-    model->base = Physbase();
-    clearScreen(model->base);
-}
-
 
 void gameLoop(GameMdl* model) {
-	char movements = 0;
 	char key = '\0';
 	
 	while (!model -> gameStatus) {
@@ -42,7 +40,6 @@ void gameLoop(GameMdl* model) {
 		if (has_input()) {
 			key = get_input();
 		}
-
 		if (key == ' ') {
 			onJumpRequest(model);
 			key = '\0';
@@ -50,40 +47,23 @@ void gameLoop(GameMdl* model) {
 			onQuitRequest(model);
 			key = '\0';
 		}
-
 		if (model -> gameStatus) {
 			break;
 		}
 
 		/* Apply clock-triggered movement updates. */
 		timeNow = getTime();
-		if (timeNow - cactusThen >= CACTUS_MOVE_RATE) {
-			clearRegion(model -> base, model -> cactus -> y, model -> cactus -> x, CACTUS_HEIGHT, CACTUS_WIDTH);
-			moveCactus(model -> cactus);
-			renderCactus(model -> cactus, model -> base);
-			cactusThen = timeNow;
-			movements++;
-		}
-		if (timeNow - dinoThen >= 1) {
+		if (timeNow - timeThen >= 1) {
 			clearRegion(model -> base, model -> dino -> y, model -> dino -> x, DINO_HEIGHT, DINO_WIDTH);
-			moveDino(model -> dino);
-			renderDino(model -> dino, model -> base);
-			dinoThen = timeNow;
-			movements++;
-		}
-
-		/* Evaluate conditional events after movement. */
-		if (movements) {
-			if (checkCollision(model)) {
-				onCollision(model);
+			clearRegion(model -> base, model -> cactus -> y, model -> cactus -> x, CACTUS_HEIGHT, CACTUS_WIDTH);
+			if (onClockTick(model)) {
 				model -> dino -> isDead = 1;
 			}
-		}
-
-		/* Render only after all updates and conditional events. */
-		if (movements) {
-			render(model);
-			movements = 0;
+			renderDino(model -> dino, model -> base);
+			renderCactus(model -> cactus, model -> base);
+			clearRegion(model -> base, 8, SCRN_W - (5 * 8) - 8, 8, 5 * 8);
+			renderScore(model -> score, model -> base);
+			timeThen = timeNow;
 		}
 	}
 
@@ -103,17 +83,6 @@ void gameLoop(GameMdl* model) {
 	}
 	key = get_input();
 }
-
-
-
-UINT32 getTime() {
-	UINT32 old_ssp, time;
-	old_ssp = Super(0);
-	time = *timer;
-	Super(old_ssp);
-	return time;
-}
-
 
 int main() {
 	GameMdl model;

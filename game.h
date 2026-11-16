@@ -53,14 +53,4 @@ void gameInit(GameMdl* model);
 */
 void gameLoop(GameMdl* model);
 
-/*----- Function: initScreen -----
-
- PURPOSE: Selects the physical framebuffer and clears it.
-
- INPUT: model - game model whose framebuffer pointer is set.
-
- OUTPUT: None.
-*/
-void initScreen(GameMdl* model);
-
 #endif
