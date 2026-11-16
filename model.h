@@ -21,7 +21,7 @@ Declares game-state structures, constants, initialization, and movement logic.
 
 
 /* Cactus constants */
-#define DX_CACTUS -2
+#define DX_CACTUS -5
 #define DY_CACTUS 0
 #define CACTUS_MOVE_RATE 2 /* frames */
 
