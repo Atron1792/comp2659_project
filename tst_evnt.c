@@ -12,6 +12,14 @@ Manually exercises asynchronous requests, clock ticks, and collision events.
 #include "cond.h"
 #include "synch.h"
 
+/*----- Function: initTestModel -----
+
+ PURPOSE: Creates a deterministic model fixture for event tests.
+
+ INPUT: model - model to configure; dino and cactus - fixture objects.
+
+ OUTPUT: None.
+*/
 static void initTestModel(GameMdl *model, Dino *dino, Cactus *cactus)
 {
     model->score = 0L;
@@ -24,6 +32,14 @@ static void initTestModel(GameMdl *model, Dino *dino, Cactus *cactus)
     initCactus(cactus, 320, DINO_Y_POS, 0);
 }
 
+/*----- Function: tstJumpRequest -----
+
+ PURPOSE: Demonstrates grounded and airborne jump requests.
+
+ INPUT: None.
+
+ OUTPUT: Prints the vertical velocity after each request.
+*/
 static void tstJumpRequest(void)
 {
     GameMdl model;
@@ -41,6 +57,14 @@ static void tstJumpRequest(void)
     printf("airborne jump request: yVel = %d\n", dino.yVel);
 }
 
+/*----- Function: tstQuitRequest -----
+
+ PURPOSE: Demonstrates setting the quit status through an asynchronous request.
+
+ INPUT: None.
+
+ OUTPUT: Prints the resulting game status.
+*/
 static void tstQuitRequest(void)
 {
     GameMdl model;
@@ -53,6 +77,14 @@ static void tstQuitRequest(void)
     printf("quit request: gameStatus = 0x%X\n", model.gameStatus);
 }
 
+/*----- Function: tstClockTick -----
+
+ PURPOSE: Demonstrates one synchronous movement and scoring update.
+
+ INPUT: None.
+
+ OUTPUT: Prints positions before and after the clock tick.
+*/
 static void tstClockTick(void)
 {
     GameMdl model;
@@ -73,6 +105,14 @@ static void tstClockTick(void)
     printf("clock tick: dino y %d -> %d, cactus x %d -> %d\n",oldDinoY, dino.y, oldCactusX, cactus.x);
 }
 
+/*----- Function: tstCollision -----
+
+ PURPOSE: Demonstrates collision detection and loss-status handling.
+
+ INPUT: None.
+
+ OUTPUT: Prints collision and status results.
+*/
 static void tstCollision(void)
 {
     GameMdl model;
@@ -89,6 +129,14 @@ static void tstCollision(void)
     printf("collision event: gameStatus = 0x%X\n", model.gameStatus);
 }
 
+/*----- Function: main -----
+
+ PURPOSE: Runs all asynchronous, synchronous, and collision demonstrations.
+
+ INPUT: None.
+
+ OUTPUT: Returns zero after all demonstrations complete.
+*/
 int main(void)
 {
     tstJumpRequest();

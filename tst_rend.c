@@ -11,6 +11,14 @@ Exercises complete scene rendering using initialized game-model objects.
 #include "model.h"
 #include "renderer.h"
 
+/*----- Function: main -----
+
+ PURPOSE: Renders one initialized game scene to the physical framebuffer.
+
+ INPUT: None.
+
+ OUTPUT: Returns zero after the scene is rendered.
+*/
 int main(void)
 {
     GameMdl mdl;

@@ -11,6 +11,14 @@ Tests nonblocking keyboard detection and character retrieval.
 
 #define ESC_KEY 27
 
+/*----- Function: main -----
+
+ PURPOSE: Displays keyboard characters until Escape is received.
+
+ INPUT: None.
+
+ OUTPUT: Returns zero after Escape is read.
+*/
 int main(void)
 {
     char key;

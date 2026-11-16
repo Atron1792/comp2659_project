@@ -15,6 +15,14 @@ Demonstrates dinosaur jumping, cactus movement, rendering, and collision.
 #include "raster.h"
 #include "renderer.h"
 
+/*----- Function: initMovementModel -----
+
+ PURPOSE: Connects test-owned sprites to a model and initializes their state.
+
+ INPUT: model - model to configure; dino and cactus - objects to initialize.
+
+ OUTPUT: None.
+*/
 static void initMovementModel(GameMdl *model, Dino *dino, Cactus *cactus)
 {
     model->score = 0L;
@@ -27,6 +35,14 @@ static void initMovementModel(GameMdl *model, Dino *dino, Cactus *cactus)
     initCactus(cactus, 640 - CACTUS_WIDTH, FLOOR_Y - CACTUS_HEIGHT, -4);
 }
 
+/*----- Function: main -----
+
+ PURPOSE: Demonstrates movement, rendering, and collision handling.
+
+ INPUT: None.
+
+ OUTPUT: Returns zero after the movement demonstration completes.
+*/
 int main(void)
 {
     int counter;
