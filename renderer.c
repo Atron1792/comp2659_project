@@ -14,8 +14,11 @@ void render(const GameMdl *model)
     clearScreen(model->base);
     
     renderGround(model->base);
+    clearRegion(model->base, model->dino->y, model->dino->x, DINO_HEIGHT, DINO_WIDTH);
+    clearRegion(model->base, model->cactus->y, model->cactus->x, CACTUS_HEIGHT, CACTUS_WIDTH);
     renderDino(model->dino, model->base);
     renderCactus(model->cactus, model->base);
+    clearRegion(model->base, 8, SCRN_W - (5 * 8) - 8, 8, 5 * 8);
     renderScore(model->score, model->base);
 }
 

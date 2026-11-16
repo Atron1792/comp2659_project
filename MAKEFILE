@@ -1,5 +1,5 @@
-all: tests
-tests: tst_inpt
+all: game
+tests: tst_inpt tst_rend tst_rast tst_mdl tst_mvnt tst_evnt
 only_game: game
 
 game: game.o model.o raster.o font.o bitmaps.o renderer.o asynch.o synch.o cond.o input.o

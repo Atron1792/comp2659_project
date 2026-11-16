@@ -11,8 +11,15 @@ rendering, and terminal game-state screens.
 #include "input.h"
 #define ESC_KEY '\x1b'
 
+#define FRAMEBUFFER_SIZE 32000
+#define FRAMEBUFFER_ALIGNMENT 256
+
 volatile UINT32 *timer = (UINT32 *)0x462;
 static UINT32 timeThen, timeNow;
+static UINT32 *originalScreen;
+static UINT32 *frontBuffer;
+static UINT32 *backBuffer;
+static UINT8 backStorage[FRAMEBUFFER_SIZE + FRAMEBUFFER_ALIGNMENT - 1];
 
 UINT32 getTime() {
 	UINT32 old_ssp, time;
@@ -22,10 +29,42 @@ UINT32 getTime() {
 	return time;
 }
 
+void initDoubleBuffer(GameMdl* model) {
+	UINT32 alignedAddress;
+
+	originalScreen = Physbase();
+	frontBuffer = originalScreen;
+	alignedAddress = ((UINT32)backStorage + FRAMEBUFFER_ALIGNMENT - (UINT32)1) & ~(FRAMEBUFFER_ALIGNMENT - (UINT32)1);
+	backBuffer = (UINT32 *)alignedAddress;
+	model->base = backBuffer;
+	clearScreen(model->base);
+}
+
+void presentFrame(GameMdl* model) {
+	UINT32 *oldFront;
+
+	Setscreen(backBuffer, backBuffer, -1);
+	while (Physbase() != backBuffer) {
+	}
+
+	oldFront = frontBuffer;
+	frontBuffer = backBuffer;
+	backBuffer = oldFront;
+	model->base = backBuffer;
+}
+
+void restoreScreen(void) {
+	Setscreen(originalScreen, originalScreen, -1);
+	while (Physbase() != originalScreen) {
+	}
+}
+
 void gameInit(GameMdl* model) {
 	initGameMdl(model);
+	initDoubleBuffer(model);
 	disableCursor();
 	render(model);
+	presentFrame(model);
 	
 	/* Initialise time checking variables */
 	timeNow = getTime();
@@ -51,23 +90,21 @@ void gameLoop(GameMdl* model) {
 			break;
 		}
 
-		/* Apply clock-triggered movement updates. */
-		timeNow = getTime();
-		if (timeNow - timeThen >= 1) {
-			clearRegion(model -> base, model -> dino -> y, model -> dino -> x, DINO_HEIGHT, DINO_WIDTH);
-			clearRegion(model -> base, model -> cactus -> y, model -> cactus -> x, CACTUS_HEIGHT, CACTUS_WIDTH);
-			if (onClockTick(model)) {
-				model -> dino -> isDead = 1;
-			}
-			renderDino(model -> dino, model -> base);
-			renderCactus(model -> cactus, model -> base);
-			clearRegion(model -> base, 8, SCRN_W - (5 * 8) - 8, 8, 5 * 8);
-			renderScore(model -> score, model -> base);
-			timeThen = timeNow;
-		}
+void updateGame(GameMdl* model) {
+	timeNow = getTime();
+	if (timeNow - timeThen < 1) {
+		return;
 	}
 
-	/*clearScreen(model->base);*/
+	if (onClockTick(model)) {
+		model -> dino -> isDead = 1;
+	}
+	render(model);
+	presentFrame(model);
+	timeThen = timeNow;
+}
+
+void renderEndScreen(GameMdl* model) {
 	if (model -> gameStatus & WIN_FLG) {
 		plotString((UINT8 *)model->base, 180, 280, "YOU WIN!");
 	} else if (model -> gameStatus & LOSS_FLG) {
@@ -79,9 +116,11 @@ void gameLoop(GameMdl* model) {
 	} else if (model -> gameStatus & QUIT_FLG) {
 		plotString((UINT8 *)model->base, 180, 280, "QUIT");
 	}
+	presentFrame(model);
 	while (!has_input()) {
 	}
 	key = get_input();
+	restoreScreen();
 }
 
 int main() {

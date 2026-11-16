@@ -1,11 +1,7 @@
-foreach i { $< }
-	if { -f $i.tos }
-		echo Rm $i.tos
-		Rm $i.tos
-	endif
-	if { -f $i.o }
-		echo Rm $i.o
-		Rm $i.o
+foreach i { *.o *.tos }
+	if { -f $i }
+		echo Rm $i
+		Rm $i
 	endif
 endfor
 make

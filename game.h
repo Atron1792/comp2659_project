@@ -31,6 +31,39 @@ Declares game initialization, timing, screen setup, and main-loop routines.
 */
 UINT32 getTime();
 
+/*----- Function: initDoubleBuffer -----
+
+ PURPOSE: Saves the original screen and prepares an aligned off-screen buffer.
+
+ INPUT: model - game model whose drawing framebuffer is set to the back buffer.
+
+ OUTPUT: None.
+*/
+void initDoubleBuffer(GameMdl* model);
+
+/*----- Function: presentFrame -----
+
+ PURPOSE: Displays the completed back buffer and selects the old front buffer
+          for the next frame.
+
+ INPUT: model - game model whose drawing framebuffer is updated.
+
+ OUTPUT: None.
+
+ ASSUMPTIONS: initDoubleBuffer() has been called before this function.
+*/
+void presentFrame(GameMdl* model);
+
+/*----- Function: restoreScreen -----
+
+ PURPOSE: Restores the framebuffer that was active before double buffering.
+
+ INPUT: None.
+
+ OUTPUT: None.
+*/
+void restoreScreen(void);
+
 /*----- Function: gameInit -----
 
  PURPOSE: Initializes game state and the game-loop clock values.
