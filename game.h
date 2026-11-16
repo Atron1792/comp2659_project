@@ -64,6 +64,38 @@ void presentFrame(GameMdl* model);
 */
 void restoreScreen(void);
 
+/*----- Function: processInput -----
+
+ PURPOSE: Processes one pending keyboard request for the game.
+
+ INPUT: model - game model whose jump or quit state may be updated.
+
+ OUTPUT: None.
+*/
+void processInput(GameMdl *model);
+
+/*----- Function: updateGame -----
+
+ PURPOSE: Applies a clock-triggered gameplay update and presents the frame
+          when the update interval has elapsed.
+
+ INPUT: model - game model to update and render.
+
+ OUTPUT: None.
+*/
+void updateGame(GameMdl *model);
+
+/*----- Function: renderEndScreen -----
+
+ PURPOSE: Draws the terminal message and final game objects for the current
+          game status.
+
+ INPUT: model - game model containing the terminal status and object state.
+
+ OUTPUT: None.
+*/
+void renderEndScreen(GameMdl *model);
+
 /*----- Function: gameInit -----
 
  PURPOSE: Initializes game state and the game-loop clock values.

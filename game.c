@@ -59,6 +59,47 @@ void restoreScreen(void) {
 	}
 }
 
+void processInput(GameMdl *model) {
+	char key = '\0';
+
+	if (has_input()) {
+		key = get_input();
+	}
+
+	if (key == ' ') {
+		onJumpRequest(model);
+		key = '\0';
+	} else if (key == ESC_KEY) {
+		onQuitRequest(model);
+		key = '\0';
+	}
+}
+
+void updateGame(GameMdl *model) {
+	timeNow = getTime();
+
+	if (timeNow - timeThen >= 1) {
+		if (onClockTick(model)) {
+			model -> dino -> isDead = 1;
+		}
+		render(model);
+		presentFrame(model);
+		timeThen = timeNow;
+	}
+}
+
+void renderEndScreen(GameMdl *model) {
+	if (model -> gameStatus & WIN_FLG) {
+		plotString((UINT8 *)model->base, 180, 280, "YOU WIN!");
+	} else if (model -> gameStatus & LOSS_FLG) {
+		plotString((UINT8 *)model->base, 180, 280, "GAME OVER");
+		renderDino(model -> dino, model -> base);
+		renderCactus(model -> cactus, model -> base);
+	} else if (model -> gameStatus & QUIT_FLG) {
+		plotString((UINT8 *)model->base, 180, 280, "QUIT");
+	}
+}
+
 void gameInit(GameMdl* model) {
 	initGameMdl(model);
 	initDoubleBuffer(model);
@@ -72,51 +113,18 @@ void gameInit(GameMdl* model) {
 }
 
 void gameLoop(GameMdl* model) {
-	char key = '\0';
-	
 	while (!model -> gameStatus) {
-		/* Process asynchronous input requests first. */
-		if (has_input()) {
-			key = get_input();
+		processInput(model);
+		if (!model -> gameStatus) {
+			updateGame(model);
 		}
-		if (key == ' ') {
-			onJumpRequest(model);
-			key = '\0';
-		} else if (key == ESC_KEY) {
-			onQuitRequest(model);
-			key = '\0';
-		}
-		if (model -> gameStatus) {
-			break;
-		}
+	}
 
-		/* Apply clock-triggered movement updates. */
-		timeNow = getTime();
-		if (timeNow - timeThen >= 1) {
-			if (onClockTick(model)) {
-				model -> dino -> isDead = 1;
-			}
-			render(model);
-			presentFrame(model);
-			timeThen = timeNow;
-		}
-	}
-	
-	if (model -> gameStatus & WIN_FLG) {
-		plotString((UINT8 *)model->base, 180, 280, "YOU WIN!");
-	} else if (model -> gameStatus & LOSS_FLG) {
-		plotString((UINT8 *)model->base, 180, 280, "GAME OVER");
-		
-		clearRegion(model -> base, model -> dino -> y, model -> dino -> x, DINO_HEIGHT, DINO_WIDTH);
-		renderDino(model -> dino, model -> base);
-		renderCactus(model -> cactus, model -> base);
-	} else if (model -> gameStatus & QUIT_FLG) {
-		plotString((UINT8 *)model->base, 180, 280, "QUIT");
-	}
+	renderEndScreen(model);
 	presentFrame(model);
 	while (!has_input()) {
 	}
-	key = get_input();
+	get_input();
 	restoreScreen();
 }
 
