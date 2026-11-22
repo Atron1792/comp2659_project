@@ -95,6 +95,7 @@ void renderEndScreen(GameMdl *model) {
 		plotString((UINT8 *)model->base, 180, 280, "YOU WIN!");
 	} else if (model -> gameStatus & LOSS_FLG) {
 		plotString((UINT8 *)model->base, 180, 280, "GAME OVER");
+		renderGround(model->base);
 		renderDino(model -> dino, model -> base);
 		renderCactus(model -> cactus, model -> base);
 	} else if (model -> gameStatus & QUIT_FLG) {
@@ -108,7 +109,7 @@ void gameInit(GameMdl* model) {
 	disableCursor();
 	render(model);
 	presentFrame(model);
-	
+
 	/* Initialise time checking variables */
 	timeNow = getTime();
 	timeThen = timeNow;
@@ -121,6 +122,7 @@ void gameLoop(GameMdl* model) {
 			updateGame(model);
 		}
 	}
+	clearScreen(backBuffer); /* maybe replace with render func */
 	renderEndScreen(model);
 	presentFrame(model);
 	while (!has_input()) {

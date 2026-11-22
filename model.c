@@ -11,14 +11,14 @@ Initializes and updates the dinosaur, cactus, and overall game model state.
 void initGameMdl(GameMdl* mdl) {
 	mdl -> score = 0L;
 	mdl -> gameStatus = 0;
-    
+
     if (mdl->dino) {
         initDino(mdl -> dino, DINO_X_POS, DINO_Y_POS);
     }
     if (mdl->cactus) {
         initCactus(mdl -> cactus, SCRN_W - CACTUS_WIDTH, FLOOR_Y - CACTUS_HEIGHT, DX_CACTUS);
     }
-    
+
     mdl -> base = Physbase();
 }
 

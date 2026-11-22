@@ -226,7 +226,7 @@ static void tstPlot8bitBitmap(UINT8 *base)
 
     plot8bitBitmap(base, SCREEN_HEIGHT - 8, SCREEN_WIDTH - 8, bitmap, 8);
     Cconin();
-    
+
     plot8bitBitmap(base, SCREEN_HEIGHT - 8, 0, bitmap, 8);
     Cconin();
 }
