@@ -40,7 +40,7 @@ static void tstWritePsg(void)
 
 	writePsg(A_vol, 9);
 	readPsg(A_vol, &value);
-	printf("write valid register: volume = %u\n", (unsigned int)value);
+	printf("write valid register: volume = %u\n", value);
 
 	writePsg(16, 15);
 	printf("invalid register write ignored\n");
@@ -62,14 +62,12 @@ static void tstSetTone(void)
 	setTone(CHANNEL_A, 0x0ABC);
 	readPsg(A_fine, &fine);
 	readPsg(A_coarse, &coarse);
-	printf("tone valid: fine = %u, coarse = %u\n",
-		   (unsigned int)fine, (unsigned int)coarse);
+	printf("tone valid: fine = %u, coarse = %u\n", fine, coarse);
 
 	setTone(CHANNEL_C, 4095);
 	readPsg(C_fine, &fine);
 	readPsg(C_coarse, &coarse);
-	printf("tone C maximum: fine = %u, coarse = %u\n",
-		   (unsigned int)fine, (unsigned int)coarse);
+	printf("tone C maximum: fine = %u, coarse = %u\n", fine, coarse);
 
 	setTone(CHANNEL_C, 4096);
 }
@@ -88,7 +86,7 @@ static void tstSetVolume(void)
 
 	setVolume(CHANNEL_B, 12);
 	readPsg(B_vol, &value);
-	printf("volume valid: channel B = %u\n", (unsigned int)value);
+	printf("volume valid: channel B = %u\n", value);
 
 	setVolume(CHANNEL_B, 16);
 }
@@ -107,11 +105,11 @@ static void tstEnableChannel(void)
 
 	enableChannel(CHANNEL_A, TONE_ON, NOISE_OFF);
 	readPsg(MIXER_IO, &mixer);
-	printf("channel A tone on: mixer = %u\n", (unsigned int)mixer);
+	printf("channel A tone on: mixer = %u\n", mixer);
 
 	enableChannel(CHANNEL_C, TONE_OFF, NOISE_ON);
 	readPsg(MIXER_IO, &mixer);
-	printf("channel C noise on: mixer = %u\n", (unsigned int)mixer);
+	printf("channel C noise on: mixer = %u\n", mixer);
 
 	enableChannel(3, TONE_ON, NOISE_ON);
 }
@@ -130,7 +128,7 @@ static void tstSetNoise(void)
 
 	setNoise(31);
 	readPsg(NOISE, &value);
-	printf("noise valid: %u\n", (unsigned int)value);
+	printf("noise valid: %u\n", value);
 
 	setNoise(32);
 }
@@ -153,8 +151,7 @@ static void tstSetEnvelope(void)
 	readPsg(ENVELOPE_FINE, &fine);
 	readPsg(ENVELOPE_COARSE, &coarse);
 	readPsg(ENVELOPE_SHAPE, &shape);
-	printf("envelope hold: fine = %u, coarse = %u, shape = %u\n",
-		   (unsigned int)fine, (unsigned int)coarse, (unsigned int)shape);
+	printf("envelope hold: fine = %u, coarse = %u, shape = %u\n", fine, coarse, shape);
 
 	setEnvelope(99, 0xFFFF);
 }
@@ -175,8 +172,7 @@ static void tstStopSound(void)
 	stopSound();
 	readPsg(MIXER_IO, &mixer);
 	readPsg(A_vol, &volume);
-	printf("stop sound: mixer = %u, volume A = %u\n",
-		   (unsigned int)mixer, (unsigned int)volume);
+	printf("stop sound: mixer = %u, volume A = %u\n", mixer, volume);
 }
 
 /*----- Function: main -----

@@ -15,25 +15,30 @@ volatile UINT8 *psgWrite = (volatile UINT8 *)WRITE_REG;
 int readPsg(UINT8 reg, UINT8 *value)
 {
 	long oldSsp;
-	if (value != 0 || reg <= 15) 
+
+	if (value == 0 || reg > 15)
 	{
-		oldSsp = Super(0);
-		*psgSelect = reg;
-		*value = *psgSelect;
-		Super(oldSsp);
-		return 1;
+		return 0;
 	}
-	return 0;
+
+	oldSsp = Super(0);
+	*psgSelect = reg;
+	*value = *psgSelect;
+	Super(oldSsp);
+	return 1;
 }
 
 void writePsg(UINT8 reg, UINT8 val)
 {
 	long oldSsp;
-	if (reg <= 15) {
-		oldSsp = Super(0);
-		*psgSelect = reg;
-		*psgWrite = val;
+
+	if (reg > 15) {
+		return;
 	}
+
+	oldSsp = Super(0);
+	*psgSelect = reg;
+	*psgWrite = val;
 	Super(oldSsp);
 }
 
