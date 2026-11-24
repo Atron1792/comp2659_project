@@ -9,7 +9,7 @@ Initializes and updates the dinosaur, cactus, and overall game model state.
 #include "bitmaps.h"
 
 void initGameMdl(GameMdl* mdl) {
-	mdl -> score = 0L;
+    mdl -> score = 0L;
 	mdl -> gameStatus = 0;
 
     if (mdl->dino) {
@@ -53,27 +53,19 @@ void moveDino(Dino* dino) {
 CACTUS FUNCTIONS
 */
 void initCactus(Cactus* cactus, int x, int y, int dx) {
-    int i;
+    cactus -> x = x;
     cactus -> y = y;
     cactus -> dx = dx;
     cactus -> dy = 0;
-    for (i = 0; i < 3; i++) {
-        cactus -> ca[i] = 200 + (i * 202);
-    }
-    cactus -> x = cactus -> ca[0];
 }
 
 void moveCactus(Cactus* cactus) {
-    int i;
-    for (i = 0; i < 3; i++) {
-        cactus -> ca[i] += cactus -> dx;
+    cactus -> x += cactus -> dx;
+
+    if (cactus -> x + CACTUS_WIDTH <= 0) {
+        cactus -> x = SCRN_W;
+        cactus -> y = FLOOR_Y;
     }
-    if (cactus -> ca[0] < 0) {
-        cactus -> ca[0] = cactus -> ca[1];
-        cactus -> ca[1] = cactus -> ca[2];
-        cactus -> ca[2] = 608;
-    }
-    cactus -> x = cactus -> ca[0];
 }
 
 

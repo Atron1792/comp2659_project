@@ -19,20 +19,21 @@ Declares game-state structures, constants, initialization, and movement logic.
 /* Dino constants */
 #define JUMP_Y_VELOCITY 10 /* frames */
 
+#define DINO_X_POS 32
+#define DINO_Y_POS (FLOOR_Y - DINO_HEIGHT)
+
 
 /* Cactus constants */
-#define DX_CACTUS -7
+#define DX_CACTUS -5
 #define DY_CACTUS 0
 #define CACTUS_MOVE_RATE 2 /* frames */
+
 
 /* Environment Constants */
 #define SCRN_W 640
 #define SCRN_H 400
 
 #define FLOOR_Y (SCRN_H - DINO_HEIGHT)
-
-#define DINO_X_POS 32
-#define DINO_Y_POS (FLOOR_Y - DINO_HEIGHT)
 
 #define GRAVITY -1
 
@@ -41,7 +42,7 @@ Declares game-state structures, constants, initialization, and movement logic.
 #define WIN_FLG 0x01
 #define LOSS_FLG 0x02
 #define QUIT_FLG 0x04
-#define D_FLG 0x80 /* Unused flag */
+#define D_FLG 0x08 /* Unused flag */
 #define E_FLG 0x10 /* Unused flag */
 #define F_FLG 0x20 /* Unused flag */
 #define G_FLG 0x40 /* Unused flag */
@@ -58,11 +59,10 @@ typedef struct {
 typedef struct {
     int x, y;
     int dx, dy;
-    int ca[3]; /*for multiple cacti*/
 } Cactus;
 
 typedef struct {
-	unsigned long score;
+	UINT32 score;
     Dino* dino;
     Cactus* cactus;
     UINT32* base;

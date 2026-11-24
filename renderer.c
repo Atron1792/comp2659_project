@@ -43,12 +43,8 @@ void renderDino(const Dino *dino, UINT32 *base)
     plot32bitBitmap(base, dino->y, dino->x, bitmap, DINO_HEIGHT);
 }
 
-void renderCactus(const Cactus *cactus, UINT32 *base)
-{
-    int i;
-    for (i = 0; i < 3; i++) {
-        plot32bitBitmap(base, cactus->y, cactus->ca[i], cactusBitmap, CACTUS_HEIGHT);
-    }
+void renderCactus(const Cactus *cactus, UINT32 *base) {
+    plot32bitBitmap(base, cactus->y, cactus->x, cactusBitmap, CACTUS_HEIGHT);
 }
 
 

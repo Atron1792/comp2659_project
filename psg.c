@@ -76,55 +76,51 @@ void setVolume(UINT8 channel, UINT8 volume) {
 void enableChannel(UINT8 channel, UINT8 toneOn, UINT8 noiseOn) {
 	UINT8 maskTune;
 
-	if (channel > CHANNEL_C) {
-		return;
-	}
-
-	if (!readPsg(MIXER_IO, &maskTune)) {
-		return;
-	}
-
+	if (channel > CHANNEL_C) {return;} /* Invalid channel */
+	if (!readPsg(MIXER_IO, maskTune)) {return;} /* Unable to read psg chip */
+		
 	switch (channel) {
 		case CHANNEL_A:
-			if (toneOn > 0) {
-				writePsg(MIXER_IO, TONE_A_ON);
+			if (toneOn) {
+				maskTune &= TONE_A_ON;
 			} else {
-				writePsg(MIXER_IO, TONE_A_OFF);
+				maskTune |= ~TONE_A_ON;
 			}
-			if (noiseOn > 0) {
-				writePsg(MIXER_IO, NOISE_A_ON);
+			if (noiseOn) {
+				maskTune &= NOISE_A_ON;
 			} else {
-				writePsg(MIXER_IO, NOISE_A_OFF);
+				maskTune |= ~NOISE_A_ON;
 			}
 			break;
 		case CHANNEL_B:
 			if (toneOn) {
-				writePsg(MIXER_IO, TONE_B_ON);
+				maskTune &= TONE_B_ON;
 			} else {
-				writePsg(MIXER_IO, TONE_B_OFF);
+				maskTune |= ~TONE_B_ON;;
 			}
-			if (noiseOn > 0) {
-				writePsg(MIXER_IO, NOISE_B_ON);
+			if (noiseOn) {
+				maskTune &= NOISE_B_ON;
 			} else {
-				writePsg(MIXER_IO, NOISE_B_OFF);
+				maskTune |= ~NOISE_B_ON;
 			}
 			break;
 		case CHANNEL_C:
 			if (toneOn) {
-				writePsg(MIXER_IO, TONE_C_ON);
-			} else if (NOISE_ON) {
-				writePsg(MIXER_IO, NOISE_C_ON);
-			}
-			if (noiseOn > 0) {
-				writePsg(MIXER_IO, NOISE_C_ON);
+				maskTune &= TONE_C_ON;
 			} else {
-				writePsg(MIXER_IO, NOISE_C_OFF);
+				maskTune |= ~TONE_C_ON;
+			}
+			if (noiseOn) {
+				maskTune &= NOISE_C_ON;
+			} else {
+				maskTune |= ~NOISE_C_ON;
 			}
 			break;
 
 		default:
 			break;
 	}
+	writePsg(MIXER_IO, maskTune);
 }
 
 void setNoise(UINT8 tuning) {
