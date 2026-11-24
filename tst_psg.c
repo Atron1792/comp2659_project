@@ -6,6 +6,8 @@ Provides a test driver skeleton for the low-level PSG module.
 */
 
 #include "psg.h"
+#include "TYPES.H"
+#include <stdio.h>
 
 /*----- Function: tstReadPsg -----
 
@@ -17,6 +19,11 @@ Provides a test driver skeleton for the low-level PSG module.
 */
 static void tstReadPsg(void)
 {
+	UINT8 value;
+
+	printf("read valid register: %d\n", readPsg(MIXER_IO, &value));
+	printf("read invalid register: %d\n", readPsg(16, &value));
+	printf("read null destination: %d\n", readPsg(MIXER_IO, (UINT8 *)0));
 }
 
 /*----- Function: tstWritePsg -----
@@ -29,6 +36,14 @@ static void tstReadPsg(void)
 */
 static void tstWritePsg(void)
 {
+	UINT8 value;
+
+	writePsg(A_vol, 9);
+	readPsg(A_vol, &value);
+	printf("write valid register: volume = %u\n", (unsigned int)value);
+
+	writePsg(16, 15);
+	printf("invalid register write ignored\n");
 }
 
 /*----- Function: tstSetTone -----
@@ -41,6 +56,22 @@ static void tstWritePsg(void)
 */
 static void tstSetTone(void)
 {
+	UINT8 fine;
+	UINT8 coarse;
+
+	setTone(CHANNEL_A, 0x0ABC);
+	readPsg(A_fine, &fine);
+	readPsg(A_coarse, &coarse);
+	printf("tone valid: fine = %u, coarse = %u\n",
+		   (unsigned int)fine, (unsigned int)coarse);
+
+	setTone(CHANNEL_C, 4095);
+	readPsg(C_fine, &fine);
+	readPsg(C_coarse, &coarse);
+	printf("tone C maximum: fine = %u, coarse = %u\n",
+		   (unsigned int)fine, (unsigned int)coarse);
+
+	setTone(CHANNEL_C, 4096);
 }
 
 /*----- Function: tstSetVolume -----
@@ -53,6 +84,13 @@ static void tstSetTone(void)
 */
 static void tstSetVolume(void)
 {
+	UINT8 value;
+
+	setVolume(CHANNEL_B, 12);
+	readPsg(B_vol, &value);
+	printf("volume valid: channel B = %u\n", (unsigned int)value);
+
+	setVolume(CHANNEL_B, 16);
 }
 
 /*----- Function: tstEnableChannel -----
@@ -65,6 +103,17 @@ static void tstSetVolume(void)
 */
 static void tstEnableChannel(void)
 {
+	UINT8 mixer;
+
+	enableChannel(CHANNEL_A, TONE_ON, NOISE_OFF);
+	readPsg(MIXER_IO, &mixer);
+	printf("channel A tone on: mixer = %u\n", (unsigned int)mixer);
+
+	enableChannel(CHANNEL_C, TONE_OFF, NOISE_ON);
+	readPsg(MIXER_IO, &mixer);
+	printf("channel C noise on: mixer = %u\n", (unsigned int)mixer);
+
+	enableChannel(3, TONE_ON, NOISE_ON);
 }
 
 /*----- Function: tstSetNoise -----
@@ -77,6 +126,13 @@ static void tstEnableChannel(void)
 */
 static void tstSetNoise(void)
 {
+	UINT8 value;
+
+	setNoise(31);
+	readPsg(NOISE, &value);
+	printf("noise valid: %u\n", (unsigned int)value);
+
+	setNoise(32);
 }
 
 /*----- Function: tstSetEnvelope -----
@@ -89,6 +145,18 @@ static void tstSetNoise(void)
 */
 static void tstSetEnvelope(void)
 {
+	UINT8 fine;
+	UINT8 coarse;
+	UINT8 shape;
+
+	setEnvelope(HOLD, 0x1234);
+	readPsg(ENVELOPE_FINE, &fine);
+	readPsg(ENVELOPE_COARSE, &coarse);
+	readPsg(ENVELOPE_SHAPE, &shape);
+	printf("envelope hold: fine = %u, coarse = %u, shape = %u\n",
+		   (unsigned int)fine, (unsigned int)coarse, (unsigned int)shape);
+
+	setEnvelope(99, 0xFFFF);
 }
 
 /*----- Function: tstStopSound -----
@@ -101,6 +169,14 @@ static void tstSetEnvelope(void)
 */
 static void tstStopSound(void)
 {
+	UINT8 mixer;
+	UINT8 volume;
+
+	stopSound();
+	readPsg(MIXER_IO, &mixer);
+	readPsg(A_vol, &volume);
+	printf("stop sound: mixer = %u, volume A = %u\n",
+		   (unsigned int)mixer, (unsigned int)volume);
 }
 
 /*----- Function: main -----
@@ -113,5 +189,14 @@ static void tstStopSound(void)
 */
 int main(void)
 {
+	tstReadPsg();
+	tstWritePsg();
+	tstSetTone();
+	tstSetVolume();
+	tstEnableChannel();
+	tstSetNoise();
+	tstSetEnvelope();
+	tstStopSound();
+	printf("PSG TESTS COMPLETE.\n");
     return 0;
 }

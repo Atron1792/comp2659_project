@@ -8,6 +8,8 @@ Declares the PSG (Programmable Sound Generator) functionality for the game.
 #ifndef PSG
 #define PSG
 
+#include "TYPES.H"
+
 /* YM2149 memory mapped addresses */
 #define SELECT_REG 0xFF8800
 #define WRITE_REG 0xFF8802
