@@ -4,11 +4,11 @@
 _clearScreen:
 	link	a6,#-2
 	move.l	d3,-(a7)
-	;line	29
+	;line	15
 	moveq	#0,d3
 	bra	L2
 L1:
-	;line	31
+	;line	17
 	ext.l	d3
 	move.l	d3,d0
 	asl.l	#2,d0
@@ -28,17 +28,17 @@ L3:
 _clearRegion:
 	link	a6,#-10
 	movem.l	d3/d4,-(a7)
-	;line	40
+	;line	26
 	move.l	8(a6),-8(a6)
-	;line	40
+	;line	26
 	move.w	12(a6),d4
 	bra	L6
 L5:
-	;line	42
+	;line	28
 	move.w	14(a6),d3
 	bra	L10
 L9:
-	;line	44
+	;line	30
 	tst.w	d4
 	blt	L13
 	cmp.w	#400,d4
@@ -47,7 +47,7 @@ L9:
 	blt	L13
 	cmp.w	#640,d3
 	bge	L13
-	;line	45
+	;line	31
 	moveq	#1,d0
 	moveq	#7,d1
 	moveq	#7,d2
@@ -55,7 +55,7 @@ L9:
 	sub.w	d2,d1
 	asl.w	d1,d0
 	move.b	d0,-9(a6)
-	;line	46
+	;line	32
 	move.l	-8(a6),a0
 	move.w	d4,d0
 	muls	#80,d0
@@ -94,7 +94,7 @@ _plotPixel:
 	movem.l	d3/d4,-(a7)
 	move.w	14(a6),d3
 	move.w	12(a6),d4
-	;line	54
+	;line	40
 	tst.w	d3
 	blt	L14
 	cmp.w	#640,d3
@@ -103,7 +103,7 @@ _plotPixel:
 	blt	L14
 	cmp.w	#400,d4
 	bge	L14
-	;line	56
+	;line	42
 	move.l	8(a6),a0
 	move.w	d4,d0
 	muls	#80,d0
@@ -128,31 +128,31 @@ _plotHorizontalLine:
 	link	a6,#-10
 	movem.l	d3/d4/d5,-(a7)
 	move.w	12(a6),d5
-	;line	67
+	;line	53
 	move.l	8(a6),-4(a6)
-	;line	67
+	;line	53
 	tst.w	d5
 	blt	L16
 	cmp.w	#400,d5
 	blt	L15
 L16:
-	;line	68
+	;line	54
 	bra	L17
 L15:
-	;line	71
+	;line	57
 	moveq	#0,d4
 	bra	L19
 L18:
-	;line	72
+	;line	58
 	move.w	14(a6),d0
 	add.w	d4,d0
 	move.w	d0,d3
-	;line	73
+	;line	59
 	tst.w	d3
 	blt	L22
 	cmp.w	#640,d3
 	bge	L22
-	;line	75
+	;line	61
 	moveq	#1,d0
 	moveq	#7,d1
 	moveq	#7,d2
@@ -160,7 +160,7 @@ L18:
 	sub.w	d2,d1
 	asl.w	d1,d0
 	move.b	d0,-5(a6)
-	;line	76
+	;line	62
 	move.l	-4(a6),a0
 	move.w	d5,d0
 	muls	#80,d0
@@ -187,17 +187,17 @@ _plotVerticalLine:
 	link	a6,#-10
 	movem.l	d3/d4/d5,-(a7)
 	move.w	14(a6),d3
-	;line	88
+	;line	74
 	move.l	8(a6),-4(a6)
-	;line	88
+	;line	74
 	moveq	#0,d5
 	bra	L24
 L23:
-	;line	90
+	;line	76
 	move.w	12(a6),d0
 	add.w	d5,d0
 	move.w	d0,d4
-	;line	92
+	;line	78
 	tst.w	d4
 	blt	L27
 	cmp.w	#400,d4
@@ -206,7 +206,7 @@ L23:
 	blt	L27
 	cmp.w	#640,d3
 	bge	L27
-	;line	94
+	;line	80
 	moveq	#1,d0
 	moveq	#7,d1
 	moveq	#7,d2
@@ -214,7 +214,7 @@ L23:
 	sub.w	d2,d1
 	asl.w	d1,d0
 	move.b	d0,-5(a6)
-	;line	96
+	;line	82
 	move.l	-4(a6),a0
 	move.w	d4,d0
 	muls	#80,d0
@@ -239,56 +239,56 @@ L25:
 _plotLine:
 	link	a6,#-22
 	movem.l	d3/d4/d5/d6/d7/a3/a4/a5,-(a7)
-	;line	114
+	;line	100
 	move.l	8(a6),-4(a6)
-	;line	116
+	;line	102
 	move.w	16(a6),d0
 	sub.w	12(a6),d0
 	move.w	d0,d5
-	;line	117
+	;line	103
 	move.w	18(a6),d0
 	sub.w	14(a6),d0
 	move.w	d0,d4
-	;line	119
+	;line	105
 	tst.w	d5
 	bge	L28
-	;line	121
+	;line	107
 	move.w	d5,d0
 	neg.w	d0
 	move.w	d0,d5
-	;line	122
+	;line	108
 	move.w	#-1,a5
 	bra	L29
 L28:
-	;line	126
+	;line	112
 	move.w	#1,a5
 L29:
-	;line	129
+	;line	115
 	tst.w	d4
 	bge	L30
-	;line	131
+	;line	117
 	move.w	d4,d0
 	neg.w	d0
 	move.w	d0,d4
-	;line	132
+	;line	118
 	move.w	#-1,a4
 	bra	L31
 L30:
-	;line	136
+	;line	122
 	move.w	#1,a4
 L31:
-	;line	139
+	;line	125
 	move.w	d4,d0
 	sub.w	d5,d0
 	move.w	d0,d7
-	;line	140
+	;line	126
 	move.w	12(a6),d6
-	;line	141
+	;line	127
 	move.w	14(a6),d3
-	;line	143
+	;line	129
 	bra	L33
 L32:
-	;line	145
+	;line	131
 	tst.w	d6
 	blt	L35
 	cmp.w	#400,d6
@@ -297,7 +297,7 @@ L32:
 	blt	L35
 	cmp.w	#640,d3
 	bge	L35
-	;line	147
+	;line	133
 	moveq	#1,d0
 	moveq	#7,d1
 	moveq	#7,d2
@@ -305,7 +305,7 @@ L32:
 	sub.w	d2,d1
 	asl.w	d1,d0
 	move.b	d0,-5(a6)
-	;line	149
+	;line	135
 	move.w	d6,d0
 	muls	#80,d0
 	move.w	d3,d1
@@ -317,35 +317,35 @@ L32:
 	move.b	-5(a6),d0
 	or.b	d0,(a0)
 L35:
-	;line	152
+	;line	138
 	cmp.w	16(a6),d6
 	bne	L36
 	cmp.w	18(a6),d3
 	bne	L36
-	;line	154
+	;line	140
 	bra	L34
 L36:
-	;line	157
+	;line	143
 	move.w	d7,d0
 	add.w	d0,d0
 	move.w	d0,a3
-	;line	159
+	;line	145
 	move.w	d5,d0
 	neg.w	d0
 	cmp.w	d0,a3
 	ble	L37
-	;line	161
+	;line	147
 	sub.w	d5,d7
-	;line	162
+	;line	148
 	move.w	a4,d0
 	add.w	d0,d3
 L37:
-	;line	165
+	;line	151
 	cmp.w	a3,d4
 	ble	L38
-	;line	167
+	;line	153
 	add.w	d4,d7
-	;line	168
+	;line	154
 	move.w	a5,d0
 	add.w	d0,d6
 L38:
@@ -358,17 +358,17 @@ L34:
 _plotRectangle:
 	link	a6,#-10
 	movem.l	d3/d4,-(a7)
-	;line	180
+	;line	166
 	move.l	8(a6),-4(a6)
-	;line	182
+	;line	168
 	move.w	12(a6),d4
 	bra	L40
 L39:
-	;line	184
+	;line	170
 	move.w	14(a6),d3
 	bra	L44
 L43:
-	;line	186
+	;line	172
 	tst.w	d4
 	blt	L47
 	cmp.w	#400,d4
@@ -377,7 +377,7 @@ L43:
 	blt	L47
 	cmp.w	#640,d3
 	bge	L47
-	;line	188
+	;line	174
 	moveq	#1,d0
 	moveq	#7,d1
 	moveq	#7,d2
@@ -385,7 +385,7 @@ L43:
 	sub.w	d2,d1
 	asl.w	d1,d0
 	move.b	d0,-5(a6)
-	;line	190
+	;line	176
 	move.w	d4,d0
 	muls	#80,d0
 	move.w	d3,d1
@@ -419,17 +419,17 @@ L41:
 _plotSquare:
 	link	a6,#-10
 	movem.l	d3/d4,-(a7)
-	;line	203
+	;line	189
 	move.l	8(a6),-4(a6)
-	;line	205
+	;line	191
 	move.w	12(a6),d4
 	bra	L49
 L48:
-	;line	207
+	;line	193
 	move.w	14(a6),d3
 	bra	L53
 L52:
-	;line	209
+	;line	195
 	tst.w	d4
 	blt	L56
 	cmp.w	#400,d4
@@ -438,7 +438,7 @@ L52:
 	blt	L56
 	cmp.w	#640,d3
 	bge	L56
-	;line	211
+	;line	197
 	moveq	#1,d0
 	moveq	#7,d1
 	moveq	#7,d2
@@ -446,7 +446,7 @@ L52:
 	sub.w	d2,d1
 	asl.w	d1,d0
 	move.b	d0,-5(a6)
-	;line	213
+	;line	199
 	move.w	d4,d0
 	muls	#80,d0
 	move.w	d3,d1
@@ -482,28 +482,28 @@ _plotTriangle:
 	movem.l	d3/d4/d5/d6/d7/a3/a4/a5,-(a7)
 	move.w	18(a6),d4
 	move.b	21(a6),d5
-	;line	230
+	;line	216
 	move.l	8(a6),-4(a6)
-	;line	232
+	;line	218
 	tst.w	d4
 	beq	L58
 	tst.w	16(a6)
 	bne	L57
 L58:
-	;line	234
+	;line	220
 	bra	L59
 L57:
-	;line	237
+	;line	223
 	moveq	#0,d3
 	bra	L61
 L60:
-	;line	239
+	;line	225
 	tst.b	d5
 	beq	L65
 	cmp.b	#1,d5
 	bne	L64
 L65:
-	;line	241
+	;line	227
 	moveq	#1,d0
 	add.w	d3,d0
 	mulu	16(a6),d0
@@ -514,7 +514,7 @@ L65:
 	move.w	d0,a4
 	bra	L66
 L64:
-	;line	245
+	;line	231
 	move.w	16(a6),d0
 	move.w	d4,d1
 	sub.w	d3,d1
@@ -525,48 +525,48 @@ L64:
 	divu	d4,d0
 	move.w	d0,a4
 L66:
-	;line	248
+	;line	234
 	tst.b	d5
 	beq	L68
 	cmp.b	#2,d5
 	bne	L67
 L68:
-	;line	250
+	;line	236
 	move.w	14(a6),a5
 	bra	L69
 L67:
-	;line	254
+	;line	240
 	move.w	14(a6),d0
 	sub.w	a4,d0
 	addq.w	#1,d0
 	move.w	d0,a5
 L69:
-	;line	257
+	;line	243
 	tst.b	d5
 	beq	L71
 	cmp.b	#1,d5
 	bne	L70
 L71:
-	;line	259
+	;line	245
 	move.w	12(a6),d0
 	add.w	d3,d0
 	move.w	d0,d7
 	bra	L72
 L70:
-	;line	263
+	;line	249
 	move.w	12(a6),d0
 	sub.w	d3,d0
 	move.w	d0,d7
 L72:
-	;line	266
+	;line	252
 	sub.l	a3,a3
 	bra	L74
 L73:
-	;line	268
+	;line	254
 	move.w	a5,d0
 	add.w	a3,d0
 	move.w	d0,d6
-	;line	270
+	;line	256
 	tst.w	d7
 	blt	L77
 	cmp.w	#400,d7
@@ -575,7 +575,7 @@ L73:
 	blt	L77
 	cmp.w	#640,d6
 	bge	L77
-	;line	272
+	;line	258
 	moveq	#1,d0
 	moveq	#7,d1
 	moveq	#7,d2
@@ -583,7 +583,7 @@ L73:
 	sub.w	d2,d1
 	asl.w	d1,d0
 	move.b	d0,-5(a6)
-	;line	274
+	;line	260
 	move.w	d7,d0
 	muls	#80,d0
 	move.w	d6,d1
@@ -616,38 +616,38 @@ _plot8bitBitmap:
 	movem.l	d3/d4/d5/d6/a3/a4,-(a7)
 	move.w	14(a6),d4
 	moveq	#80,d6
-	;line	287
+	;line	273
 	moveq	#7,d0
 	and.w	d4,d0
 	move.w	d0,d5
 	moveq	#8,d0
 	sub.w	d5,d0
 	move.w	d0,-12(a6)
-	;line	287
+	;line	273
 	tst.w	d4
 	blt	L79
 	cmp.w	#640,d4
 	blt	L78
 L79:
-	;line	289
+	;line	275
 	bra	L80
 L78:
-	;line	292
+	;line	278
 	move.w	12(a6),d3
-	;line	293
+	;line	279
 	move.l	8(a6),a3
-	;line	294
+	;line	280
 	bra	L82
 L81:
-	;line	296
+	;line	282
 	add.l	d6,a3
-	;line	297
+	;line	283
 	addq.w	#1,d3
 L82:
 	tst.w	d3
 	blt	L81
 L83:
-	;line	299
+	;line	285
 	move.w	d4,d0
 	asr.w	#3,d0
 	move.w	d3,d1
@@ -655,23 +655,23 @@ L83:
 	add.w	d1,d0
 	ext.l	d0
 	add.l	d0,a3
-	;line	301
+	;line	287
 	sub.l	a4,a4
 	bra	L85
 L84:
-	;line	302
+	;line	288
 	tst.w	d3
 	blt	L88
 	cmp.w	#400,d3
 	bge	L88
-	;line	303
+	;line	289
 	move.l	16(a6),a0
 	add.l	a4,a0
 	clr.w	d0
 	move.b	(a0),d0
 	asr.w	d5,d0
 	or.b	d0,(a3)
-	;line	304
+	;line	290
 	tst.w	d5
 	beq	L89
 	move.w	d4,d0
@@ -679,7 +679,7 @@ L84:
 	addq.w	#1,d0
 	cmp.w	d0,d6
 	ble	L89
-	;line	305
+	;line	291
 	move.l	16(a6),a0
 	add.l	a4,a0
 	clr.w	d0
@@ -688,18 +688,18 @@ L84:
 	asl.w	d1,d0
 	or.b	d0,1(a3)
 L89:
-	;line	308
+	;line	294
 	add.l	d6,a3
 	bra	L90
 L88:
-	;line	309
+	;line	295
 	cmp.w	#400,d3
 	blt	L91
-	;line	311
+	;line	297
 	bra	L86
 L91:
 L90:
-	;line	313
+	;line	299
 	addq.w	#1,d3
 L87:
 	addq.w	#1,a4
@@ -715,38 +715,38 @@ _plot16bitBitmap:
 	link	a6,#-12
 	movem.l	d3/d4/d5/d6/a3,-(a7)
 	move.w	14(a6),d5
-	;line	325
+	;line	311
 	moveq	#15,d0
 	and.w	d5,d0
 	move.w	d0,d6
 	moveq	#16,d0
 	sub.w	d6,d0
 	move.w	d0,-12(a6)
-	;line	325
+	;line	311
 	tst.w	d5
 	blt	L93
 	cmp.w	#640,d5
 	blt	L92
 L93:
-	;line	327
+	;line	313
 	bra	L94
 L92:
-	;line	330
+	;line	316
 	move.w	12(a6),d3
-	;line	331
+	;line	317
 	move.l	8(a6),a3
-	;line	332
+	;line	318
 	bra	L96
 L95:
-	;line	334
+	;line	320
 	lea	80(a3),a3
-	;line	335
+	;line	321
 	addq.w	#1,d3
 L96:
 	tst.w	d3
 	blt	L95
 L97:
-	;line	337
+	;line	323
 	move.w	d3,d0
 	muls	#40,d0
 	move.w	d5,d1
@@ -755,16 +755,16 @@ L97:
 	ext.l	d0
 	add.l	d0,d0
 	add.l	d0,a3
-	;line	339
+	;line	325
 	moveq	#0,d4
 	bra	L99
 L98:
-	;line	340
+	;line	326
 	tst.w	d3
 	blt	L102
 	cmp.w	#400,d3
 	bge	L102
-	;line	341
+	;line	327
 	move.w	d4,a0
 	add.l	a0,a0
 	move.l	16(a6),d0
@@ -772,7 +772,7 @@ L98:
 	move.w	(a0),d0
 	lsr.w	d6,d0
 	or.w	d0,(a3)
-	;line	342
+	;line	328
 	tst.w	d6
 	beq	L103
 	move.w	d5,d0
@@ -780,7 +780,7 @@ L98:
 	addq.w	#1,d0
 	cmp.w	#40,d0
 	bge	L103
-	;line	343
+	;line	329
 	move.w	d4,a0
 	add.l	a0,a0
 	move.l	16(a6),d0
@@ -790,18 +790,18 @@ L98:
 	asl.w	d1,d0
 	or.w	d0,2(a3)
 L103:
-	;line	346
+	;line	332
 	lea	80(a3),a3
 	bra	L104
 L102:
-	;line	347
+	;line	333
 	cmp.w	#400,d3
 	blt	L105
-	;line	349
+	;line	335
 	bra	L100
 L105:
 L104:
-	;line	351
+	;line	337
 	addq.w	#1,d3
 L101:
 	addq.w	#1,d4
@@ -817,38 +817,38 @@ _plot32bitBitmap:
 	link	a6,#-12
 	movem.l	d3/d4/d5/d6/a3,-(a7)
 	move.w	14(a6),d5
-	;line	363
+	;line	349
 	moveq	#31,d0
 	and.w	d5,d0
 	move.w	d0,d6
 	moveq	#32,d0
 	sub.w	d6,d0
 	move.w	d0,-12(a6)
-	;line	363
+	;line	349
 	tst.w	d5
 	blt	L107
 	cmp.w	#640,d5
 	blt	L106
 L107:
-	;line	365
+	;line	351
 	bra	L108
 L106:
-	;line	368
+	;line	354
 	move.w	12(a6),d3
-	;line	369
+	;line	355
 	move.l	8(a6),a3
-	;line	370
+	;line	356
 	bra	L110
 L109:
-	;line	372
+	;line	358
 	lea	80(a3),a3
-	;line	373
+	;line	359
 	addq.w	#1,d3
 L110:
 	tst.w	d3
 	blt	L109
 L111:
-	;line	375
+	;line	361
 	move.w	d3,d0
 	muls	#20,d0
 	move.w	d5,d1
@@ -857,16 +857,16 @@ L111:
 	ext.l	d0
 	asl.l	#2,d0
 	add.l	d0,a3
-	;line	377
+	;line	363
 	moveq	#0,d4
 	bra	L113
 L112:
-	;line	378
+	;line	364
 	tst.w	d3
 	blt	L116
 	cmp.w	#400,d3
 	bge	L116
-	;line	379
+	;line	365
 	ext.l	d4
 	move.l	d4,d0
 	asl.l	#2,d0
@@ -876,7 +876,7 @@ L112:
 	move.l	(a0),d0
 	lsr.l	d6,d0
 	or.l	d0,(a3)
-	;line	380
+	;line	366
 	tst.w	d6
 	beq	L117
 	move.w	d5,d0
@@ -884,7 +884,7 @@ L112:
 	addq.w	#1,d0
 	cmp.w	#20,d0
 	bge	L117
-	;line	381
+	;line	367
 	ext.l	d4
 	move.l	d4,d0
 	asl.l	#2,d0
@@ -896,18 +896,18 @@ L112:
 	asl.l	d1,d0
 	or.l	d0,4(a3)
 L117:
-	;line	384
+	;line	370
 	lea	80(a3),a3
 	bra	L118
 L116:
-	;line	385
+	;line	371
 	cmp.w	#400,d3
 	blt	L119
-	;line	387
+	;line	373
 	bra	L114
 L119:
 L118:
-	;line	389
+	;line	375
 	addq.w	#1,d3
 L115:
 	addq.w	#1,d4
@@ -923,12 +923,12 @@ _plotCharacter:
 	link	a6,#-14
 	movem.l	d3/d4/d5/d6/d7,-(a7)
 	move.b	17(a6),d7
-	;line	401
+	;line	387
 	cmp.b	#32,d7
 	blt	L120
 	cmp.b	#126,d7
 	bgt	L120
-	;line	403
+	;line	389
 	move.b	d7,d0
 	ext.w	d0
 	sub.w	#32,d0
@@ -936,29 +936,29 @@ _plotCharacter:
 	ext.l	d0
 	add.l	#_font,d0
 	move.l	d0,-4(a6)
-	;line	405
+	;line	391
 	moveq	#0,d5
 	bra	L122
 L121:
-	;line	407
+	;line	393
 	moveq	#0,d4
 	bra	L126
 L125:
-	;line	409
+	;line	395
 	move.w	12(a6),d0
 	add.w	d5,d0
 	move.w	d0,d6
-	;line	410
+	;line	396
 	move.w	14(a6),d0
 	add.w	d4,d0
 	move.w	d0,d3
-	;line	411
+	;line	397
 	moveq	#1,d0
 	moveq	#7,d1
 	sub.w	d4,d1
 	asl.w	d1,d0
 	move.b	d0,-5(a6)
-	;line	413
+	;line	399
 	tst.w	d6
 	blt	L129
 	cmp.w	#400,d6
@@ -967,13 +967,13 @@ L125:
 	blt	L129
 	cmp.w	#640,d3
 	bge	L129
-	;line	415
+	;line	401
 	move.l	-4(a6),a0
 	ext.l	d5
 	move.b	0(a0,d5.l),d0
 	and.b	-5(a6),d0
 	beq	L130
-	;line	417
+	;line	403
 	move.w	d6,d0
 	muls	#80,d0
 	move.w	d3,d1
@@ -1012,34 +1012,34 @@ _plotString:
 	movem.l	d3/d4/a3/a4,-(a7)
 	move.l	16(a6),a4
 	move.w	14(a6),d4
-	;line	430
+	;line	416
 	sub.l	a3,a3
 	move.w	d4,d3
-	;line	430
+	;line	416
 	bra	L132
 L131:
-	;line	432
+	;line	418
 	cmp.b	#10,0(a4,a3.l)
 	bne	L134
-	;line	434
+	;line	420
 	addq.w	#8,12(a6)
-	;line	435
+	;line	421
 	move.w	d4,d3
 	bra	L135
 L134:
-	;line	437
+	;line	423
 	cmp.b	#13,0(a4,a3.l)
 	bne	L136
-	;line	439
+	;line	425
 	move.w	d4,d3
 	bra	L137
 L136:
-	;line	441
+	;line	427
 	cmp.b	#32,0(a4,a3.l)
 	blt	L138
 	cmp.b	#126,0(a4,a3.l)
 	bgt	L138
-	;line	443
+	;line	429
 	move.b	0(a4,a3.l),d0
 	ext.w	d0
 	move.w	d0,-(a7)
@@ -1048,12 +1048,12 @@ L136:
 	move.l	8(a6),-(a7)
 	jsr	_plotCharacter
 	lea	10(a7),a7
-	;line	444
+	;line	430
 	addq.w	#8,d3
 L138:
 L137:
 L135:
-	;line	447
+	;line	433
 	addq.w	#1,a3
 L132:
 	tst.b	0(a4,a3.l)

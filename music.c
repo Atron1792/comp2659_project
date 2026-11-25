@@ -6,7 +6,6 @@ Implements looping background music using the PSG module.
 */
 
 #include "music.h"
-#include "psg.h"
 
 static const MusicNote backgroundBeat[MUSIC_NOTE_COUNT] = {
     {268, 9}, {358, 3}, {268, 6}, {358, 6},

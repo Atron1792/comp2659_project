@@ -6,8 +6,6 @@ Implements the PSG (Programmable Sound Generator) functionality for the game.
 */
 
 #include "psg.h"
-#include "TYPES.H"
-#include <osbind.h>
 
 volatile UINT8 *psgSelect = (volatile UINT8 *)SELECT_REG;
 volatile UINT8 *psgWrite = (volatile UINT8 *)WRITE_REG;

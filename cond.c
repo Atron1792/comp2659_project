@@ -6,8 +6,6 @@ Provides collision detection and game-status condition handlers.
 */
 
 #include "cond.h"
-#include "bitmaps.h"
-#include "effects.h"
 
 signed int checkCollision(const GameMdl *model)
 {

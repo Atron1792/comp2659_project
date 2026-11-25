@@ -9,6 +9,7 @@ Declares the music playback interface layered on top of the PSG module.
 #define MUSIC_H
 
 #include "TYPES.H"
+#include "psg.h"
 
 #define MUSIC_VOLUME 2
 #define MUSIC_NOTE_COUNT 16

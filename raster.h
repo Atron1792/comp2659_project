@@ -9,6 +9,20 @@ and font rendering routines.
 #ifndef RASTER_H
 #define RASTER_H
 
+#include "TYPES.H"
+
+#define FRAMEBUFFER_WORD_COUNT 8000
+#define SCREEN_WIDTH 640
+#define SCREEN_HEIGHT 400
+
+#define BITS_PER_BYTE 8
+#define WORD_BIT_COUNT 16
+#define LONG_BIT_COUNT 32
+
+#define BYTES_PER_SCANLINE 80
+#define WORDS_PER_SCANLINE 40
+#define LONGS_PER_SCANLINE 20
+
 /*----- Function: clearScreen -----
 
  PURPOSE: Clears the entire screen.

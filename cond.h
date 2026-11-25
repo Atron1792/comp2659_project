@@ -9,6 +9,8 @@ Declares collision detection and game-status condition handlers.
 #define COND_H
 
 #include "model.h"
+#include "bitmaps.h"
+#include "effects.h"
 
 /*Dino and Cactus Hitbox constants
 

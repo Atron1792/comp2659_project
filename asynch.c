@@ -6,7 +6,6 @@ Handles asynchronous user requests such as jumping and quitting.
 */
 
 #include "asynch.h"
-#include "effects.h"
 
 void onJumpRequest(GameMdl *model)
 {

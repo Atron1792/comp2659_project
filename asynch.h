@@ -9,6 +9,7 @@ Declares handlers for asynchronous user requests.
 #define ASYNCH_H
 
 #include "model.h"
+#include "effects.h"
 
 /*----- Function: onJumpRequest -----
 

@@ -8,7 +8,6 @@ Composes the game scene, sprites, ground line, and score on the framebuffer.
 #include "renderer.h"
 #include "model.h"
 
-
 void render(const GameMdl *model)
 {
     clearScreen(model->base);

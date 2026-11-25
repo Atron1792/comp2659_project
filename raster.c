@@ -6,21 +6,8 @@ Implements framebuffer clearing, primitive drawing, bitmap plotting,
 and font rendering routines.
 */
 
-#include "TYPES.H"
-#include "font.h"
 #include "raster.h"
-
-#define FRAMEBUFFER_WORD_COUNT 8000
-#define SCREEN_WIDTH 640
-#define SCREEN_HEIGHT 400
-
-#define BITS_PER_BYTE 8
-#define WORD_BIT_COUNT 16
-#define LONG_BIT_COUNT 32
-
-#define BYTES_PER_SCANLINE 80
-#define WORDS_PER_SCANLINE 40
-#define LONGS_PER_SCANLINE 20
+#include "font.h"
 
 void clearScreen(UINT32 *base)
 {

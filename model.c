@@ -6,7 +6,6 @@ Initializes and updates the dinosaur, cactus, and overall game model state.
 */
 
 #include "model.h"
-#include "bitmaps.h"
 
 void initGameMdl(GameMdl* mdl) {
     mdl -> score = 0L;
