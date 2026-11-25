@@ -10,6 +10,17 @@ Declares collision detection and game-status condition handlers.
 
 #include "model.h"
 
+/*Dino and Cactus Hitbox constants
+
+The numbers are set this way to provide a more balancing hitbox for the player.
+
+*/
+#define DINO_HITBOX_WIDTH 24
+#define DINO_HITBOX_HEIGHT 26
+#define CACTUS_HITBOX_WIDTH 28
+#define CACTUS_HITBOX_HEIGHT 32
+
+
 /*----- Function: checkCollision -----
 
  PURPOSE: Detects whether the dinosaur and cactus overlap.

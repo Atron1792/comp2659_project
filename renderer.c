@@ -44,9 +44,11 @@ void renderDino(const Dino *dino, UINT32 *base)
 }
 
 void renderCactus(const Cactus *cactus, UINT32 *base) {
-    plot32bitBitmap(base, cactus->y, cactus->x, cactusBitmap, CACTUS_HEIGHT);
+    int i;
+    for (i = 0; i < NUMBER_OF_CACTI; i++) {
+        plot32bitBitmap(base, cactus->y, cactus->x + (i * CACTUS_SEPARATION), cactusBitmap, CACTUS_HEIGHT);
+    }
 }
-
 
 void renderScore(UINT32 score, UINT32* base) {
     char scoreText[6];

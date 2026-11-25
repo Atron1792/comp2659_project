@@ -11,10 +11,10 @@ Provides collision detection and game-status condition handlers.
 signed int checkCollision(const GameMdl *model)
 {
     if (model->dino && model->cactus) {
-        if (model->dino->x < model->cactus->x + CACTUS_WIDTH &&
-            model->dino->x + DINO_WIDTH > model->cactus->x &&
-            model->dino->y < model->cactus->y + CACTUS_HEIGHT &&
-            model->dino->y + DINO_HEIGHT > model->cactus->y) {
+        if (model->dino->x < model->cactus->x + CACTUS_HITBOX_WIDTH &&
+            model->dino->x + DINO_HITBOX_WIDTH > model->cactus->x &&
+            model->dino->y < model->cactus->y + CACTUS_HITBOX_HEIGHT &&
+            model->dino->y + DINO_HITBOX_HEIGHT > model->cactus->y) {
             return 1;
         }
     }

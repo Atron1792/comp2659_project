@@ -63,15 +63,7 @@ void moveCactus(Cactus* cactus) {
     cactus -> x += cactus -> dx;
 
     if (cactus -> x + CACTUS_WIDTH <= 0) {
-        cactus -> x = SCRN_W;
-        cactus -> y = FLOOR_Y - CACTUS_HEIGHT;
+        cactus -> x += CACTUS_SEPARATION;
     }
 }
 
-
-int checkIntersect(const Dino* dino, const Cactus* cactus) {
-    return (dino->x < cactus->x + CACTUS_WIDTH &&
-           dino->x + DINO_WIDTH > cactus->x) &&
-           (dino->y < cactus->y + CACTUS_HEIGHT &&
-           dino->y + DINO_HEIGHT > cactus->y);
-}

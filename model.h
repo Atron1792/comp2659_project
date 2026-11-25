@@ -27,7 +27,8 @@ Declares game-state structures, constants, initialization, and movement logic.
 #define DX_CACTUS -5
 #define DY_CACTUS 0
 #define CACTUS_MOVE_RATE 2 /* frames */
-
+#define NUMBER_OF_CACTI 1
+#define CACTUS_SEPARATION (SCRN_W / NUMBER_OF_CACTI)
 
 /* Environment Constants */
 #define SCRN_W 640
@@ -127,15 +128,4 @@ void initCactus(Cactus* cactus, int x, int y, int dx);
 */
 void moveCactus(Cactus* cactus);
 
-/*----- Function: checkIntersect -----
-
- PURPOSE: Tests whether the dinosaur and cactus rectangles overlap.
-
- INPUT: dino - dinosaur bounds; cactus - cactus bounds.
-
- OUTPUT: Nonzero for overlap, zero otherwise.
-
- ASSUMPTIONS: Sprite dimensions are DINO_WIDTH/HEIGHT and CACTUS_WIDTH/HEIGHT.
-*/
-int checkIntersect(const Dino* dino, const Cactus* cactus);
 #endif
