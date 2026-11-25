@@ -114,6 +114,19 @@ void processInput(GameMdl *model);
 */
 void updateGame(GameMdl *model);
 
+/*----- Function: updateGame -----
+
+ PURPOSE: Applies a clock-triggered gameplay update and presents the frame
+          when the update interval has elapsed.
+
+ INPUT: model(GameMdl *) - Game model to update and render.
+
+ OUTPUT: int - returns 1 for 1-player, and 2 for 2-player
+
+ ASSUMPTIONS: 
+*/
+int gameSplashScreen(GameMdl* model);
+
 /*----- Function: renderEndScreen -----
 
  PURPOSE: Draws the terminal message and final game objects for the current
