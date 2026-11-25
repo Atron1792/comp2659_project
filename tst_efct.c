@@ -15,7 +15,7 @@ Provides a test driver skeleton for the effects module.
 
  OUTPUT: None.
 */
-static void tstJumpEffect(void)
+static void tstJumpEffect()
 {
 }
 
@@ -27,7 +27,7 @@ static void tstJumpEffect(void)
 
  OUTPUT: None.
 */
-static void tstCollisionEffect(void)
+static void tstCollisionEffect()
 {
 }
 
@@ -39,7 +39,7 @@ static void tstCollisionEffect(void)
 
  OUTPUT: Returns zero after the test cases complete.
 */
-int main(void)
+int main()
 {
     return 0;
 }

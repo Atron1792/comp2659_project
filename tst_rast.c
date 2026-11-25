@@ -349,7 +349,8 @@ static void tstPlotString(UINT8 *base)
 
  OUTPUT: Returns zero after all demonstrations complete.
 */
-int main(void){
+int main()
+{
     UINT32 *base;
 
     base = Physbase();

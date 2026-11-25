@@ -16,7 +16,7 @@ Declares the keyboard polling interface used by the game.
 
  OUTPUT: Nonzero when input is available; zero otherwise.
 */
-int has_input(void);
+int has_input();
 
 /*----- Function: get_input -----
 
@@ -28,6 +28,6 @@ int has_input(void);
 
  ASSUMPTIONS: The caller has already confirmed input is available.
 */
-char get_input(void);
+char get_input();
 
 #endif

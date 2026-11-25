@@ -7,10 +7,10 @@ Implements gameplay sound effects using the PSG module.
 
 #include "effects.h"
 
-void playJumpEffect(void)
+void playJumpEffect()
 {
 }
 
-void playCollisionEffect(void)
+void playCollisionEffect()
 {
 }

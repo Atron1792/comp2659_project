@@ -2,12 +2,14 @@
 File Name: tst_psg.c
 Authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
 
-Provides a test driver skeleton for the low-level PSG module.
+Demonstrates usage of the low-level PSG module.
 */
+
+#include <osbind.h>
+#include <stdio.h>
 
 #include "psg.h"
 #include "TYPES.H"
-#include <stdio.h>
 
 /*----- Function: tstReadPsg -----
 
@@ -17,7 +19,7 @@ Provides a test driver skeleton for the low-level PSG module.
 
  OUTPUT: None.
 */
-static void tstReadPsg(void)
+static void tstReadPsg()
 {
 	UINT8 value;
 
@@ -34,7 +36,7 @@ static void tstReadPsg(void)
 
  OUTPUT: None.
 */
-static void tstWritePsg(void)
+static void tstWritePsg()
 {
 	UINT8 value;
 
@@ -54,7 +56,7 @@ static void tstWritePsg(void)
 
  OUTPUT: None.
 */
-static void tstSetTone(void)
+static void tstSetTone()
 {
 	UINT8 fine;
 	UINT8 coarse;
@@ -80,7 +82,7 @@ static void tstSetTone(void)
 
  OUTPUT: None.
 */
-static void tstSetVolume(void)
+static void tstSetVolume()
 {
 	UINT8 value;
 
@@ -99,7 +101,7 @@ static void tstSetVolume(void)
 
  OUTPUT: None.
 */
-static void tstEnableChannel(void)
+static void tstEnableChannel()
 {
 	UINT8 mixer;
 
@@ -122,7 +124,7 @@ static void tstEnableChannel(void)
 
  OUTPUT: None.
 */
-static void tstSetNoise(void)
+static void tstSetNoise()
 {
 	UINT8 value;
 
@@ -141,7 +143,7 @@ static void tstSetNoise(void)
 
  OUTPUT: None.
 */
-static void tstSetEnvelope(void)
+static void tstSetEnvelope()
 {
 	UINT8 fine;
 	UINT8 coarse;
@@ -164,7 +166,7 @@ static void tstSetEnvelope(void)
 
  OUTPUT: None.
 */
-static void tstStopSound(void)
+static void tstStopSound()
 {
 	UINT8 mixer;
 	UINT8 volume;
@@ -183,15 +185,22 @@ static void tstStopSound(void)
 
  OUTPUT: Returns zero after the test cases complete.
 */
-int main(void)
+int main()
 {
 	tstReadPsg();
+	Cconin();
 	tstWritePsg();
+	Cconin();
 	tstSetTone();
+	Cconin();
 	tstSetVolume();
+	Cconin();
 	tstEnableChannel();
+	Cconin();
 	tstSetNoise();
+	Cconin();
 	tstSetEnvelope();
+	Cconin();
 	tstStopSound();
 	printf("PSG TESTS COMPLETE.\n");
     return 0;

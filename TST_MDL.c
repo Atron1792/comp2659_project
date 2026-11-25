@@ -23,7 +23,7 @@ Manually exercises initialization and dinosaur model movement routines.
 
  ASSUMPTIONS: initGameMdl() initializes the supplied sprite objects.
 */
-static void testModel(void)
+static void testModel()
 {
     GameMdl model;
     Dino dino;
@@ -47,7 +47,7 @@ static void testModel(void)
 
  OUTPUT: Prints the dinosaur's position, velocities, and death state.
 */
-static void tstDinoInitialization(void)
+static void tstDinoInitialization()
 {
     Dino dino;
 
@@ -67,7 +67,7 @@ static void tstDinoInitialization(void)
  ASSUMPTIONS: The configured jump velocity and gravity are applied by
               moveDino().
 */
-static void tstDinoJump(void)
+static void tstDinoJump()
 {
     Dino dino;
 
@@ -86,7 +86,7 @@ static void tstDinoJump(void)
 
  OUTPUT: Prints the landing position and vertical velocity.
 */
-static void tstDinoLanding(void)
+static void tstDinoLanding()
 {
     Dino dino;
 
@@ -105,7 +105,7 @@ static void tstDinoLanding(void)
 
  OUTPUT: Prints each dinosaur demonstration result.
 */
-static void dinoTests(void)
+static void dinoTests()
 {
     tstDinoInitialization();
     tstDinoJump();
@@ -121,7 +121,7 @@ static void dinoTests(void)
 
  OUTPUT: Prints the cactus position and vertical displacement.
 */
-static void tstCactusMove(void)
+static void tstCactusMove()
 {
     Cactus cactus;
 
@@ -139,7 +139,7 @@ static void tstCactusMove(void)
 
  OUTPUT: Prints the wrapped cactus position.
 */
-static void tstCactusWrap(void)
+static void tstCactusWrap()
 {
     Cactus cactus;
 
@@ -157,7 +157,7 @@ static void tstCactusWrap(void)
 
  OUTPUT: Prints each cactus demonstration result.
 */
-static void cactusTests(void)
+static void cactusTests()
 {
     tstCactusMove();
     tstCactusWrap();
@@ -171,7 +171,7 @@ static void cactusTests(void)
 
  OUTPUT: Returns zero after the demonstrations complete.
 */
-int main(void)
+int main()
 {
     testModel();
     dinoTests();

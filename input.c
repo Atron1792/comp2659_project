@@ -9,12 +9,12 @@ Encapsulates TOS keyboard polling and keyboard-character retrieval.
 
 #include "input.h"
 
-int has_input(void)
+int has_input()
 {
     return Cconis();
 }
 
-char get_input(void)
+char get_input()
 {
     return (char)Cnecin();
 }

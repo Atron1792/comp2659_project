@@ -19,7 +19,7 @@ Tests nonblocking keyboard detection and character retrieval.
 
  OUTPUT: Returns zero after Escape is read.
 */
-int main(void)
+int main()
 {
     char key;
 

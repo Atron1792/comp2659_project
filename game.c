@@ -9,10 +9,6 @@ rendering, and terminal game-state screens.
 #include "game.h"
 #include "raster.h"
 #include "input.h"
-#define ESC_KEY '\x1b'
-
-#define FRAMEBUFFER_SIZE 32000
-#define FRAMEBUFFER_ALIGNMENT 256
 
 volatile UINT32 *timer = (UINT32 *)0x462;
 static UINT32 timeThen, timeNow;
@@ -54,7 +50,7 @@ void presentFrame(GameMdl* model) {
 	model->base = backBuffer;
 }
 
-void restoreScreen(void) {
+void restoreScreen() {
 	Setscreen(originalScreen, originalScreen, -1);
 	while (Physbase() != originalScreen) {
 	}
@@ -77,15 +73,19 @@ void processInput(GameMdl *model) {
 }
 
 void updateGame(GameMdl *model) {
-	timeNow = getTime();
+	UINT32 elapsed;
 
-	if (timeNow - timeThen >= 1) {
+	timeNow = getTime();
+	elapsed = timeNow - timeThen;
+
+	if (elapsed >= 1) {
 		onClockTick(model);
 		if (checkCollision(model)) {
 			onCollision(model);
 		}
 		render(model);
 		presentFrame(model);
+		updateMusic(elapsed);
 		timeThen = timeNow;
 	}
 }
@@ -116,6 +116,7 @@ void gameInit(GameMdl* model) {
 	/* Initialise time checking variables */
 	timeNow = getTime();
 	timeThen = timeNow;
+	startMusic();
 }
 
 void gameLoop(GameMdl* model) {
@@ -125,6 +126,7 @@ void gameLoop(GameMdl* model) {
 			updateGame(model);
 		}
 	}
+	stopMusic();
 	clearScreen(backBuffer); /* maybe replace with render func */
 	renderEndScreen(model);
 	presentFrame(model);
@@ -134,6 +136,14 @@ void gameLoop(GameMdl* model) {
 	restoreScreen();
 }
 
+/*----- Function: main -----
+
+ PURPOSE: Initializes the game and runs its main loop.
+
+ INPUT: None.
+
+ OUTPUT: Returns zero after the game exits.
+*/
 int main() {
 	GameMdl model;
 	Dino dino;

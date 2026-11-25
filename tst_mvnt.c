@@ -43,7 +43,7 @@ static void initMovementModel(GameMdl *model, Dino *dino, Cactus *cactus)
 
  OUTPUT: Returns zero after the movement demonstration completes.
 */
-int main(void)
+int main()
 {
     int counter;
     GameMdl model;

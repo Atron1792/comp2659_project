@@ -19,7 +19,7 @@ Exercises complete scene rendering using initialized game-model objects.
 
  OUTPUT: Returns zero after the scene is rendered.
 */
-int main(void)
+int main()
 {
     GameMdl mdl;
     Dino dino;

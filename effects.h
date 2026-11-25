@@ -18,7 +18,7 @@ Declares gameplay sound effects layered on top of the PSG module.
 
  ASSUMPTIONS: The PSG is available for sound effects on channel C.
 */
-void playJumpEffect(void);
+void playJumpEffect();
 
 /*----- Function: playCollisionEffect -----
 
@@ -28,6 +28,6 @@ void playJumpEffect(void);
 
  ASSUMPTIONS: The PSG is available for sound effects on channel C.
 */
-void playCollisionEffect(void);
+void playCollisionEffect();
 
 #endif

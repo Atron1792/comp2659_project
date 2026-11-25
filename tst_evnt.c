@@ -40,7 +40,7 @@ static void initTestModel(GameMdl *model, Dino *dino, Cactus *cactus)
 
  OUTPUT: Prints the vertical velocity after each request.
 */
-static void tstJumpRequest(void)
+static void tstJumpRequest()
 {
     GameMdl model;
     Dino dino;
@@ -65,7 +65,7 @@ static void tstJumpRequest(void)
 
  OUTPUT: Prints the resulting game status.
 */
-static void tstQuitRequest(void)
+static void tstQuitRequest()
 {
     GameMdl model;
     Dino dino;
@@ -85,7 +85,7 @@ static void tstQuitRequest(void)
 
  OUTPUT: Prints positions before and after the clock tick.
 */
-static void tstClockTick(void)
+static void tstClockTick()
 {
     GameMdl model;
     Dino dino;
@@ -113,7 +113,7 @@ static void tstClockTick(void)
 
  OUTPUT: Prints collision and status results.
 */
-static void tstCollision(void)
+static void tstCollision()
 {
     GameMdl model;
     Dino dino;
@@ -137,7 +137,7 @@ static void tstCollision(void)
 
  OUTPUT: Returns zero after all demonstrations complete.
 */
-int main(void)
+int main()
 {
     tstJumpRequest();
     tstQuitRequest();

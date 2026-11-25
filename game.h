@@ -20,6 +20,12 @@ Declares game initialization, timing, screen setup, and main-loop routines.
 #include "asynch.h"
 #include "synch.h"
 #include "cond.h"
+#include "music.h"
+
+/* Game and framebuffer constants */
+#define ESC_KEY '\x1b'
+#define FRAMEBUFFER_SIZE 32000
+#define FRAMEBUFFER_ALIGNMENT 256
 
 /*----- Function: getTime -----
 
@@ -62,7 +68,7 @@ void presentFrame(GameMdl* model);
 
  OUTPUT: None.
 */
-void restoreScreen(void);
+void restoreScreen();
 
 /*----- Function: processInput -----
 

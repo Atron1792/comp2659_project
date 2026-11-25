@@ -10,6 +10,14 @@ Declares the music playback interface layered on top of the PSG module.
 
 #include "TYPES.H"
 
+#define MUSIC_VOLUME 2
+#define MUSIC_NOTE_COUNT 16
+
+typedef struct {
+    UINT16 tuning;
+    UINT32 duration;
+} MusicNote;
+
 /*----- Function: startMusic -----
 
  PURPOSE: Starts playback of the game's looping background music.
@@ -20,7 +28,17 @@ Declares the music playback interface layered on top of the PSG module.
 
  ASSUMPTIONS: The PSG is available for music playback on channel A.
 */
-void startMusic(void);
+void startMusic();
+
+/*----- Function: stopMusic -----
+
+ PURPOSE: Stops background music and silences all PSG sound.
+
+ INPUT: None.
+
+ OUTPUT: None.
+*/
+void stopMusic();
 
 /*----- Function: updateMusic -----
 
