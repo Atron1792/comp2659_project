@@ -90,12 +90,15 @@ void updateGame(GameMdl *model) {
 	}
 }
 
+/*void renderSplash(GameMdl* model) {
+	plot
+}*/
+
 void renderEndScreen(GameMdl *model) {
 	if (model -> gameStatus & WIN_FLG) {
 		plotString((UINT8 *)model->base, 180, 280, "YOU WIN!");
 	} else if (model -> gameStatus & LOSS_FLG) {
 		plotString((UINT8 *)model->base, 180, 280, "GAME OVER");
-		plotString((UINT8 *)model->base, 180, 281, "GAME OVER"); /* Makes "GAME OVER" string bold */
 		renderGround(model->base);
 		renderDino(model -> dino, model -> base);
 		renderCactus(model -> cactus, model -> base);

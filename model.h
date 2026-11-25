@@ -120,7 +120,7 @@ void initCactus(Cactus* cactus, int x, int y, int dx);
 
 /*----- Function: moveCactus -----
 
- PURPOSE: Advances a cactus and wraps it to the right edge after leaving screen.
+ PURPOSE: Advances a cactus and wraps it to the right edge after leaving screen. Or in the case of multiple cacti, moves the cactus to the right of the last one.
 
  INPUT: cactus - cactus state to update.
 
