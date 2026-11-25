@@ -24,4 +24,7 @@ extern const UINT32 dinoBitmapDeath[DINO_HEIGHT];
 /* Cactus sprite, containing CACTUS_HEIGHT 32-bit rows. */
 extern const UINT32 cactusBitmap[CACTUS_HEIGHT];
 
+/* Splash screen bitmap, containing 400 rows of 640 pixels (80 32-bit words) each. */
+extern const UINT8 splashBitmap[];
+
 #endif

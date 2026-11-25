@@ -24,19 +24,22 @@ void renderMenuButton(UINT32 *base, int row, char *label, int labelCol, int sele
 
 void renderSplashScreen(UINT32 *base, int selectedOption)
 {
+    int i;
     int secondButtonRow;
     int thirdButtonRow;
+    UINT8 *screen;
 
     secondButtonRow = MENU_BUTTON_ROW + MENU_BUTTON_HEIGHT + MENU_BUTTON_GAP;
     thirdButtonRow = secondButtonRow + MENU_BUTTON_HEIGHT + MENU_BUTTON_GAP;
-    clearScreen(base);
-    plotString((UINT8 *)base, 110, 280, "DINO JUMP");
+    screen = (UINT8 *)base;
+    for (i = 0; i < SCREEN_HEIGHT * BYTES_PER_SCANLINE; i++) {
+        screen[i] = splashBitmap[i];
+    }
     renderMenuButton(base, MENU_BUTTON_ROW, "1 PLAYER", 288, selectedOption == 0);
     renderMenuButton(base, secondButtonRow, "2 PLAYER", 288, selectedOption == 1);
     renderMenuButton(base, thirdButtonRow, "QUIT", 304, selectedOption == 2);
     plotString((UINT8 *)base, 330, 236, "2 PLAYER COMING SOON");
     plotString((UINT8 *)base, 352, 180, "TAB SELECT  ENTER CHOOSE  ESC QUIT");
-    plotHorizontalLine(base, 380, 0, SCREEN_WIDTH);
 }
 
 void renderGame(const GameMdl *model)
