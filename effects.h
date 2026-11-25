@@ -23,7 +23,9 @@ Declares gameplay sound effects layered on top of the PSG module.
 
  PURPOSE: Starts the jump sound effect.
 
- OUTPUT: None.
+ INPUT: None
+
+ OUTPUT: None
 
  ASSUMPTIONS: The PSG is available for sound effects on channel C.
 */
@@ -33,7 +35,9 @@ void playJumpEffect();
 
  PURPOSE: Starts the collision sound effect.
 
- OUTPUT: None.
+ INPUT: None
+
+ OUTPUT: None
 
  ASSUMPTIONS: The PSG is available for sound effects on channel C.
 */

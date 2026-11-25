@@ -77,11 +77,11 @@ typedef struct {
 
  PURPOSE: Initializes scalar game state and any supplied sprite objects.
 
- INPUT: model - game model to initialize; its sprite pointers may be null.
+ INPUT: model(GameMdl *) - Game model to initialize; its sprite pointers may be null.
 
- OUTPUT: None.
+ OUTPUT: None
 
- ASSUMPTIONS: The framebuffer returned by Physbase is valid.
+ ASSUMPTIONS: model points to writable game state.
 */
 void initGameMdl(GameMdl* model);
 
@@ -89,9 +89,13 @@ void initGameMdl(GameMdl* model);
 
  PURPOSE: Initializes a dinosaur's position, velocity, and animation state.
 
- INPUT: dino - dinosaur to initialize; x and y - starting coordinates.
+ INPUT: dino(Dino *) - Dinosaur to initialize.
+        x(int) - Initial horizontal coordinate.
+        y(int) - Initial vertical coordinate.
 
- OUTPUT: None.
+ OUTPUT: None
+
+ ASSUMPTIONS: dino points to writable dinosaur state.
 */
 void initDino(Dino* dino, int x, int y);
 
@@ -99,9 +103,9 @@ void initDino(Dino* dino, int x, int y);
 
  PURPOSE: Advances dinosaur position, gravity, and floor clamping by one tick.
 
- INPUT: dino - dinosaur state to update.
+ INPUT: dino(Dino *) - Dinosaur state to update.
 
- OUTPUT: None.
+ OUTPUT: None
 
  ASSUMPTIONS: A negative y velocity moves upward and GRAVITY is negative.
 */
@@ -111,10 +115,14 @@ void moveDino(Dino* dino);
 
  PURPOSE: Initializes a cactus's position and horizontal velocity.
 
- INPUT: cactus - cactus to initialize; x and y - starting coordinates;
-        dx - horizontal movement per update.
+ INPUT: cactus(Cactus *) - Cactus to initialize.
+        x(int) - Initial horizontal coordinate.
+        y(int) - Initial vertical coordinate.
+        dx(int) - Horizontal displacement per update.
 
- OUTPUT: None.
+ OUTPUT: None
+
+ ASSUMPTIONS: cactus points to writable cactus state.
 */
 void initCactus(Cactus* cactus, int x, int y, int dx);
 
@@ -122,9 +130,11 @@ void initCactus(Cactus* cactus, int x, int y, int dx);
 
  PURPOSE: Advances a cactus and wraps it to the right edge after leaving screen. Or in the case of multiple cacti, moves the cactus to the right of the last one.
 
- INPUT: cactus - cactus state to update.
+ INPUT: cactus(Cactus *) - Cactus state to update.
 
- OUTPUT: None.
+ OUTPUT: None
+
+ ASSUMPTIONS: The left edge wrap condition assumes a positive rightward position; horizontal wrapping is updated from cactus->dx.
 */
 void moveCactus(Cactus* cactus);
 

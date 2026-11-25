@@ -14,8 +14,7 @@ Manually exercises initialization and dinosaur model movement routines.
 
 /*----- Function: testModel -----
 
- PURPOSE: Exercises game-model initialization with valid dinosaur and cactus
-          objects.
+ PURPOSE: Exercises game-model initialization with valid dinosaur and cactus objects.
 
  INPUT: None.
 
@@ -64,8 +63,7 @@ static void tstDinoInitialization()
 
  OUTPUT: Prints the dinosaur's position and vertical velocity after movement.
 
- ASSUMPTIONS: The configured jump velocity and gravity are applied by
-              moveDino().
+ ASSUMPTIONS: The configured jump velocity and gravity are applied by moveDino().
 */
 static void tstDinoJump()
 {
@@ -169,7 +167,7 @@ static void cactusTests()
 
  INPUT: None.
 
- OUTPUT: Returns zero after the demonstrations complete.
+ OUTPUT: int - Zero after the demonstrations complete.
 */
 int main()
 {

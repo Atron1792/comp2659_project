@@ -15,9 +15,11 @@ Tests nonblocking keyboard detection and character retrieval.
 
  PURPOSE: Displays keyboard characters until Escape is received.
 
- INPUT: None.
+ INPUT: None
 
- OUTPUT: Returns zero after Escape is read.
+ OUTPUT: int - Zero after Escape is read.
+
+ ASSUMPTIONS: Keyboard input is available through Cconis/Cnecin.
 */
 int main()
 {

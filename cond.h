@@ -25,9 +25,9 @@ The numbers are set this way to provide a more balancing hitbox for the player.
 
  PURPOSE: Detects whether the dinosaur and cactus overlap.
 
- INPUT: model - read-only game model containing both sprites.
+ INPUT: model(const GameMdl *) - Read-only game model containing both sprites.
 
- OUTPUT: Returns nonzero when the sprites overlap, otherwise zero.
+ OUTPUT: signed int - Nonzero when the sprites overlap; zero otherwise.
 
  ASSUMPTIONS: Null sprite pointers are treated as no collision.
 */
@@ -37,9 +37,11 @@ signed int checkCollision(const GameMdl *model);
 
  PURPOSE: Records a dinosaur-cactus collision as a loss.
 
- INPUT: model - writable game model whose status is updated.
+ INPUT: model(GameMdl *) - Writable game model whose status is updated.
 
- OUTPUT: None.
+ OUTPUT: None
+
+ ASSUMPTIONS: model points to writable game state.
 */
 void onCollision(GameMdl *model);
 
@@ -47,9 +49,11 @@ void onCollision(GameMdl *model);
 
  PURPOSE: Records a quit condition in the game status.
 
- INPUT: model - writable game model whose status is updated.
+ INPUT: model(GameMdl *) - Writable game model whose status is updated.
 
- OUTPUT: None.
+ OUTPUT: None
+
+ ASSUMPTIONS: model points to writable game state.
 */
 void onQuit(GameMdl* model);
 

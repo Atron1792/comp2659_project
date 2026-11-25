@@ -19,9 +19,13 @@ Demonstrates dinosaur jumping, cactus movement, rendering, and collision.
 
  PURPOSE: Connects test-owned sprites to a model and initializes their state.
 
- INPUT: model - model to configure; dino and cactus - objects to initialize.
+ INPUT: model(GameMdl *) - Model to configure.
+        dino(Dino *) - Dinosaur object to initialize.
+        cactus(Cactus *) - Cactus object to initialize.
 
- OUTPUT: None.
+ OUTPUT: None
+
+ ASSUMPTIONS: model, dino, and cactus point to writable test state.
 */
 static void initMovementModel(GameMdl *model, Dino *dino, Cactus *cactus)
 {
@@ -39,9 +43,11 @@ static void initMovementModel(GameMdl *model, Dino *dino, Cactus *cactus)
 
  PURPOSE: Demonstrates movement, rendering, and collision handling.
 
- INPUT: None.
+ INPUT: None
 
- OUTPUT: Returns zero after the movement demonstration completes.
+ OUTPUT: int - Zero after the movement demonstration completes.
+
+ ASSUMPTIONS: The physical framebuffer is valid.
 */
 int main()
 {

@@ -44,9 +44,11 @@ Declares game initialization, timing, screen setup, and main-loop routines.
 
  PURPOSE: Reads the TOS system timer without leaving supervisor mode active.
 
- INPUT: None.
+ INPUT: None
 
- OUTPUT: The current timer value.
+ OUTPUT: UINT32 - Current value of the TOS 70 Hz vertical blank counter.
+
+ ASSUMPTIONS: The caller permits a brief transition between supervisor and user mode.
 */
 UINT32 getTime();
 
@@ -54,9 +56,11 @@ UINT32 getTime();
 
  PURPOSE: Saves the original screen and prepares an aligned off-screen buffer.
 
- INPUT: model - game model whose drawing framebuffer is set to the back buffer.
+ INPUT: model(GameMdl *) - Game model whose drawing framebuffer is set to the aligned back buffer.
 
- OUTPUT: None.
+ OUTPUT: None
+
+ ASSUMPTIONS: model points to writable, initialized game state.
 */
 void initDoubleBuffer(GameMdl* model);
 
@@ -65,9 +69,9 @@ void initDoubleBuffer(GameMdl* model);
  PURPOSE: Displays the completed back buffer and selects the old front buffer
           for the next frame.
 
- INPUT: model - game model whose drawing framebuffer is updated.
+ INPUT: model(GameMdl *) - Game model whose drawing framebuffer is updated.
 
- OUTPUT: None.
+ OUTPUT: None
 
  ASSUMPTIONS: initDoubleBuffer() has been called before this function.
 */
@@ -77,9 +81,11 @@ void presentFrame(GameMdl* model);
 
  PURPOSE: Restores the framebuffer that was active before double buffering.
 
- INPUT: None.
+ INPUT: None
 
- OUTPUT: None.
+ OUTPUT: None
+
+ ASSUMPTIONS: The original screen address is available from the initDoubleBuffer() call.
 */
 void restoreScreen();
 
@@ -87,9 +93,11 @@ void restoreScreen();
 
  PURPOSE: Processes one pending keyboard request for the game.
 
- INPUT: model - game model whose jump or quit state may be updated.
+ INPUT: model(GameMdl *) - Game model whose jump or quit state may be updated.
 
- OUTPUT: None.
+ OUTPUT: None
+
+ ASSUMPTIONS: model points to writable game state.
 */
 void processInput(GameMdl *model);
 
@@ -98,9 +106,11 @@ void processInput(GameMdl *model);
  PURPOSE: Applies a clock-triggered gameplay update and presents the frame
           when the update interval has elapsed.
 
- INPUT: model - game model to update and render.
+ INPUT: model(GameMdl *) - Game model to update and render.
 
- OUTPUT: None.
+ OUTPUT: None
+
+ ASSUMPTIONS: initDoubleBuffer() and gameInit() have initialized timing and framebuffer state.
 */
 void updateGame(GameMdl *model);
 
@@ -109,9 +119,11 @@ void updateGame(GameMdl *model);
  PURPOSE: Draws the terminal message and final game objects for the current
           game status.
 
- INPUT: model - game model containing the terminal status and object state.
+ INPUT: model(GameMdl *) - Game model containing the terminal status and object state.
 
- OUTPUT: None.
+ OUTPUT: None
+
+ ASSUMPTIONS: model points to valid, initialized game state.
 */
 void renderEndScreen(GameMdl *model);
 
@@ -119,9 +131,11 @@ void renderEndScreen(GameMdl *model);
 
  PURPOSE: Initializes game state and the game-loop clock values.
 
- INPUT: model - game model to initialize.
+ INPUT: model(GameMdl *) - Game model to initialize.
 
- OUTPUT: None.
+ OUTPUT: None
+
+ ASSUMPTIONS: model's sprite pointers have already been assigned.
 */
 void gameInit(GameMdl* model);
 
@@ -129,9 +143,9 @@ void gameInit(GameMdl* model);
 
  PURPOSE: Runs input polling, timed updates, rendering, and terminal screens.
 
- INPUT: model - initialized game model used by the loop.
+ INPUT: model(GameMdl *) - Initialized game model used by the loop.
 
- OUTPUT: None.
+ OUTPUT: None
 
  ASSUMPTIONS: The model and its sprite pointers are valid.
 */

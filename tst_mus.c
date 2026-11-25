@@ -26,9 +26,11 @@ static UINT32 timeThen, timeNow;
 
  PURPOSE: Pulled from game.c, reads the TOS system timer without leaving supervisor mode active.
   
- INPUT: None.
+ INPUT: None
 
- OUTPUT: None.
+ OUTPUT: UINT32 - Current value of the TOS 70 Hz vertical blank counter.
+
+ ASSUMPTIONS: Supervisor mode is briefly enabled while the timer is read.
 */
 UINT32 getTime() {
 	UINT32 old_ssp, time;
@@ -42,9 +44,11 @@ UINT32 getTime() {
 
  PURPOSE: Exercises starting background music playback.
 
- INPUT: None.
+ INPUT: None
 
- OUTPUT: None.
+ OUTPUT: None
+
+ ASSUMPTIONS: startMusic() has initialized Channel A.
 */
 static void tstStartMusic()
 {
@@ -68,9 +72,11 @@ static void tstStartMusic()
 
  PURPOSE: Exercises advancing background music using elapsed time.
 
- INPUT: None.
+ INPUT: None
 
- OUTPUT: None.
+ OUTPUT: None
+
+ ASSUMPTIONS: A key press ends the elapsed-time playback demonstration.
 */
 static void tstUpdateMusic()
 {
@@ -93,9 +99,11 @@ static void tstUpdateMusic()
 
  PURPOSE: Exercises stopping playback through the music module.
 
- INPUT: None.
+ INPUT: None
 
- OUTPUT: None.
+ OUTPUT: None
+
+ ASSUMPTIONS: stopMusic() has stopped background playback.
 */
 static void tstStopMusic()
 {
@@ -110,9 +118,9 @@ static void tstStopMusic()
 
  PURPOSE: Runs the music-module test cases.
 
- INPUT: None.
+ INPUT: None
 
- OUTPUT: Returns zero after the test cases complete.
+ OUTPUT: int - Zero after the test cases complete.
 */
 int main()
 {

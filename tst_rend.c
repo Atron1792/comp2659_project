@@ -15,9 +15,11 @@ Exercises complete scene rendering using initialized game-model objects.
 
  PURPOSE: Renders one initialized game scene to the physical framebuffer.
 
- INPUT: None.
+ INPUT: None
 
- OUTPUT: Returns zero after the scene is rendered.
+ OUTPUT: int - Zero after the scene is rendered.
+
+ ASSUMPTIONS: The physical framebuffer is valid and both sprites are initialized.
 */
 int main()
 {

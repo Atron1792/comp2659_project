@@ -22,9 +22,9 @@ typedef struct {
 
  PURPOSE: Starts playback of the game's looping background music.
 
- INPUT: None.
+ INPUT: None
 
- OUTPUT: None.
+ OUTPUT: None
 
  ASSUMPTIONS: The PSG is available for music playback on channel A.
 */
@@ -34,9 +34,11 @@ void startMusic();
 
  PURPOSE: Stops background music and silences all PSG sound.
 
- INPUT: None.
+ INPUT: None
 
- OUTPUT: None.
+ OUTPUT: None
+
+ ASSUMPTIONS: Channel A is used only for background music.
 */
 void stopMusic();
 
@@ -44,9 +46,9 @@ void stopMusic();
 
  PURPOSE: Advances the current music note when enough time has elapsed.
 
- INPUT: timeElapsed - number of vertical-blank ticks since the last update.
+ INPUT: timeElapsed(UINT32) - Vertical-blank ticks elapsed since the previous call.
 
- OUTPUT: None.
+ OUTPUT: None
 
  ASSUMPTIONS: startMusic() has been called before this function.
 */

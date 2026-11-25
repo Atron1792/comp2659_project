@@ -12,9 +12,9 @@ Declares the keyboard polling interface used by the game.
 
  PURPOSE: Checks whether a keyboard character is available without blocking.
 
- INPUT: None.
+ INPUT: None
 
- OUTPUT: Nonzero when input is available; zero otherwise.
+ OUTPUT: int - Nonzero when input is available; zero otherwise.
 */
 int has_input();
 
@@ -22,9 +22,9 @@ int has_input();
 
  PURPOSE: Reads one pending keyboard character without echoing it.
 
- INPUT: None.
+ INPUT: None
 
- OUTPUT: The character read from the keyboard.
+ OUTPUT: char - Character read from the keyboard.
 
  ASSUMPTIONS: The caller has already confirmed input is available.
 */

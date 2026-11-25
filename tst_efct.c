@@ -15,9 +15,11 @@ Provides an interactive test driver for gameplay sound effects.
 
  PURPOSE: Exercises the jump sound effect.
 
- INPUT: None.
+ INPUT: None
 
- OUTPUT: None.
+ OUTPUT: None
+
+ ASSUMPTIONS: Channel C and the envelope generator are available.
 */
 static void tstJumpEffect()
 {
@@ -28,9 +30,11 @@ static void tstJumpEffect()
 
  PURPOSE: Exercises the collision sound effect.
 
- INPUT: None.
+ INPUT: None
 
- OUTPUT: None.
+ OUTPUT: None
+
+ ASSUMPTIONS: Channel C and the envelope generator are available.
 */
 static void tstCollisionEffect()
 {
@@ -41,9 +45,9 @@ static void tstCollisionEffect()
 
  PURPOSE: Runs the effects-module test cases.
 
- INPUT: None.
+ INPUT: None
 
- OUTPUT: Returns zero after the test cases complete.
+ OUTPUT: int - Zero after the test cases complete.
 */
 int main()
 {

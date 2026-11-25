@@ -70,87 +70,105 @@ Declares the PSG (Programmable Sound Generator) functionality for the game.
 
 
 /* ----- Function: readPsg -----
-Purpose: Attempts to read a value from the given PSG register (0-15). This is a helper
-         routine that will be helpful to test the other routines in this module.
 
-Input: reg(UINT8) - The register that is being read from
-       value(UINT8*) - The value that was read from the register
-                       value is valid, if and only if the output is true
+ PURPOSE: Reads a PSG register when the register and output pointer are valid.
 
-Output: Boolean indicating if a value was successfully read or not
+ INPUT: reg(UINT8) - PSG register number in the range 0 through 15.
+        value(UINT8 *) - Destination for the read register value.
+
+ OUTPUT: int - Nonzero on success; zero if reg or value is invalid.
+
+ ASSUMPTIONS: Supervisor mode is briefly enabled while the PSG is accessed.
 */
 int readPsg(UINT8 reg, UINT8 *value);
 
 /* ----- Function: writePsg -----
-Purpose: Writes the given byte value (0-255) to the given PSG register (0-15). This is a helper
-         routine to be used by the other functions in this module.
 
-Input: reg(UINT8) - Register that is being written to
-       val(UINT8) - Value being written to reg
+ PURPOSE: Writes a byte to a valid PSG register.
 
-Output: None
+ INPUT: reg(UINT8) - PSG register number in the range 0 through 15.
+        val(UINT8) - Eight-bit value to write.
+
+ OUTPUT: None
+
+ ASSUMPTIONS: Supervisor mode is briefly enabled while the PSG is accessed.
 */
 void writePsg(UINT8 reg, UINT8 val);
 
 /* ----- Function: setTone -----
-Purpose: Loads the tone registers (coarse and fine) for the given channel (0=A, 1=B, 2=C)
-         with the given {12-bit} tuning.
 
+ PURPOSE: Loads the fine and coarse tone registers for a valid PSG channel.
 
-Input: channel(UINT8) - The channel (A, B, or C) that is being written to
-       tuning(UINT16) - 12-bit tone that will be written to the specified channel
+ INPUT: channel(UINT8) - Channel A, B, or C.
+        tuning(UINT16) - Twelve-bit tone period in the range 0 through 4095.
 
-Output: None
+ OUTPUT: None
+
+ ASSUMPTIONS: An out-of-range tuning or channel value is ignored.
 */
 void setTone(UINT8 channel, UINT16 tuning);
 
 /* ----- Function: setVolume -----
-Purpose: Writes the given byte value (0-255) to the given PSG register (0-15). This is a helper
-         routine to be used by the other functions in this module.
 
-Input: channel(UINT8) - The channel (A, B, or C) that is being written to
-       volume(UINT8) - The volume value to be written to specified channel
+ PURPOSE: Sets a valid PSG channel volume.
 
-Output: None
+ INPUT: channel(UINT8) - Channel A, B, or C.
+        volume(UINT8) - Volume in the range 0 through 15.
+
+ OUTPUT: None
+
+ ASSUMPTIONS: An out-of-range channel or volume value is ignored.
 */
 void setVolume(UINT8 channel, UINT8 volume);
 
 /* ----- Function: enableChannel -----
-Purpose: Turns the given channel’s (0=A, 1=B, 2=C) tone/noise signals on/off (0=off, 1=on).
 
-Input: channel(UINT8) - The channel (A, B, or C) that is being written to
-       toneOn(UINT8) - Set the tone for the specified channel to be either on or off
-       noiseOn(UINT8) - Set the noise for the specified channel to be either on or off
+ PURPOSE: Enables or disables a channel's tone and noise mixer signals.
 
-Output: None
+ INPUT: channel(UINT8) - Channel A, B, or C.
+        toneOn(UINT8) - TONE_ON or TONE_OFF.
+        noiseOn(UINT8) - NOISE_ON or NOISE_OFF.
+
+ OUTPUT: None
+
+ ASSUMPTIONS: An invalid channel or signal value is ignored.
 */
 void enableChannel(UINT8 channel, UINT8 toneOn, UINT8 noiseOn);
 
 /* ----- Function: setNoise -----
-Purpose: Load the Noise register with the given tuning.
 
-Input: tuning(UINT8) - The 5-bit tuning value loaded to the noise register
+ PURPOSE: Loads the PSG noise-period register.
 
-Output: None
+ INPUT: tuning(UINT8) - Five-bit noise period in the range 0 through 31.
+
+ OUTPUT: None
+
+ ASSUMPTIONS: An out-of-range tuning value is ignored.
 */
 void setNoise(UINT8 tuning);
 
 /* ----- Function: setEnvelope -----
-Purpose: Loads the PSG envelope control registers with the given envelope shape and 16-bit sustain.
 
-Input: shape(UINT8) - The shape loaded into the envelope control registers
-       sustain(UINT16) - The sustain value being written to the envelope control registers
+ PURPOSE: Loads a valid envelope shape and sixteen-bit sustain period.
 
-Output: None
+ INPUT: shape(UINT8) - HOLD, ALT, ATT, or CONT.
+        sustain(UINT16) - Sixteen-bit envelope period.
+
+ OUTPUT: None
+
+ ASSUMPTIONS: An unsupported envelope shape is ignored.
 */
 void setEnvelope(UINT8 shape, UINT16 sustain);
 
 /* ----- Function: stopSound -----
-Purpose: Silences all PSG sound production.
 
-Input: None
+ PURPOSE: Silences all PSG tone, noise, and envelope output.
 
-Output: None
+ INPUT: None
+
+ OUTPUT: None
+
+ ASSUMPTIONS: All channels may be safely reset.
 */
 void stopSound();
 #endif

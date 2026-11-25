@@ -15,9 +15,11 @@ Demonstrates usage of the low-level PSG module.
 
  PURPOSE: Exercises reading a PSG register.
 
- INPUT: None.
+ INPUT: None
 
- OUTPUT: None.
+ OUTPUT: None
+
+ ASSUMPTIONS: The PSG test hardware is available.
 */
 static void tstReadPsg()
 {
@@ -32,9 +34,11 @@ static void tstReadPsg()
 
  PURPOSE: Exercises writing a PSG register.
 
- INPUT: None.
+ INPUT: None
 
- OUTPUT: None.
+ OUTPUT: None
+
+ ASSUMPTIONS: Valid writes are readable through readPsg().
 */
 static void tstWritePsg()
 {
@@ -52,9 +56,11 @@ static void tstWritePsg()
 
  PURPOSE: Exercises configuring tone frequency on each PSG channel.
 
- INPUT: None.
+ INPUT: None
 
- OUTPUT: None.
+ OUTPUT: None
+
+ ASSUMPTIONS: Valid channel and tuning values do not modify invalid cases.
 */
 static void tstSetTone()
 {
@@ -78,9 +84,11 @@ static void tstSetTone()
 
  PURPOSE: Exercises configuring volume on each PSG channel.
 
- INPUT: None.
+ INPUT: None
 
- OUTPUT: None.
+ OUTPUT: None
+
+ ASSUMPTIONS: Volume values are in the PSG's 4-bit range.
 */
 static void tstSetVolume()
 {
@@ -97,9 +105,11 @@ static void tstSetVolume()
 
  PURPOSE: Exercises enabling and disabling channel tone and noise signals.
 
- INPUT: None.
+ INPUT: None
 
- OUTPUT: None.
+ OUTPUT: None
+
+ ASSUMPTIONS: The mixer register is readable after each channel change.
 */
 static void tstEnableChannel()
 {
@@ -120,9 +130,11 @@ static void tstEnableChannel()
 
  PURPOSE: Exercises configuring the PSG noise generator.
 
- INPUT: None.
+ INPUT: None
 
- OUTPUT: None.
+ OUTPUT: None
+
+ ASSUMPTIONS: Noise tuning values are in the 5-bit range.
 */
 static void tstSetNoise()
 {
@@ -139,9 +151,11 @@ static void tstSetNoise()
 
  PURPOSE: Exercises configuring the PSG envelope generator.
 
- INPUT: None.
+ INPUT: None
 
- OUTPUT: None.
+ OUTPUT: None
+
+ ASSUMPTIONS: Valid envelope shape constants are supported by the PSG.
 */
 static void tstSetEnvelope()
 {
@@ -162,9 +176,11 @@ static void tstSetEnvelope()
 
  PURPOSE: Exercises silencing all PSG sound production.
 
- INPUT: None.
+ INPUT: None
 
- OUTPUT: None.
+ OUTPUT: None
+
+ ASSUMPTIONS: Mixer and volume registers are readable after stopSound().
 */
 static void tstStopSound()
 {
@@ -181,9 +197,9 @@ static void tstStopSound()
 
  PURPOSE: Runs the PSG-module test cases.
 
- INPUT: None.
+ INPUT: None
 
- OUTPUT: Returns zero after the test cases complete.
+ OUTPUT: int - Zero after the test cases complete.
 */
 int main()
 {

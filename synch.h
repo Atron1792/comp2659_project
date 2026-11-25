@@ -14,12 +14,11 @@ Declares synchronous clock-tick processing for game state updates.
 
  PURPOSE: Advances dinosaur and cactus movement and updates the score.
 
- INPUT: model - writable game model to update.
+ INPUT: model(GameMdl *) - Writable game model to update.
 
- OUTPUT: None.
+ OUTPUT: None
 
- ASSUMPTIONS: One call represents one 70 Hz game tick. The score increases
-              once every seven calls.
+ ASSUMPTIONS: One call represents one 70 Hz game tick. The score increases once every seven calls.
 */
 void onClockTick(GameMdl *model);
 

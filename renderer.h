@@ -17,9 +17,11 @@ Declares scene and sprite rendering routines for the game framebuffer.
 
  PURPOSE: Draws the complete current game scene.
 
- INPUT: model - read-only game state and framebuffer to render.
+ INPUT: model(const GameMdl *) - Read-only game state and framebuffer to render.
 
- OUTPUT: None.
+ OUTPUT: None
+
+ ASSUMPTIONS: model's dinosaur and cactus pointers are valid.
 */
 void render(const GameMdl *model);
 
@@ -27,9 +29,11 @@ void render(const GameMdl *model);
 
  PURPOSE: Draws the horizontal ground line.
 
- INPUT: base - framebuffer address.
+ INPUT: base(UINT32 *) - Framebuffer address.
 
- OUTPUT: None.
+ OUTPUT: None
+
+ ASSUMPTIONS: base points to a valid monochrome framebuffer.
 */
 void renderGround(UINT32 *base);
 
@@ -37,9 +41,12 @@ void renderGround(UINT32 *base);
 
  PURPOSE: Draws the dinosaur animation frame selected by vertical velocity.
 
- INPUT: dino - dinosaur state; base - framebuffer address.
+ INPUT: dino(const Dino *) - Dinosaur state.
+        base(UINT32 *) - Framebuffer address.
 
- OUTPUT: None.
+ OUTPUT: None
+
+ ASSUMPTIONS: dino and base point to valid state and framebuffer memory.
 */
 void renderDino(const Dino *dino, UINT32 *base);
 
@@ -47,9 +54,12 @@ void renderDino(const Dino *dino, UINT32 *base);
 
  PURPOSE: Draws the complete cactus bitmap. In the case of multiple cacti, draws them in a row with a fixed separation.
 
- INPUT: cactus - cactus state; base - framebuffer address.
+ INPUT: cactus(const Cactus *) - Cactus state.
+        base(UINT32 *) - Framebuffer address.
 
- OUTPUT: None.
+ OUTPUT: None
+
+ ASSUMPTIONS: base points to a valid monochrome framebuffer.
 */
 void renderCactus(const Cactus *cactus, UINT32 *base);
 
@@ -57,9 +67,12 @@ void renderCactus(const Cactus *cactus, UINT32 *base);
 
  PURPOSE: Draws the current score as five digits in the top-right corner.
 
- INPUT: score - numeric score; base - framebuffer address.
+ INPUT: score(UINT32) - Numeric score.
+        base(UINT32 *) - Framebuffer address.
 
- OUTPUT: None.
+ OUTPUT: None
+
+ ASSUMPTIONS: The score is formatted into a five-digit string.
 */
 void renderScore(UINT32 score, UINT32* base);
 
@@ -67,9 +80,11 @@ void renderScore(UINT32 score, UINT32* base);
 
  PURPOSE: Hides the terminal cursor while the game is running.
 
- INPUT: None.
+ INPUT: None
 
- OUTPUT: None.
+ OUTPUT: None
+
+ ASSUMPTIONS: The function is called from a TOS text console.
 */
 void disableCursor();
 #endif

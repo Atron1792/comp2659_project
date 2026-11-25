@@ -16,9 +16,13 @@ Manually exercises asynchronous requests, clock ticks, and collision events.
 
  PURPOSE: Creates a deterministic model fixture for event tests.
 
- INPUT: model - model to configure; dino and cactus - fixture objects.
+ INPUT: model(GameMdl *) - Model to configure.
+        dino(Dino *) - Dinosaur fixture object.
+        cactus(Cactus *) - Cactus fixture object.
 
- OUTPUT: None.
+ OUTPUT: None
+
+ ASSUMPTIONS: model, dino, and cactus point to writable test state.
 */
 static void initTestModel(GameMdl *model, Dino *dino, Cactus *cactus)
 {
@@ -38,7 +42,9 @@ static void initTestModel(GameMdl *model, Dino *dino, Cactus *cactus)
 
  INPUT: None.
 
- OUTPUT: Prints the vertical velocity after each request.
+ OUTPUT: None - Prints the vertical velocity after each request.
+
+ ASSUMPTIONS: The dinosaur is tested once on the floor and once airborne.
 */
 static void tstJumpRequest()
 {
@@ -63,7 +69,9 @@ static void tstJumpRequest()
 
  INPUT: None.
 
- OUTPUT: Prints the resulting game status.
+ OUTPUT: None - Prints the resulting game status.
+
+ ASSUMPTIONS: The fixture model starts with no status flags set.
 */
 static void tstQuitRequest()
 {
@@ -83,7 +91,9 @@ static void tstQuitRequest()
 
  INPUT: None.
 
- OUTPUT: Prints positions before and after the clock tick.
+ OUTPUT: None - Prints positions before and after the clock tick.
+
+ ASSUMPTIONS: The fixture dinosaur and cactus have one tick of movement.
 */
 static void tstClockTick()
 {
@@ -111,7 +121,9 @@ static void tstClockTick()
 
  INPUT: None.
 
- OUTPUT: Prints collision and status results.
+ OUTPUT: None - Prints collision and status results.
+
+ ASSUMPTIONS: The sprites are positioned to overlap before the collision test.
 */
 static void tstCollision()
 {
@@ -135,7 +147,7 @@ static void tstCollision()
 
  INPUT: None.
 
- OUTPUT: Returns zero after all demonstrations complete.
+ OUTPUT: int - Zero after all demonstrations complete.
 */
 int main()
 {

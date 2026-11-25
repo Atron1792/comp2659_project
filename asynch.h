@@ -14,9 +14,9 @@ Declares handlers for asynchronous user requests.
 
  PURPOSE: Starts a dinosaur jump when the dinosaur is standing on the floor.
 
- INPUT: model - game model containing the dinosaur to update.
+ INPUT: model(GameMdl *) - Game model containing the dinosaur to update.
 
- OUTPUT: None.
+ OUTPUT: None
 
  ASSUMPTIONS: model and its dinosaur pointer are valid.
 */
@@ -26,9 +26,9 @@ void onJumpRequest(GameMdl *model);
 
  PURPOSE: Sets the quit status flag in the game model.
 
- INPUT: model - game model whose status is updated.
+ INPUT: model(GameMdl *) - Game model whose status is updated.
 
- OUTPUT: None.
+ OUTPUT: None
 
  ASSUMPTIONS: model points to writable game state.
 */

@@ -17,9 +17,11 @@ Manually exercises framebuffer primitives, bitmap plotting, and font output.
 
  PURPOSE: Displays rectangle plotting followed by region clearing.
 
- INPUT: base - framebuffer address.
+ INPUT: base(UINT32 *) - Framebuffer address.
 
- OUTPUT: None; pauses after each visual step.
+ OUTPUT: None - Pauses after each visual step.
+
+ ASSUMPTIONS: Cconin() waits for test input.
 */
 static void tstClearRegion(UINT32 *base)
 {
@@ -33,9 +35,11 @@ static void tstClearRegion(UINT32 *base)
 
  PURPOSE: Demonstrates clearing the complete framebuffer.
 
- INPUT: base - framebuffer address.
+ INPUT: base(UINT32 *) - Framebuffer address.
 
- OUTPUT: None; pauses after clearing.
+ OUTPUT: None - Pauses after clearing.
+
+ ASSUMPTIONS: Cconin() waits for test input.
 */
 static void tstClearScreen(UINT32 *base)
 {
@@ -47,9 +51,11 @@ static void tstClearScreen(UINT32 *base)
 
  PURPOSE: Displays pixels at all four screen corners.
 
- INPUT: base - framebuffer address.
+ INPUT: base(UINT8 *) - Framebuffer address.
 
- OUTPUT: None; pauses after each pixel.
+ OUTPUT: None - Pauses after each pixel.
+
+ ASSUMPTIONS: Cconin() waits for test input.
 */
 static void tstPlotPixel(UINT8 *base)
 {
@@ -70,9 +76,11 @@ static void tstPlotPixel(UINT8 *base)
 
  PURPOSE: Displays horizontal lines at screen edges.
 
- INPUT: base - framebuffer address.
+ INPUT: base(UINT32 *) - Framebuffer address.
 
- OUTPUT: None; pauses after each line.
+ OUTPUT: None - Pauses after each line.
+
+ ASSUMPTIONS: Cconin() waits for test input.
 */
 static void tstPlotHorizontalLine(UINT32 *base)
 {
@@ -93,9 +101,11 @@ static void tstPlotHorizontalLine(UINT32 *base)
 
  PURPOSE: Displays vertical lines at screen edges.
 
- INPUT: base - framebuffer address.
+ INPUT: base(UINT32 *) - Framebuffer address.
 
- OUTPUT: None; pauses after each line.
+ OUTPUT: None - Pauses after each line.
+
+ ASSUMPTIONS: Cconin() waits for test input.
 */
 static void tstPlotVerticalLine(UINT32 *base)
 {
@@ -116,9 +126,11 @@ static void tstPlotVerticalLine(UINT32 *base)
 
  PURPOSE: Displays diagonal lines in each screen corner.
 
- INPUT: base - framebuffer address.
+ INPUT: base(UINT32 *) - Framebuffer address.
 
- OUTPUT: None; pauses after each line.
+ OUTPUT: None - Pauses after each line.
+
+ ASSUMPTIONS: Cconin() waits for test input.
 */
 static void tstPlotLine(UINT32 *base)
 {
@@ -139,9 +151,11 @@ static void tstPlotLine(UINT32 *base)
 
  PURPOSE: Displays rectangles in each screen corner.
 
- INPUT: base - framebuffer address.
+ INPUT: base(UINT32 *) - Framebuffer address.
 
- OUTPUT: None; pauses after each rectangle.
+ OUTPUT: None - Pauses after each rectangle.
+
+ ASSUMPTIONS: Cconin() waits for test input.
 */
 static void tstPlotRectangle(UINT32 *base)
 {
@@ -162,9 +176,11 @@ static void tstPlotRectangle(UINT32 *base)
 
  PURPOSE: Displays squares in each screen corner.
 
- INPUT: base - framebuffer address.
+ INPUT: base(UINT32 *) - Framebuffer address.
 
- OUTPUT: None; pauses after each square.
+ OUTPUT: None - Pauses after each square.
+
+ ASSUMPTIONS: Cconin() waits for test input.
 */
 static void tstPlotSquare(UINT32 *base)
 {
@@ -185,9 +201,11 @@ static void tstPlotSquare(UINT32 *base)
 
  PURPOSE: Displays triangles in each orientation.
 
- INPUT: base - framebuffer address.
+ INPUT: base(UINT32 *) - Framebuffer address.
 
- OUTPUT: None; pauses after each triangle.
+ OUTPUT: None - Pauses after each triangle.
+
+ ASSUMPTIONS: Cconin() waits for test input.
 */
 static void tstPlotTriangle(UINT32 *base)
 {
@@ -208,9 +226,11 @@ static void tstPlotTriangle(UINT32 *base)
 
  PURPOSE: Displays an eight-bit bitmap at screen edges.
 
- INPUT: base - framebuffer address.
+ INPUT: base(UINT8 *) - Framebuffer address.
 
- OUTPUT: None; pauses after each bitmap.
+ OUTPUT: None - Pauses after each bitmap.
+
+ ASSUMPTIONS: Cconin() waits for test input.
 */
 static void tstPlot8bitBitmap(UINT8 *base)
 {
@@ -235,9 +255,11 @@ static void tstPlot8bitBitmap(UINT8 *base)
 
  PURPOSE: Displays a sixteen-bit bitmap at screen edges.
 
- INPUT: base - framebuffer address.
+ INPUT: base(UINT16 *) - Framebuffer address.
 
- OUTPUT: None; pauses after each bitmap.
+ OUTPUT: None - Pauses after each bitmap.
+
+ ASSUMPTIONS: Cconin() waits for test input.
 */
 static void tstPlot16bitBitmap(UINT16 *base)
 {
@@ -265,9 +287,11 @@ static void tstPlot16bitBitmap(UINT16 *base)
 
  PURPOSE: Displays a thirty-two-bit bitmap at screen edges.
 
- INPUT: base - framebuffer address.
+ INPUT: base(UINT32 *) - Framebuffer address.
 
- OUTPUT: None; pauses after each bitmap.
+ OUTPUT: None - Pauses after each bitmap.
+
+ ASSUMPTIONS: Cconin() waits for test input.
 */
 static void tstPlot32bitBitmap(UINT32 *base)
 {
@@ -299,9 +323,11 @@ static void tstPlot32bitBitmap(UINT32 *base)
 
  PURPOSE: Displays one font character in each screen corner.
 
- INPUT: base - framebuffer address.
+ INPUT: base(UINT8 *) - Framebuffer address.
 
- OUTPUT: None; pauses after each character.
+ OUTPUT: None - Pauses after each character.
+
+ ASSUMPTIONS: Cconin() waits for test input.
 */
 static void tstPlotCharacter(UINT8 *base)
 {
@@ -322,9 +348,11 @@ static void tstPlotCharacter(UINT8 *base)
 
  PURPOSE: Displays a string in each screen corner.
 
- INPUT: base - framebuffer address.
+ INPUT: base(UINT8 *) - Framebuffer address.
 
- OUTPUT: None; pauses after each string.
+ OUTPUT: None - Pauses after each string.
+
+ ASSUMPTIONS: Cconin() waits for test input.
 */
 static void tstPlotString(UINT8 *base)
 {
@@ -345,9 +373,11 @@ static void tstPlotString(UINT8 *base)
 
  PURPOSE: Runs all framebuffer primitive and font demonstrations.
 
- INPUT: None.
+ INPUT: None
 
- OUTPUT: Returns zero after all demonstrations complete.
+ OUTPUT: int - Zero after all demonstrations complete.
+
+ ASSUMPTIONS: Physbase() provides a valid physical framebuffer.
 */
 int main()
 {
