@@ -21,6 +21,19 @@ Declares game initialization, timing, screen setup, and main-loop routines.
 #include "synch.h"
 #include "cond.h"
 #include "music.h"
+#include "input.h"
+
+
+/* SPLASH SCREEN CONSTANTS */
+#define BORDER_THICK 2
+#define BORDER_WIDTH 
+#define BORDER_LENGTH 
+
+#define P1_OPT_X 196
+#define P1_OPT_Y 288
+
+#define P2_OPT_X 220
+#define P2_OPT_Y 288
 
 /* Game and framebuffer constants */
 #define ESC_KEY '\x1b'

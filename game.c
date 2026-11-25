@@ -7,8 +7,6 @@ rendering, and terminal game-state screens.
 */
 
 #include "game.h"
-#include "raster.h"
-#include "input.h"
 
 volatile UINT32 *timer = (UINT32 *)0x462;
 static UINT32 timeThen, timeNow;
@@ -90,9 +88,18 @@ void updateGame(GameMdl *model) {
 	}
 }
 
-/*void renderSplash(GameMdl* model) {
-	plot
-}*/
+void renderSplash(GameMdl* model) {
+	/* 1 player box border */
+	plotRectangle(model->base, 192, 284, BORDER_LENGTH, BORDER_WIDTH);
+	clearRegion(model->base, 192 + BORDER_THICK, 284 + BORDER_THICK, BORDER_LENGTH - (BORDER_THICK << 1), BORDER_WIDTH - (BORDER_THICK << 1));
+	
+	/* 2 player box border */
+	plotRectangle(model->base, 216, 284, 16, 72);
+	clearRegion(model->base, 218, 286, 12, 68);
+	
+	plotString((UINT8 *)model->base, P1_OPT_X, P1_OPT_Y, "1 Player");
+	plotString((UINT8 *)model->base, P2_OPT_X, P2_OPT_Y, "2 Player");
+}
 
 void renderEndScreen(GameMdl *model) {
 	if (model -> gameStatus & WIN_FLG) {
@@ -148,6 +155,7 @@ void gameLoop(GameMdl* model) {
  OUTPUT: Returns zero after the game exits.
 */
 int main() {
+	UINT32 i=0;
 	GameMdl model;
 	Dino dino;
 	Cactus cactus;
@@ -156,6 +164,7 @@ int main() {
 	model.cactus = &cactus;
 
 	gameInit(&model);
+	
 	gameLoop(&model);
 	return 0;
 }
