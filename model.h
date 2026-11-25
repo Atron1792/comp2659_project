@@ -27,9 +27,8 @@ Declares game-state structures, constants, initialization, and movement logic.
 #define DX_CACTUS -5
 #define DY_CACTUS 0
 #define CACTUS_MOVE_RATE 2 /* frames */
-
-#define NUM_CACTI 1
-#define CACTUS_SEPARATION (SCRN_W / NUM_CACTI)
+#define NUMBER_OF_CACTI 1
+#define CACTUS_SEPARATION (SCRN_W / NUMBER_OF_CACTI)
 
 /* Environment Constants */
 #define SCRN_W 640
@@ -121,7 +120,7 @@ void initCactus(Cactus* cactus, int x, int y, int dx);
 
 /*----- Function: moveCactus -----
 
- PURPOSE: Advances a cactus and wraps it to the right edge after leaving screen.
+ PURPOSE: Advances a cactus and wraps it to the right edge after leaving screen. Or in the case of multiple cacti, moves the cactus to the right of the last one.
 
  INPUT: cactus - cactus state to update.
 

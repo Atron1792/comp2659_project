@@ -45,7 +45,7 @@ void renderDino(const Dino *dino, UINT32 *base);
 
 /*----- Function: renderCactus -----
 
- PURPOSE: Draws the complete cactus bitmap.
+ PURPOSE: Draws the complete cactus bitmap. In the case of multiple cacti, draws them in a row with a fixed separation.
 
  INPUT: cactus - cactus state; base - framebuffer address.
 

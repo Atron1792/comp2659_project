@@ -63,7 +63,7 @@ void moveCactus(Cactus* cactus) {
     cactus -> x += cactus -> dx;
 
     if (cactus -> x + CACTUS_WIDTH <= 0) {
-        cactus -> x = SCRN_W - CACTUS_WIDTH;
+        cactus -> x += CACTUS_SEPARATION;
+        cactus -> y = FLOOR_Y - CACTUS_HEIGHT;
     }
 }
-
