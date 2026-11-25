@@ -2,10 +2,14 @@
 File Name: tst_efct.c
 Authors: Muhammad Abdullah, Nicholas Christie, Rohan Pernitsky
 
-Provides a test driver skeleton for the effects module.
+Provides an interactive test driver for gameplay sound effects.
 */
 
+#include <osbind.h>
+#include <stdio.h>
+
 #include "effects.h"
+#include "psg.h"
 
 /*----- Function: tstJumpEffect -----
 
@@ -17,6 +21,7 @@ Provides a test driver skeleton for the effects module.
 */
 static void tstJumpEffect()
 {
+    playJumpEffect();
 }
 
 /*----- Function: tstCollisionEffect -----
@@ -29,6 +34,7 @@ static void tstJumpEffect()
 */
 static void tstCollisionEffect()
 {
+    playCollisionEffect();
 }
 
 /*----- Function: main -----
@@ -41,5 +47,10 @@ static void tstCollisionEffect()
 */
 int main()
 {
+    Cconin();
+    tstJumpEffect();
+    Cconin();
+    tstCollisionEffect();
+    printf("EFFECTS TESTS COMPLETE.\n");
     return 0;
 }

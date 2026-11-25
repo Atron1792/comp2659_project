@@ -8,7 +8,16 @@ Declares gameplay sound effects layered on top of the PSG module.
 #ifndef EFFECTS_H
 #define EFFECTS_H
 
-#include "TYPES.H"
+/* Jump sound effect */
+#define JUMP_TONE_PERIOD 0x0090
+#define JUMP_ENVELOPE_PERIOD 0x0310
+
+/* Collision sound effect */
+#define COLLISION_NOISE_PERIOD 0x001F
+#define COLLISION_ENVELOPE_PERIOD 0x0310
+
+/* Enables envelope-controlled volume */
+#define ENVELOPE_VOLUME 0x10
 
 /*----- Function: playJumpEffect -----
 

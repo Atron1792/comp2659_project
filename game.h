@@ -26,8 +26,8 @@ Declares game initialization, timing, screen setup, and main-loop routines.
 
 /* SPLASH SCREEN CONSTANTS */
 #define BORDER_THICK 2
-#define BORDER_WIDTH 
-#define BORDER_LENGTH 
+#define BORDER_WIDTH 72
+#define BORDER_LENGTH 16
 
 #define P1_OPT_X 196
 #define P1_OPT_Y 288

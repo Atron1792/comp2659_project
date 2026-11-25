@@ -6,6 +6,7 @@ Handles asynchronous user requests such as jumping and quitting.
 */
 
 #include "asynch.h"
+#include "effects.h"
 
 void onJumpRequest(GameMdl *model)
 {
@@ -14,6 +15,7 @@ void onJumpRequest(GameMdl *model)
         model->dino->yVel >= 0) {
         model->dino->y = DINO_Y_POS;
         model->dino->yVel = -JUMP_Y_VELOCITY;
+        playJumpEffect();
     }
 }
 

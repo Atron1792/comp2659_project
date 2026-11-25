@@ -31,7 +31,7 @@ Declares the PSG (Programmable Sound Generator) functionality for the game.
 #define ENVELOPE_COARSE 0x0C
 #define ENVELOPE_SHAPE 0X0D
 #define PORT_A 0x0E
-#define PORT_B 0x0B
+#define PORT_B 0x0F
 
 /**** Defined constants for function parameters ****/
 

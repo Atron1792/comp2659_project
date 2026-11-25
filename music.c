@@ -33,7 +33,8 @@ void startMusic()
 void stopMusic()
 {
     musicPlaying = 0;
-    stopSound();
+    enableChannel(CHANNEL_A, TONE_OFF, NOISE_OFF);
+    setVolume(CHANNEL_A, 0);
 }
 
 void updateMusic(UINT32 timeElapsed)
