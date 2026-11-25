@@ -27,8 +27,9 @@ Declares game-state structures, constants, initialization, and movement logic.
 #define DX_CACTUS -5
 #define DY_CACTUS 0
 #define CACTUS_MOVE_RATE 2 /* frames */
-#define NUMBER_OF_CACTI 1
-#define CACTUS_SEPARATION (SCRN_W / NUMBER_OF_CACTI)
+
+#define NUM_CACTI 1
+#define CACTUS_SEPARATION (SCRN_W / NUM_CACTI)
 
 /* Environment Constants */
 #define SCRN_W 640

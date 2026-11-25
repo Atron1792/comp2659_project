@@ -1,4 +1,4 @@
-all: music
+all: game #music
 tests: tst_inpt tst_rend tst_rast tst_mdl tst_mvnt tst_evnt tst_psg tst_mus
 music: tst_psg
 
