@@ -13,7 +13,14 @@ Declares scene and sprite rendering routines for the game framebuffer.
 #include "raster.h"
 #include "bitmaps.h"
 
-/*----- Function: render -----
+#define MENU_BUTTON_ROW 160
+#define MENU_BUTTON_COL 220
+#define MENU_BUTTON_HEIGHT 42
+#define MENU_BUTTON_WIDTH 200
+#define MENU_BUTTON_GAP 16
+#define MENU_BORDER_THICK 2
+
+/*----- Function: renderGame -----
 
  PURPOSE: Draws the complete current game scene.
 
@@ -23,7 +30,36 @@ Declares scene and sprite rendering routines for the game framebuffer.
 
  ASSUMPTIONS: model's dinosaur and cactus pointers are valid.
 */
-void render(const GameMdl *model);
+void renderGame(const GameMdl *model);
+
+/*----- Function: renderMenuButton -----
+
+ PURPOSE: Draws a rectangular menu button and highlights it when selected.
+
+ INPUT: base(UINT32 *) - Framebuffer address.
+        row(int) - Top row of the button.
+        label(char *) - Text displayed in the button.
+        labelCol(int) - Column where the label begins.
+        selected(int) - Nonzero to draw the selection border.
+
+ OUTPUT: None
+
+ ASSUMPTIONS: base points to a valid monochrome framebuffer.
+*/
+void renderMenuButton(UINT32 *base, int row, char *label, int labelCol, int selected);
+
+/*----- Function: renderSplashScreen -----
+
+ PURPOSE: Draws the main menu and highlights the selected option.
+
+ INPUT: base(UINT32 *) - Framebuffer address.
+        selectedOption(int) - Zero-based index of the selected menu button.
+
+ OUTPUT: None
+
+ ASSUMPTIONS: base points to a valid monochrome framebuffer.
+*/
+void renderSplashScreen(UINT32 *base, int selectedOption);
 
 /*----- Function: renderGround -----
 

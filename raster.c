@@ -411,26 +411,20 @@ void plotCharacter(UINT8 *base, int row, int col, char ch)
 
 void plotString(UINT8 *base, int row, int col, char *ch)
 {
-    int i = 0;
     int curr_col = col;
-
-    while (ch[i] != '\0')
-    {
-        if (ch[i] == '\n')
+    while (*ch != '\0') {
+        if (*ch == '\n')
         {
             row += FONT_HEIGHT;
             curr_col = col;
-        }
-        else if (ch[i] == '\r')
+        } else if (*ch == '\r')
         {
             curr_col = col;
-        }
-        else if (IS_PRINTABLE(ch[i]))
+        } else if (IS_PRINTABLE(*ch))
         {
-            plotCharacter(base, row, curr_col, ch[i]);
+            plotCharacter(base, row, curr_col, *ch);
             curr_col += BITS_PER_BYTE;
         }
-
-        i++;
+        ++ch;
     }
 }

@@ -24,21 +24,12 @@ Declares game initialization, timing, screen setup, and main-loop routines.
 #include "input.h"
 
 
-/* SPLASH SCREEN CONSTANTS */
-#define BORDER_THICK 2
-#define BORDER_WIDTH 72
-#define BORDER_LENGTH 16
-
-#define P1_OPT_X 196
-#define P1_OPT_Y 288
-
-#define P2_OPT_X 220
-#define P2_OPT_Y 288
-
 /* Game and framebuffer constants */
 #define ESC_KEY '\x1b'
 #define FRAMEBUFFER_SIZE 32000
 #define FRAMEBUFFER_ALIGNMENT 256
+
+#define MENU_OPTION_COUNT 3
 
 /*----- Function: getTime -----
 
@@ -114,16 +105,17 @@ void processInput(GameMdl *model);
 */
 void updateGame(GameMdl *model);
 
-/*----- Function: updateGame -----
+/*----- Function: gameSplashScreen -----
 
- PURPOSE: Applies a clock-triggered gameplay update and presents the frame
-          when the update interval has elapsed.
+ PURPOSE: Displays the main menu. Tab changes the selected option, Enter
+          activates 1 Player or Quit, and Esc exits. 2 Player is shown as
+          coming soon and is not activated.
 
- INPUT: model(GameMdl *) - Game model to update and render.
+ INPUT: model(GameMdl *) - Game model whose framebuffer is used for the menu.
 
- OUTPUT: int - returns 1 for 1-player, and 2 for 2-player
+ OUTPUT: int - 1 to start a single-player game, or 0 to quit.
 
- ASSUMPTIONS: 
+ ASSUMPTIONS: Double buffering has been initialized for model.
 */
 int gameSplashScreen(GameMdl* model);
 
@@ -148,19 +140,19 @@ void renderEndScreen(GameMdl *model);
 
  OUTPUT: None
 
- ASSUMPTIONS: model's sprite pointers have already been assigned.
+ ASSUMPTIONS: model's sprite pointers have already been assigned and initDoubleBuffer() has been called.
 */
 void gameInit(GameMdl* model);
 
 /*----- Function: gameLoop -----
 
- PURPOSE: Runs input polling, timed updates, rendering, and terminal screens.
+ PURPOSE: Initializes gameplay, then runs input polling, timed updates, rendering, and terminal screens.
 
- INPUT: model(GameMdl *) - Initialized game model used by the loop.
+ INPUT: model(GameMdl *) - Game model whose sprite pointers are assigned.
 
  OUTPUT: None
 
- ASSUMPTIONS: The model and its sprite pointers are valid.
+ ASSUMPTIONS: The model's sprite pointers are assigned and double buffering has been initialized.
 */
 void gameLoop(GameMdl* model);
 

@@ -79,13 +79,11 @@ void enableChannel(UINT8 channel, UINT8 toneOn, UINT8 noiseOn)
 	UINT8 toneMask;
 	UINT8 noiseMask;
 
-	if (channel > CHANNEL_C || toneOn > TONE_ON || noiseOn > NOISE_ON) 
-	{
+	if (channel > CHANNEL_C || toneOn > TONE_ON || noiseOn > NOISE_ON) {
 		return;
 	}
 
-	if (!readPsg(MIXER_IO, &mixer)) 
-	{
+	if (!readPsg(MIXER_IO, &mixer)) {
 		return;
 	}
 
@@ -118,8 +116,7 @@ void setEnvelope(UINT8 shape, UINT16 sustain)
 	UINT8 fine;
 	UINT8 coarse;
 
-	if (shape != HOLD && shape != ALT && shape != ATT && shape != CONT) 
-	{
+	if (shape != HOLD && shape != ALT && shape != ATT && shape != CONT) {
 		return;
 	}
 
@@ -138,8 +135,7 @@ void setEnvelope(UINT8 shape, UINT16 sustain)
 	} else if (shape == ATT)
 	{
 		writePsg(ENVELOPE_SHAPE, 4);
-	} else 
-	{
+	} else {
 		writePsg(ENVELOPE_SHAPE, 8);
 	}
 }
@@ -150,8 +146,7 @@ void stopSound()
 
 	writePsg(MIXER_IO, 0x3F);
 
-	for (reg = 0; reg <= 10; reg++) 
-	{
+	for (reg = 0; reg <= 10; reg++) {
 		writePsg((UINT8)reg, 0);
 	}
 	

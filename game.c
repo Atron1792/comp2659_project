@@ -81,7 +81,7 @@ void updateGame(GameMdl *model) {
 		if (checkCollision(model)) {
 			onCollision(model);
 		}
-		render(model);
+		renderGame(model);
 		presentFrame(model);
 		updateMusic(elapsed);
 		timeThen = timeNow;
@@ -89,18 +89,35 @@ void updateGame(GameMdl *model) {
 }
 
 int gameSplashScreen(GameMdl* model) {
-	/* 1 player box border */
-	plotRectangle(model->base, 192, 284, BORDER_LENGTH, BORDER_WIDTH);
-	clearRegion(model->base, 192 + BORDER_THICK, 284 + BORDER_THICK, BORDER_LENGTH - (BORDER_THICK << 1), BORDER_WIDTH - (BORDER_THICK << 1));
-	
-	/* 2 player box border */
-	plotRectangle(model->base, 216, 284, BORDER_LENGTH, BORDER_WIDTH);
-	clearRegion(model->base, 216 + BORDER_THICK, 284 + BORDER_THICK, BORDER_LENGTH - (BORDER_THICK << 1), BORDER_WIDTH - (BORDER_THICK << 1));
-	
-	plotString((UINT8 *)model->base, P1_OPT_X, P1_OPT_Y, "1 Player");
-	plotString((UINT8 *)model->base, P2_OPT_X, P2_OPT_Y, "2 Player");
+	int selectedOption;
+	int key;
 
-	return 1;
+	selectedOption = 0;
+	renderSplashScreen(model->base, selectedOption);
+	presentFrame(model);
+
+	while (1) {
+		if (!has_input()) {
+			continue;
+		}
+
+		key = get_input();
+		if (key == '\t')
+		{
+			selectedOption = (selectedOption + 1) % MENU_OPTION_COUNT;
+			renderSplashScreen(model->base, selectedOption);
+			presentFrame(model);
+		} else if (key == ESC_KEY) 
+		{
+			return 0;
+		} else if ((key == '\r' || key == '\n') && selectedOption == 0) 
+		{
+			return 1;
+		} else if ((key == '\r' || key == '\n') && selectedOption == 2) 
+		{
+			return 0;
+		}
+	}
 }
 
 void renderEndScreen(GameMdl *model) {
@@ -116,13 +133,14 @@ void renderEndScreen(GameMdl *model) {
 		plotString((UINT8 *)model->base, 180, 280, "QUIT");
 		renderScore(model -> score, model -> base);
 	}
+	plotString((UINT8 *)model->base, 352, 224, "PRESS ANY KEY FOR MENU");
 }
 
 void gameInit(GameMdl* model) {
 	initGameMdl(model);
-	initDoubleBuffer(model);
+	model->base = backBuffer;
 	disableCursor();
-	render(model);
+	renderGame(model);
 	presentFrame(model);
 
 	/* Initialise time checking variables */
@@ -132,9 +150,11 @@ void gameInit(GameMdl* model) {
 }
 
 void gameLoop(GameMdl* model) {
+	gameInit(model);
 	while (!model -> gameStatus) {
 		processInput(model);
-		if (!model -> gameStatus) {
+		if (!model -> gameStatus) 
+		{
 			updateGame(model);
 		}
 	}
@@ -142,10 +162,8 @@ void gameLoop(GameMdl* model) {
 	clearScreen(backBuffer); /* maybe replace with render func */
 	renderEndScreen(model);
 	presentFrame(model);
-	while (!has_input()) {
-	}
+	while (!has_input()) {}
 	get_input();
-	restoreScreen();
 }
 
 /*----- Function: main -----
@@ -165,9 +183,16 @@ int main() {
 	model.dino = &dino;
 	model.cactus = &cactus;
 
-	gameInit(&model);
-	playerMode = gameSplashScreen(&model);
-	
-	gameLoop(&model);
+	initDoubleBuffer(&model);
+	disableCursor();
+	while (1) {
+		playerMode = gameSplashScreen(&model);
+		if (playerMode != 1) 
+		{
+			break;
+		}
+		gameLoop(&model);
+	}
+	restoreScreen();
 	return 0;
 }

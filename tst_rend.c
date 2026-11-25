@@ -33,6 +33,6 @@ int main()
     mdl.cactus = &cactus;
 
     initGameMdl(&mdl);
-    render(&mdl);
+    renderGame(&mdl);
     return 0;
 }

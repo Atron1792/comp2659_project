@@ -8,7 +8,38 @@ Composes the game scene, sprites, ground line, and score on the framebuffer.
 #include "renderer.h"
 #include "model.h"
 
-void render(const GameMdl *model)
+void renderMenuButton(UINT32 *base, int row, char *label, int labelCol, int selected)
+{
+    if (selected) 
+    {
+        plotRectangle(base, row - 3, MENU_BUTTON_COL - 3, MENU_BUTTON_HEIGHT + 6, MENU_BUTTON_WIDTH + 6);
+    }
+
+    plotRectangle(base, row, MENU_BUTTON_COL, MENU_BUTTON_HEIGHT, MENU_BUTTON_WIDTH);
+    clearRegion(base, row + MENU_BORDER_THICK, MENU_BUTTON_COL + MENU_BORDER_THICK,
+        MENU_BUTTON_HEIGHT - (MENU_BORDER_THICK << 1),
+        MENU_BUTTON_WIDTH - (MENU_BORDER_THICK << 1));
+    plotString((UINT8 *)base, row + 19, labelCol, label);
+}
+
+void renderSplashScreen(UINT32 *base, int selectedOption)
+{
+    int secondButtonRow;
+    int thirdButtonRow;
+
+    secondButtonRow = MENU_BUTTON_ROW + MENU_BUTTON_HEIGHT + MENU_BUTTON_GAP;
+    thirdButtonRow = secondButtonRow + MENU_BUTTON_HEIGHT + MENU_BUTTON_GAP;
+    clearScreen(base);
+    plotString((UINT8 *)base, 110, 280, "DINO JUMP");
+    renderMenuButton(base, MENU_BUTTON_ROW, "1 PLAYER", 288, selectedOption == 0);
+    renderMenuButton(base, secondButtonRow, "2 PLAYER", 288, selectedOption == 1);
+    renderMenuButton(base, thirdButtonRow, "QUIT", 304, selectedOption == 2);
+    plotString((UINT8 *)base, 330, 236, "2 PLAYER COMING SOON");
+    plotString((UINT8 *)base, 352, 180, "TAB SELECT  ENTER CHOOSE  ESC QUIT");
+    plotHorizontalLine(base, 380, 0, SCREEN_WIDTH);
+}
+
+void renderGame(const GameMdl *model)
 {
     clearScreen(model->base);
     renderGround(model->base);

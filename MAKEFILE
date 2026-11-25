@@ -1,4 +1,4 @@
-all: tests game
+all: game
 tests: image funcs music
 image: tst_rast tst_rend tst_mdl
 funcs: tst_inpt tst_mvnt tst_evnt
