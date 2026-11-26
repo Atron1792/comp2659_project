@@ -11,7 +11,7 @@ Declares the music playback interface layered on top of the PSG module.
 #include "TYPES.H"
 #include "psg.h"
 
-#define MUSIC_VOLUME 2
+#define MUSIC_VOLUME 3
 #define MUSIC_NOTE_COUNT 16
 
 typedef struct {

@@ -10,8 +10,7 @@ Composes the game scene, sprites, ground line, and score on the framebuffer.
 
 void renderMenuButton(UINT32 *base, int row, char *label, int labelCol, int selected)
 {
-    if (selected) 
-    {
+    if (selected)  {
         plotRectangle(base, row - 3, MENU_BUTTON_COL - 3, MENU_BUTTON_HEIGHT + 6, MENU_BUTTON_WIDTH + 6);
     }
 
