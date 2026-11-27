@@ -1,0 +1,58 @@
+void enable_channel(UINT8 channel, UINT8 tone_on, UINT8 noise_on) {
+    UINT8 maskTune;
+
+    if (channel > CHANNEL_C) {
+        return;
+    }
+
+    if (!read_psg(MIXER_IO, maskTune)) {
+        return;
+    }
+
+    switch (channel) {
+
+        case CHANNEL_A:
+            if (tone_on) {
+                maskTune &= ~0x01;
+            } else {
+                maskTune |= 0x01;
+            }
+
+            if (noise_on) {
+                maskTune &= ~0x08;
+            } else {
+                maskTune |= 0x08;
+            }
+            break;
+
+        case CHANNEL_B:
+            if (tone_on) {
+                maskTune &= ~0x02;
+            } else {
+                maskTune |= 0x02;
+            }
+
+            if (noise_on) {
+                maskTune &= ~0x10;
+            } else {
+                maskTune |= 0x10;
+            }
+            break;
+
+        case CHANNEL_C:
+            if (tone_on) {
+                maskTune &= ~0x04;
+            } else {
+                maskTune |= 0x04;
+            }
+
+            if (noise_on) {
+                maskTune &= ~0x20;
+            } else {
+                maskTune |= 0x20;
+            }
+            break;
+    }
+
+    write_psg(MIXER_IO, maskTune);
+}

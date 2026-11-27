@@ -40,8 +40,42 @@ void plotPixel(UINT8 *base, int row, int col)
     }
 }
 
-void plotHorizontalLine(UINT32 *base, int row, int col, UINT16 length)
-{
+void plotHorizontalLine(UINT32 *base, int row, int col, UINT16 length) {
+    /*UINT8 *loc;
+    UINT8 prevByte;
+    UINT8 mask;
+    int width;
+    int shift = x & (BITS_PER_BYTE - 1); /* col % 8 *
+    int invShift = BITS_PER_BYTE - shift;
+    
+    int maxCol = SCREEN_WIDTH >> 3;
+    int i, currCol;
+
+    /* Bounds checking *
+    if (col + length < 0 || col >= SCREEN_WIDTH) {return;}
+    if (row < 0 || row > SCREEN_HEIGHT) {return;}
+
+    currCol = (col >> 3);
+    loc = ((UINT8 *) base) + (row * BYTES_PER_SCANLINE) + currCol;
+    
+    width = length >> 3;
+    if (width == 0) {
+        mask = (0xFF << shift) & (0xFF >> invShift);
+        loc |= mask;
+    } else {
+
+    }
+    for (i = 0; i < length; i++) {
+        if (currCol >= maxCol) {
+            break;
+        } else if (currCol >= 0) {
+            mask = 1 << (BITS_PER_BYTE - shift - 1);
+            *loc |= mask;
+        }
+        currCol++;
+    }*/
+
+    
     UINT8 *byte_base = (UINT8 *)base;
     UINT8 mask;
     int i;
@@ -60,21 +94,28 @@ void plotHorizontalLine(UINT32 *base, int row, int col, UINT16 length)
     }
 }
 
-void plotVerticalLine(UINT32 *base, int row, int col, UINT16 length)
-{
-    UINT8 *byte_base = (UINT8 *)base;
+void plotVerticalLine(UINT32 *base, int row, int col, UINT16 length) {
+    UINT8 *loc;
     UINT8 mask;
-    int i;
-    int curr_row;
+    int i, currRow;
+    int shift = col & (LONG_BIT_COUNT - 1);
 
+    /* Bounds checking */
+    if (col < 0 || col >= SCREEN_WIDTH) {return;}
+    if (row + length < 0 || row > SCREEN_HEIGHT) {return;}
+    
+    loc = ((UINT8 *)base) + (row * BYTES_PER_SCANLINE) + (col >> 3);
+    
+    mask = 1 << shift;
+    currRow = row;
     for (i = 0; i < length; i++) {
-        curr_row = row + i;
-
-        if (curr_row >= 0 && curr_row < SCREEN_HEIGHT && col >= 0 && col < SCREEN_WIDTH) {
-            mask = 1 << (BITS_PER_BYTE - 1 - (col & (BITS_PER_BYTE - 1)));
-
-            *(byte_base + (curr_row * BYTES_PER_SCANLINE) + (col >> 3)) |= mask;
+        if (currRow >= SCREEN_HEIGHT) {
+            break;
+        } else if (currRow >= 0) {
+            *loc |= mask;
         }
+        *loc += BYTES_PER_SCANLINE;
+        currRow++;
     }
 }
 
@@ -141,13 +182,16 @@ void plotLine(UINT32 *base, int start_row, int start_col, int end_row, int end_c
     }
 }
 
-void plotRectangle(UINT32 *base, int row, int col, UINT16 length, UINT16 width)
-{
+void plotRectangle(UINT32 *base, int row, int col, UINT16 length, UINT16 width) {
     UINT8 *byte_base;
     UINT8 mask;
     int curr_row;
     int curr_col;
 
+    /* Bounds checking */
+    if (col + width < 0 || col >= SCREEN_WIDTH) {return;}
+    if (row + length < 0 || row > SCREEN_HEIGHT) {return;}
+    
     byte_base = (UINT8 *)base;
 
     for (curr_row = row; curr_row < row + (int)length; curr_row++) {
@@ -159,10 +203,10 @@ void plotRectangle(UINT32 *base, int row, int col, UINT16 length, UINT16 width)
             }
         }
     }
+    */
 }
 
-void plotSquare(UINT32 *base, int row, int col, UINT16 side)
-{
+void plotSquare(UINT32 *base, int row, int col, UINT16 side) {
     UINT8 *byte_base;
     UINT8 mask;
     int curr_row;
