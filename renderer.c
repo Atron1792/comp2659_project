@@ -18,7 +18,7 @@ void renderMenuButton(UINT32 *base, int row, char *label, int labelCol, int sele
     clearRegion(base, row + MENU_BORDER_THICK, MENU_BUTTON_COL + MENU_BORDER_THICK,
         MENU_BUTTON_HEIGHT - (MENU_BORDER_THICK << 1),
         MENU_BUTTON_WIDTH - (MENU_BORDER_THICK << 1));
-    plotString((UINT8 *)base, row + 19, labelCol, label);
+    plotString(base, row + 19, labelCol, label);
 }
 
 void renderSplashScreen(UINT32 *base, int selectedOption)
@@ -37,8 +37,8 @@ void renderSplashScreen(UINT32 *base, int selectedOption)
     renderMenuButton(base, MENU_BUTTON_ROW, "1 PLAYER", 288, selectedOption == 0);
     renderMenuButton(base, secondButtonRow, "2 PLAYER", 288, selectedOption == 1);
     renderMenuButton(base, thirdButtonRow, "QUIT", 304, selectedOption == 2);
-    plotString((UINT8 *)base, 330, 236, "2 PLAYER COMING SOON");
-    plotString((UINT8 *)base, 352, 180, "TAB SELECT  ENTER CHOOSE  ESC QUIT");
+    plotString(base, 330, 236, "2 PLAYER COMING SOON");
+    plotString(base, 352, 180, "TAB SELECT  ENTER CHOOSE  ESC QUIT");
 }
 
 void renderGame(const GameMdl *model)
@@ -92,9 +92,8 @@ void renderScore(UINT32 score, UINT32* base) {
         score /= 10;
     }
 
-    plotString((UINT8 *)base, 8, SCRN_W - (5 * 8) - 8, scoreText);
+    plotString(base, 8, SCRN_W - (5 * 8) - 8, scoreText);
 }
-
 
 void disableCursor() {
 	printf("\033f");

@@ -26,10 +26,10 @@ UINT32 getTime() {
 void initDoubleBuffer(GameMdl* model) {
 	UINT32 alignedAddress;
 
-	originalScreen = Physbase();
+	originalScreen = get_video_base();
 	frontBuffer = originalScreen;
 	clearScreen(originalScreen);
-	alignedAddress = ((UINT32)backStorage + FRAMEBUFFER_ALIGNMENT - (UINT32)1) & ~(FRAMEBUFFER_ALIGNMENT - (UINT32)1);
+	alignedAddress = ((UINT32)backStorage + FRAMEBUFFER_ALIGNMENT - 1) & ~(FRAMEBUFFER_ALIGNMENT - 1);
 	backBuffer = (UINT32 *)alignedAddress;
 	model->base = backBuffer;
 	clearScreen(model->base);
@@ -38,8 +38,8 @@ void initDoubleBuffer(GameMdl* model) {
 void presentFrame(GameMdl* model) {
 	UINT32 *oldFront;
 
-	Setscreen(backBuffer, backBuffer, -1);
-	while (Physbase() != backBuffer) {
+	set_video_base(backBuffer);
+	while (get_video_base() != backBuffer) {
 	}
 
 	oldFront = frontBuffer;
@@ -49,8 +49,8 @@ void presentFrame(GameMdl* model) {
 }
 
 void restoreScreen() {
-	Setscreen(originalScreen, originalScreen, -1);
-	while (Physbase() != originalScreen) {
+	set_video_base(originalScreen);
+	while (get_video_base() != originalScreen) {
 	}
 }
 
@@ -75,6 +75,9 @@ void updateGame(GameMdl *model) {
 
 	timeNow = getTime();
 	elapsed = timeNow - timeThen;
+	timeThen = timeNow;
+
+	updateMusic(elapsed);
 
 	if (elapsed >= 1) {
 		onClockTick(model);
@@ -83,8 +86,6 @@ void updateGame(GameMdl *model) {
 		}
 		renderGame(model);
 		presentFrame(model);
-		updateMusic(elapsed);
-		timeThen = timeNow;
 	}
 }
 
@@ -122,18 +123,18 @@ int gameSplashScreen(GameMdl* model) {
 
 void renderEndScreen(GameMdl *model) {
 	if (model -> gameStatus & WIN_FLG) {
-		plotString((UINT8 *)model->base, 180, 280, "YOU WIN!");
+		plotString(model->base, 180, 280, "YOU WIN!");
 	} else if (model -> gameStatus & LOSS_FLG) {
-		plotString((UINT8 *)model->base, 180, 280, "GAME OVER");
+		plotString(model->base, 180, 280, "GAME OVER");
 		renderGround(model->base);
 		renderDino(model -> dino, model -> base);
 		renderCactus(model -> cactus, model -> base);
 		renderScore(model -> score, model -> base);
 	} else if (model -> gameStatus & QUIT_FLG) {
-		plotString((UINT8 *)model->base, 180, 280, "QUIT");
+		plotString(model->base, 180, 280, "QUIT");
 		renderScore(model -> score, model -> base);
 	}
-	plotString((UINT8 *)model->base, 352, 224, "PRESS ANY KEY FOR MENU");
+	plotString(model->base, 352, 224, "PRESS ANY KEY FOR MENU");
 }
 
 void gameInit(GameMdl* model) {
@@ -187,8 +188,7 @@ int main() {
 	disableCursor();
 	while (1) {
 		playerMode = gameSplashScreen(&model);
-		if (playerMode != 1) 
-		{
+		if (playerMode != 1) {
 			break;
 		}
 		gameLoop(&model);

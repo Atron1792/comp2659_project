@@ -26,7 +26,7 @@ Manually exercises asynchronous requests, clock ticks, and collision events.
 */
 static void initTestModel(GameMdl *model, Dino *dino, Cactus *cactus)
 {
-    model->score = 0L;
+    model->score = 0;
     model->gameStatus = 0;
     model->dino = dino;
     model->cactus = cactus;

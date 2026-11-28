@@ -8,7 +8,7 @@ Initializes and updates the dinosaur, cactus, and overall game model state.
 #include "model.h"
 
 void initGameMdl(GameMdl* mdl) {
-    mdl -> score = 0L;
+    mdl -> score = 0;
 	mdl -> gameStatus = 0;
 
     if (mdl->dino) {
@@ -18,7 +18,7 @@ void initGameMdl(GameMdl* mdl) {
         initCactus(mdl -> cactus, SCRN_W - CACTUS_WIDTH, FLOOR_Y - CACTUS_HEIGHT, DX_CACTUS);
     }
 
-    mdl -> base = Physbase();
+    mdl -> base = get_video_base();
 }
 
 /*

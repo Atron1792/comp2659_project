@@ -28,7 +28,7 @@ int main()
     Cactus cactus;
     UINT32 *base;
 
-    base = Physbase();
+    base = get_video_base()
     mdl.dino = &dino;
     mdl.cactus = &cactus;
 

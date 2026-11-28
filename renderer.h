@@ -20,18 +20,6 @@ Declares scene and sprite rendering routines for the game framebuffer.
 #define MENU_BUTTON_GAP 16
 #define MENU_BORDER_THICK 2
 
-/*----- Function: renderGame -----
-
- PURPOSE: Draws the complete current game scene.
-
- INPUT: model(const GameMdl *) - Read-only game state and framebuffer to render.
-
- OUTPUT: None
-
- ASSUMPTIONS: model's dinosaur and cactus pointers are valid.
-*/
-void renderGame(const GameMdl *model);
-
 /*----- Function: renderMenuButton -----
 
  PURPOSE: Draws a rectangular menu button and highlights it when selected.
@@ -60,6 +48,18 @@ void renderMenuButton(UINT32 *base, int row, char *label, int labelCol, int sele
  ASSUMPTIONS: base points to a valid monochrome framebuffer.
 */
 void renderSplashScreen(UINT32 *base, int selectedOption);
+
+/*----- Function: renderGame -----
+
+ PURPOSE: Draws the complete current game scene.
+
+ INPUT: model(const GameMdl *) - Read-only game state and framebuffer to render.
+
+ OUTPUT: None
+
+ ASSUMPTIONS: model's dinosaur and cactus pointers are valid.
+*/
+void renderGame(const GameMdl *model);
 
 /*----- Function: renderGround -----
 

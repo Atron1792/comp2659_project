@@ -21,7 +21,7 @@ static int musicPlaying;
 void startMusic()
 {
     currentNote = 0;
-    ticksRemaining = backgroundBeat[currentNote].duration;
+    ticksRemaining = (backgroundBeat[currentNote].duration * MUSIC_TEMPO_SCALE);
     musicPlaying = 1;
 
     enableChannel(CHANNEL_A, TONE_ON, NOISE_OFF);
@@ -51,7 +51,7 @@ void updateMusic(UINT32 timeElapsed)
             currentNote = 0;
         }
 
-        ticksRemaining = backgroundBeat[currentNote].duration;
+        ticksRemaining = (backgroundBeat[currentNote].duration * MUSIC_TEMPO_SCALE);
 
         setTone(CHANNEL_A, backgroundBeat[currentNote].tuning);
         setVolume(CHANNEL_A, MUSIC_VOLUME);

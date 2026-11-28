@@ -14,6 +14,7 @@ Declares game-state structures, constants, initialization, and movement logic.
 #include <stdlib.h>
 #include "TYPES.H"
 #include "bitmaps.h"
+#include "raster.h"
 
 /* Dino constants */
 #define JUMP_Y_VELOCITY 10 /* frames */

@@ -232,7 +232,7 @@ static void tstPlotTriangle(UINT32 *base)
 
  ASSUMPTIONS: Cconin() waits for test input.
 */
-static void tstPlot8bitBitmap(UINT8 *base)
+static void tstPlot8bitBitmap(UINT32 *base)
 {
     static const UINT8 bitmap[] = {
         0x00, 0x0E, 0x0E, 0x1C, 0x78, 0x38, 0x20, 0x00
@@ -261,7 +261,7 @@ static void tstPlot8bitBitmap(UINT8 *base)
 
  ASSUMPTIONS: Cconin() waits for test input.
 */
-static void tstPlot16bitBitmap(UINT16 *base)
+static void tstPlot16bitBitmap(UINT32 *base)
 {
     static const UINT16 bitmap[] = {
         0x0000, 0x0078, 0x00FC, 0x00FC,
@@ -329,7 +329,7 @@ static void tstPlot32bitBitmap(UINT32 *base)
 
  ASSUMPTIONS: Cconin() waits for test input.
 */
-static void tstPlotCharacter(UINT8 *base)
+static void tstPlotCharacter(UINT32 *base)
 {
     plotCharacter(base, 0, 0, 'A');
     Cconin();
@@ -354,7 +354,7 @@ static void tstPlotCharacter(UINT8 *base)
 
  ASSUMPTIONS: Cconin() waits for test input.
 */
-static void tstPlotString(UINT8 *base)
+static void tstPlotString(UINT32 *base)
 {
     plotString(base, 0, 0, "TEST");
     Cconin();
@@ -377,17 +377,17 @@ static void tstPlotString(UINT8 *base)
 
  OUTPUT: int - Zero after all demonstrations complete.
 
- ASSUMPTIONS: Physbase() provides a valid physical framebuffer.
+ ASSUMPTIONS: get_video_base() provides a valid physical framebuffer.
 */
 int main()
 {
     UINT32 *base;
 
-    base = Physbase();
+    base = get_video_base()
 
     tstClearRegion(base);
     tstClearScreen(base);
-    tstPlotPixel((UINT8 *)base);
+    tstPlotPixel(base);
     clearScreen(base);
     tstPlotHorizontalLine(base);
     clearScreen(base);
@@ -401,15 +401,15 @@ int main()
     clearScreen(base);
     tstPlotTriangle(base);
     clearScreen(base);
-    tstPlot8bitBitmap((UINT8 *)base);
+    tstPlot8bitBitmap(base);
     clearScreen(base);
-    tstPlot16bitBitmap((UINT16 *)base);
+    tstPlot16bitBitmap(base);
     clearScreen(base);
     tstPlot32bitBitmap(base);
     clearScreen(base);
-    tstPlotCharacter((UINT8 *)base);
+    tstPlotCharacter(base);
     clearScreen(base);
-    tstPlotString((UINT8 *)base);
+    tstPlotString(base);
     clearScreen(base);
 
     return 0;

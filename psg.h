@@ -48,16 +48,15 @@ Declares the PSG (Programmable Sound Generator) functionality for the game.
 #define NOISE_OFF 0
 
 /* Masks for MIX_IO */
-#define TONE_A_ON 0x3E
-#define TONE_B_ON 0x3D
-#define TONE_C_ON 0x3B
+#define TONE_A_ON 0xFE
+#define TONE_B_ON 0xFD
+#define TONE_C_ON 0xFB
 #define TONE_A_OFF 0x01
 #define TONE_B_OFF 0x02
 #define TONE_C_OFF 0x04
-
-#define NOISE_A_ON 0xEF
-#define NOISE_B_ON 0xDF
-#define NOISE_C_ON 0xBF
+#define NOISE_A_ON 0xF7
+#define NOISE_B_ON 0xEF
+#define NOISE_C_ON 0xDF
 #define NOISE_A_OFF 0x08
 #define NOISE_B_OFF 0x10
 #define NOISE_C_OFF 0x20

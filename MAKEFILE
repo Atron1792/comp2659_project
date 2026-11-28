@@ -67,8 +67,8 @@ cond.o: cond.c cond.h model.h bitmaps.h effects.h
 bitmaps.o: bitmaps.c bitmaps.h
 	cc68x -g -c bitmaps.c
 
-tst_rast: tst_rast.o raster.o font.o
-	cc68x -g tst_rast.o raster.o font.o -o tst_rast.tos
+tst_rast: tst_rast.o rast_asm.o font.o
+	cc68x -g tst_rast.o rast_asm.o font.o -o tst_rast.tos
 
 tst_rast.o: tst_rast.c
 	cc68x -g -c tst_rast.c

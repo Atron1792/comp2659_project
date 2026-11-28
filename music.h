@@ -13,6 +13,7 @@ Declares the music playback interface layered on top of the PSG module.
 
 #define MUSIC_VOLUME 3
 #define MUSIC_NOTE_COUNT 16
+#define MUSIC_TEMPO_SCALE 5
 
 typedef struct {
     UINT16 tuning;

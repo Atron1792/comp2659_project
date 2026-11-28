@@ -23,6 +23,34 @@ and font rendering routines.
 #define WORDS_PER_SCANLINE 40
 #define LONGS_PER_SCANLINE 20
 
+#define VIDEO_BASE_HIGH (*(volatile UINT8 *)0xFF8201)
+#define VIDEO_BASE_MID  (*(volatile UINT8 *)0xFF8203)
+
+/*----- Function: get_video_base -----
+
+ PURPOSE: Returns the start address of the currently displayed framebuffer.
+
+ INPUT: None
+
+ OUTPUT: UINT32 * - 256-byte-aligned address of the active framebuffer.
+
+ ASSUMPTIONS: The video base high and middle bytes are readable from the
+               Atari ST video base registers.
+*/
+UINT32 *get_video_base();
+
+/*----- Function: set_video_base -----
+
+ PURPOSE: Changes the framebuffer start address in the Atari ST video base register.
+
+ INPUT: base(UINT32 *) - 256-byte-aligned framebuffer address.
+
+ OUTPUT: None
+
+ ASSUMPTIONS: The low byte of the frame buffer address is zero.
+*/
+void set_video_base(UINT32 *base);
+
 /*----- Function: clearScreen -----
 
  PURPOSE: Clears the entire screen.
@@ -54,13 +82,13 @@ void clearRegion(UINT32 *base, int row, int col, UINT16 length, UINT16 width);
 
  PURPOSE: Plots a single pixel on the screen.
 
- INPUT: Address(UINT8*): to the start of the screen
+ INPUT: Address(UINT32*): to the start of the screen
         Position(row,col): the location of the pixel to plot
 
  OUTPUT: None
 
 */
-void plotPixel(UINT8 *base, int row, int col);
+void plotPixel(UINT32 *base, int row, int col);
 
 
 /*----- Function: plotHorizontalLine -----
@@ -153,26 +181,26 @@ void plotTriangle(UINT32 *base, int row, int col, UINT16 triangle_base, UINT16 h
 
  PURPOSE: Plots a bitmap to the screen given by the top left pixel of the bitmap and the height of bitmap.
 
- INPUT: Address(UINT8*): to the start of the screen
+ INPUT: Address(UINT32*): to the start of the screen
         Position(row,col): the coordinates of the top left pixel of the bitmap
         Height: the lenth (number of rows) of the height in pixels of the bitmap
 
  OUTPUT: None
 */
-void plot8bitBitmap(UINT8 *base, int row, int col, const UINT8 *bitmap, UINT16 height);
+void plot8bitBitmap(UINT32 *base, int row, int col, const UINT8 *bitmap, UINT16 height);
 
 
 /*----- Function: plot16bitBitmap -----
 
  PURPOSE: Plots a bitmap to the screen given by the top left pixel of the bitmap and the height of bitmap.
 
- INPUT: Address(UINT16*): to the start of the screen
+ INPUT: Address(UINT32*): to the start of the screen
         Position(row,col): the coordinates of the top left pixel of the bitmap
         Height: the lenth (number of rows) of the height in pixels of the bitmap
 
  OUTPUT: None
 */
-void plot16bitBitmap(UINT16 *base, int row, int col, const UINT16 *bitmap, UINT16 height);
+void plot16bitBitmap(UINT32 *base, int row, int col, const UINT16 *bitmap, UINT16 height);
 
 
 /*----- Function: plot32bitBitmap -----
@@ -192,25 +220,25 @@ void plot32bitBitmap(UINT32 *base, int row, int col, const UINT32 *bitmap, UINT1
 
  PURPOSE: Plots a single character, as a bitmap from a font table, to the screen.
 
- INPUT: Address(UINT8*): to the start of the screen
+ INPUT: Address(UINT32*): to the start of the screen
         Position(row,col): the coordinates of the top left pixel of the character
         ch(char): the character to be written to the screen
 
  OUTPUT: None
 */
-void plotCharacter(UINT8 *base, int row, int col, char ch);
+void plotCharacter(UINT32 *base, int row, int col, char ch);
 
 
 /*----- Function: plotString -----
 
  PURPOSE: Plots a string, as a sequence of bitmaps from a font table, to the screen.
 
- INPUT: Address(UINT8*): to the start of the screen
+ INPUT: Address(UINT32*): to the start of the screen
         Position(row,col): the coordinates of the top left pixel of the string
         ch(c-string): the string to be written to the screen
 
  OUTPUT: None
 */
-void plotString(UINT8 *base, int row, int col, char *ch);
+void plotString(UINT32 *base, int row, int col, char *ch);
 
 #endif

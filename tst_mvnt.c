@@ -29,11 +29,11 @@ Demonstrates dinosaur jumping, cactus movement, rendering, and collision.
 */
 static void initMovementModel(GameMdl *model, Dino *dino, Cactus *cactus)
 {
-    model->score = 0L;
+    model->score = 0;
     model->gameStatus = 0;
     model->dino = dino;
     model->cactus = cactus;
-    model->base = Physbase();
+    model->base = get_video_base();
 
     initDino(dino, DINO_X_POS, DINO_Y_POS);
     initCactus(cactus, 640 - CACTUS_WIDTH, FLOOR_Y - CACTUS_HEIGHT, -4);

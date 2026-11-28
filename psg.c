@@ -12,7 +12,7 @@ volatile UINT8 *psgWrite = (volatile UINT8 *)WRITE_REG;
 
 int readPsg(UINT8 reg, UINT8 *value)
 {
-	long oldSsp;
+	UINT32 oldSsp;
 
 	if (value == 0 || reg > 15)
 	{
@@ -28,7 +28,7 @@ int readPsg(UINT8 reg, UINT8 *value)
 
 void writePsg(UINT8 reg, UINT8 val)
 {
-	long oldSsp;
+	UINT32 oldSsp;
 
 	if (reg > 15) {
 		return;
@@ -126,14 +126,11 @@ void setEnvelope(UINT8 shape, UINT16 sustain)
 	writePsg(ENVELOPE_FINE, fine);
 	writePsg(ENVELOPE_COARSE, coarse);
 
-	if (shape == HOLD)
-	{
+	if (shape == HOLD) {
 		writePsg(ENVELOPE_SHAPE, 1);
-	} else if (shape == ALT)
-	{
+	} else if (shape == ALT) {
 		writePsg(ENVELOPE_SHAPE, 2);
-	} else if (shape == ATT)
-	{
+	} else if (shape == ATT) {
 		writePsg(ENVELOPE_SHAPE, 4);
 	} else {
 		writePsg(ENVELOPE_SHAPE, 8);
@@ -143,8 +140,11 @@ void setEnvelope(UINT8 shape, UINT16 sustain)
 void stopSound()
 {
 	int reg;
+	UINT8 mixer;
 
-	writePsg(MIXER_IO, 0x3F);
+	if (readPsg(MIXER_IO, &mixer)) {
+		writePsg(MIXER_IO, mixer | 0x3F);
+	}
 
 	for (reg = 0; reg <= 10; reg++) {
 		writePsg((UINT8)reg, 0);
