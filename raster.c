@@ -294,10 +294,10 @@ void plotRectangle(UINT32 *base, int row, int col, UINT16 length, UINT16 width)
         }
         loc += BYTES_PER_SCANLINE;
     }
+    */
 }
 
-void plotSquare(UINT32 *base, int row, int col, UINT16 side)
-{
+void plotSquare(UINT32 *base, int row, int col, UINT16 side) {
     UINT8 *byte_base;
     UINT8 mask;
     int curr_row;
